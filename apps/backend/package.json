@@ -1,0 +1,27 @@
+{
+  "name": "@pixel-bot/backend",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "soak": "tsx scripts/soak-test.ts"
+  },
+  "dependencies": {
+    "@google/genai": "^1.9.0",
+    "@pixel-bot/protocol": "workspace:*",
+    "@sentry/node": "^8.30.0",
+    "pino": "^9.4.0",
+    "ws": "^8.18.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.0",
+    "@types/ws": "^8.5.12",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
+  }
+}

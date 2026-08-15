@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Pixel Bot — Playground Mock</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root { color-scheme: dark; }
+    body { margin: 0; font-family: ui-monospace, monospace; background: #0d1117; color: #c9d1d9; display: grid; grid-template-columns: 340px 1fr; height: 100vh; }
+    aside { padding: 16px; border-right: 1px solid #21262d; overflow-y: auto; }
+    main { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; }
+    h1 { font-size: 15px; margin: 0 0 12px; }
+    label { display: block; font-size: 11px; margin: 8px 0 2px; color: #8b949e; }
+    input { width: 100%; box-sizing: border-box; background: #161b22; color: #c9d1d9; border: 1px solid #30363d; border-radius: 6px; padding: 6px 8px; font: inherit; }
+    button { margin-top: 12px; width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #30363d; background: #238636; color: #fff; font: inherit; cursor: pointer; }
+    button.stop { background: #da3633; }
+    #face { border-radius: 50%; box-shadow: 0 0 40px rgba(88,166,255,.25); }
+    #hud { display: flex; gap: 24px; font-size: 13px; }
+    #hud .v { font-size: 22px; color: #58a6ff; }
+    #hud .v.bad { color: #f85149; }
+    #wheels { font-size: 13px; color: #8b949e; }
+    #log { font-size: 10px; white-space: pre-wrap; color: #8b949e; margin-top: 12px; max-height: 40vh; overflow-y: auto; }
+    #cam { width: 160px; border-radius: 8px; border: 1px solid #30363d; }
+    .status { font-size: 12px; margin-top: 10px; }
+    .status .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #f85149; margin-right: 6px; }
+    .status.on .dot { background: #3fb950; }
+  </style>
+</head>
+<body>
+  <aside>
+    <h1>🤖 Pixel Bot mock</h1>
+    <label>Backend wss:// URL</label>
+    <input id="url" value="ws://localhost:8080" />
+    <label>Device ID</label>
+    <input id="device" value="dev-local" />
+    <label>Token</label>
+    <input id="token" value="local-secret" />
+    <button id="connect">Connect &amp; talk</button>
+    <div class="status" id="status"><span class="dot"></span><span id="statusText">disconnected</span></div>
+    <video id="cam" muted playsinline></video>
+    <div id="log"></div>
+  </aside>
+  <main>
+    <canvas id="face" width="320" height="320"></canvas>
+    <div id="wheels">wheels: <b id="action">none</b> · expression: <b id="expression">neutral</b></div>
+    <div id="hud">
+      <div>round-trip<br /><span class="v" id="rtt">–</span> ms</div>
+      <div>median<br /><span class="v" id="rttMed">–</span> ms</div>
+      <div>turns<br /><span class="v" id="turns">0</span></div>
+      <div>frames sent<br /><span class="v" id="jpegs">0</span></div>
+    </div>
+  </main>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

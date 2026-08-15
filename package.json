@@ -1,0 +1,16 @@
+{
+  "name": "pixel-bot",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "dev:backend": "pnpm --filter @pixel-bot/backend dev",
+    "dev:mock": "pnpm --filter @pixel-bot/pixel-mock dev",
+    "soak": "pnpm --filter @pixel-bot/backend soak"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
+}
