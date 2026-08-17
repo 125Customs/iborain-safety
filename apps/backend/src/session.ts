@@ -77,8 +77,11 @@ export class DeviceSession {
       onControl: (c) =>
         this.sendJson({
           type: "control",
-          expression: c.expression,
-          action: c.action,
+          threatLevel: c.threatLevel,
+          deterrence: c.deterrence,
+          message: c.message,
+          audioPrompt: c.audioPrompt,
+          fingerprint: c.fingerprint,
           turnId: this.latency.turnId,
         }),
       onInterrupted: () => {

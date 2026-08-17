@@ -7,9 +7,9 @@ import type { Control } from "@pixel-bot/protocol";
 export interface BridgeEvents {
   /** 24kHz PCM16 mono audio for the device speaker */
   onAudioOut: (pcm: Uint8Array) => void;
-  /** validated robot control command */
+  /** validated sentry tactical control & threat command */
   onControl: (control: Omit<Control, "type" | "turnId">) => void;
-  /** user barge-in: device must flush playback */
+  /** operator / scene barge-in: device must flush playback */
   onInterrupted: () => void;
   /** model finished its turn */
   onTurnComplete: () => void;
@@ -63,7 +63,19 @@ export class EchoBridge implements Bridge {
     const chunks = this.buffered;
     this.buffered = [];
     this.events.onFirstAudioOfTurn(Date.now());
-    this.events.onControl({ expression: "happy", action: "none" });
+    this.events.onControl({
+      threatLevel: "CLEAR",
+      deterrence: "VERIFIED_GREEN",
+      message: "SYSTEM ONLINE — ECHO CHECK",
+      audioPrompt: "Echo check verified",
+      fingerprint: {
+        plate: "TEST 001",
+        vehicleType: "car",
+        confidence: 1.0,
+        traits: "Echo mode verification test",
+        hotlistMatch: false,
+      },
+    });
     for (const chunk of chunks) {
       this.events.onAudioOut(upsample16to24(chunk));
     }

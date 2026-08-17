@@ -1,5 +1,6 @@
 /**
- * @pixel-bot/protocol — FROZEN wire protocol v1.
+ * @bomasafety/protocol — FROZEN wire protocol v1.
+ * Tactical public safety and transit forensics wire protocol for BomaSafety.
  * Firmware implements against PROTOCOL.md, which is generated from this file's
  * definitions. Any change here bumps PROTOCOL_VERSION and PROTOCOL.md together.
  */
@@ -17,7 +18,7 @@ export const BINARY_HEADER_BYTES = 9;
 export enum FrameType {
   /** device→server: raw PCM16 mono 16kHz little-endian */
   AudioIn = 0x01,
-  /** device→server: JPEG camera frame */
+  /** device→server: JPEG camera frame from Sony IMX500 / Pi Cam */
   Jpeg = 0x02,
   /** server→device: raw PCM16 mono 24kHz little-endian (Gemini native output rate) */
   AudioOut = 0x11,
@@ -71,27 +72,49 @@ export function decodeBinaryFrame(data: Uint8Array): BinaryFrame | null {
 // Control plane (WebSocket text messages, JSON, Zod-validated on BOTH ends)
 // ---------------------------------------------------------------------------
 
-export const ExpressionSchema = z.enum([
-  "neutral",
-  "happy",
-  "sad",
-  "curious",
-  "surprised",
-  "thinking",
-  "sleepy",
+export const ThreatLevelSchema = z.enum([
+  "CLEAR",
+  "SUSPICIOUS",
+  "HOTLIST_MATCH",
+  "EMERGENCY",
 ]);
-export type Expression = z.infer<typeof ExpressionSchema>;
+export type ThreatLevel = z.infer<typeof ThreatLevelSchema>;
 
-export const ActionSchema = z.enum([
-  "none",
-  "stop",
-  "forward",
-  "backward",
-  "turn_left",
-  "turn_right",
-  "wiggle",
+export const DeterrenceActionSchema = z.enum([
+  "IDLE_BEACON",
+  "VERIFIED_GREEN",
+  "STROBE_ALERT",
+  "ACOUSTIC_WARNING",
+  "POLICE_SIREN",
 ]);
-export type Action = z.infer<typeof ActionSchema>;
+export type DeterrenceAction = z.infer<typeof DeterrenceActionSchema>;
+
+export const VehicleTypeSchema = z.enum([
+  "car",
+  "boda_boda",
+  "matatu",
+  "truck",
+  "pedestrian",
+]);
+export type VehicleType = z.infer<typeof VehicleTypeSchema>;
+
+export const TransitFingerprintSchema = z.object({
+  plate: z.string(),
+  vehicleType: VehicleTypeSchema,
+  confidence: z.number().min(0).max(1),
+  traits: z.string(),
+  bodaDetails: z
+    .object({
+      helmet: z.boolean().optional(),
+      reflectorJacket: z.string().optional(),
+      passengerCount: z.number().int().optional(),
+      cargo: z.string().optional(),
+    })
+    .optional(),
+  hotlistMatch: z.boolean().default(false),
+  hotlistReason: z.string().optional(),
+});
+export type TransitFingerprint = z.infer<typeof TransitFingerprintSchema>;
 
 /** device→server, first message after socket open */
 export const HelloSchema = z.object({
@@ -111,17 +134,20 @@ export const HelloAckSchema = z.object({
   budgetRemainingMs: z.number().int().nonnegative(),
 });
 
-/** server→device: robot control command (from validated Gemini tool call) */
+/** server→device: tactical sentry command (from validated Gemini tool call) */
 export const ControlSchema = z.object({
   type: z.literal("control"),
-  expression: ExpressionSchema,
-  action: ActionSchema,
+  threatLevel: ThreatLevelSchema,
+  deterrence: DeterrenceActionSchema,
+  message: z.string(),
+  audioPrompt: z.string().optional(),
+  fingerprint: TransitFingerprintSchema.optional(),
   turnId: z.string(),
 });
 export type Control = z.infer<typeof ControlSchema>;
 
 /**
- * server→device: barge-in — user interrupted the robot. Device must
+ * server→device: barge-in — operator or scene interruption. Device must
  * immediately flush its audio playback buffer and stop the speaker.
  */
 export const InterruptedSchema = z.object({
@@ -187,11 +213,20 @@ export const ServerToDeviceMsgSchema = z.discriminatedUnion("type", [
 ]);
 export type ServerToDeviceMsg = z.infer<typeof ServerToDeviceMsgSchema>;
 
-/** Gemini tool-call args for set_robot_state — validated before Control is emitted. */
-export const RobotStateArgsSchema = z.object({
-  expression: ExpressionSchema,
-  action: ActionSchema,
+/** Gemini tool-call args for set_sentry_state — validated before Control is emitted. */
+export const SentryStateArgsSchema = z.object({
+  threatLevel: ThreatLevelSchema,
+  deterrence: DeterrenceActionSchema,
+  message: z.string(),
+  audioPrompt: z.string().optional(),
+  plate: z.string().optional(),
+  vehicleType: VehicleTypeSchema.optional(),
+  traits: z.string().optional(),
+  bodaCargo: z.string().optional(),
+  hotlistMatch: z.boolean().optional(),
+  hotlistReason: z.string().optional(),
 });
+export type SentryStateArgs = z.infer<typeof SentryStateArgsSchema>;
 
 export function parseDeviceMsg(raw: string): DeviceToServerMsg | null {
   if (raw.length > MAX_TEXT_MESSAGE_BYTES) return null;

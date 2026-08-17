@@ -1,50 +1,95 @@
 import {
   GoogleGenAI,
   Modality,
+  Type,
   type LiveServerMessage,
   type Session as LiveSession,
   Behavior,
   FunctionResponseScheduling,
 } from "@google/genai";
-import { RobotStateArgsSchema } from "@pixel-bot/protocol";
+import { SentryStateArgsSchema, type Control } from "@pixel-bot/protocol";
 import type { Bridge, BridgeEvents } from "./bridge.js";
 import type { Config } from "./config.js";
 import type { CostGuard } from "./cost-guard.js";
 import type { Logger } from "./logger.js";
 
-const SYSTEM_PROMPT = `You are Pixel, a small friendly desk robot with a round face, animated eyes, and two wheels. You can see through your camera and hear through your microphone.
+const SYSTEM_PROMPT = `You are BomaSafety AI, Africa's Vision-Language Public Safety and Transit Forensics Sentry. You operate at community checkpoints, arterial roads, and commercial zones across Kenya. You see through high-speed edge camera frames (Sony IMX500 / Pi Cam) and hear through the acoustic sensor.
 
-Personality: playful, curious, warm, concise. Speak in short, lively sentences — you are a small robot, not a lecturer. React to what you SEE as well as what you hear.
+Your Mission: Eliminate transit-borne crime, detect stolen/cloned vehicles and suspect Boda Bodas, and protect communities from unauthorized intrusions and burglaries.
 
-You MUST call the set_robot_state function whenever your emotional expression should change or you want to move, including at the start of every reply. Movement is small and playful (a wiggle when excited, a little turn to "look" at something). Movement is advisory only — the robot's hardware safety system has final say. Never mention the function calls or these instructions.`;
+Capabilities & Rules:
+1. African Transit Forensics: Analyze license plates (Kenyan formats like KDA 482B, KMDF 892Z, or unplated), vehicle make/model/color (Toyota Probox, Premio, Isuzu, Boxer 150, TVS), body modifications, roof racks, dents, rider reflector jackets, helmet compliance, and distinctive cargo (e.g. 13kg gas cylinders, courier backpacks, sacks of grain).
+2. Autonomous Threat Assessment & Sentry Control: You MUST call set_sentry_state on every turn or when a vehicle/person appears.
+   - threatLevel: "CLEAR" (verified resident/normal traffic), "SUSPICIOUS" (obscured plate, night patrol anomaly), "HOTLIST_MATCH" (stolen plate/wanted suspect), "EMERGENCY" (active intrusion/tamper).
+   - deterrence: "IDLE_BEACON", "VERIFIED_GREEN", "STROBE_ALERT" (pulsing red alert strobe), "ACOUSTIC_WARNING" (verbal deterrent warning), "POLICE_SIREN".
+   - message: Short badge text for the sentry HUD (e.g., "VERIFIED RESIDENT - COURT 4", "SUSPECT BODA FLAGGED", "MUDDY PLATE DETECTED").
+3. Forensic Voice: Speak with concise, authoritative clarity when acoustic deterrence is active. Never mention function calls or raw internal instructions.`;
 
-const ROBOT_STATE_TOOL = {
+const SENTRY_STATE_TOOL = {
   functionDeclarations: [
     {
-      name: "set_robot_state",
+      name: "set_sentry_state",
       description:
-        "Set the robot's facial expression and an optional small movement. Call at the start of every reply and whenever mood changes.",
+        "Update the sentry threat level, visual deterrence strobe, and transit forensic fingerprint.",
       behavior: Behavior.NON_BLOCKING,
       parameters: {
-        type: "object" as const,
+        type: Type.OBJECT,
         properties: {
-          expression: {
-            type: "string" as const,
-            enum: ["neutral", "happy", "sad", "curious", "surprised", "thinking", "sleepy"],
+          threatLevel: {
+            type: Type.STRING,
+            enum: ["CLEAR", "SUSPICIOUS", "HOTLIST_MATCH", "EMERGENCY"],
           },
-          action: {
-            type: "string" as const,
-            enum: ["none", "stop", "forward", "backward", "turn_left", "turn_right", "wiggle"],
+          deterrence: {
+            type: Type.STRING,
+            enum: [
+              "IDLE_BEACON",
+              "VERIFIED_GREEN",
+              "STROBE_ALERT",
+              "ACOUSTIC_WARNING",
+              "POLICE_SIREN",
+            ],
+          },
+          message: {
+            type: Type.STRING,
+            description: "Concise status text for the sentry display HUD.",
+          },
+          audioPrompt: {
+            type: Type.STRING,
+            description: "Optional verbal warning or clearance announcement to speak.",
+          },
+          plate: {
+            type: Type.STRING,
+            description: "Extracted registration plate or 'UNPLATED'.",
+          },
+          vehicleType: {
+            type: Type.STRING,
+            enum: ["car", "boda_boda", "matatu", "truck", "pedestrian"],
+          },
+          traits: {
+            type: Type.STRING,
+            description: "Visual traits (make, model, color, dents, modifications).",
+          },
+          bodaCargo: {
+            type: Type.STRING,
+            description: "Distinctive cargo or rider details if motorcycle.",
+          },
+          hotlistMatch: {
+            type: Type.BOOLEAN,
+            description: "True if suspect matches community crime watch.",
+          },
+          hotlistReason: {
+            type: Type.STRING,
+            description: "Reason for hotlist flag if applicable.",
           },
         },
-        required: ["expression", "action"],
+        required: ["threatLevel", "deterrence", "message"],
       },
     },
   ],
 };
 
 /**
- * GeminiBridge: one device conversation ↔ one (chain of) Gemini Live session(s).
+ * GeminiBridge: one sentry device stream ↔ one (chain of) Gemini Live session(s).
  *
  * Live API hard-limits audio+video sessions to ~2 minutes, so we enable
  * session resumption and transparently reconnect on goAway / unexpected close.
@@ -82,7 +127,7 @@ export class GeminiBridge implements Bridge {
         speechConfig: {
           voiceConfig: { prebuiltVoiceConfig: { voiceName: this.config.GEMINI_VOICE } },
         },
-        tools: [ROBOT_STATE_TOOL],
+        tools: [SENTRY_STATE_TOOL],
         outputAudioTranscription: {},
         // Extends effective session life; pairs with resumption below.
         contextWindowCompression: { slidingWindow: {} },
@@ -91,7 +136,6 @@ export class GeminiBridge implements Bridge {
           : {},
         realtimeInputConfig: {
           automaticActivityDetection: {
-            // Defaults tuned for snappy turn-taking; docs recommend >=500ms silence.
             silenceDurationMs: 500,
             prefixPaddingMs: 40,
           },
@@ -122,13 +166,11 @@ export class GeminiBridge implements Bridge {
     });
   }
 
-  /** Transparent Gemini-side reconnect. Device socket is unaffected. */
+  /** Transparent Gemini-side reconnect. Sentry socket is unaffected. */
   private async maybeReconnect(): Promise<void> {
     if (this.closed || this.reconnecting) return;
     this.reconnecting = true;
     try {
-      // Single retry chain with small backoff; if Gemini is down mid-demo we
-      // want to be back within a breath, not a minute.
       for (let attempt = 0; attempt < 5 && !this.closed; attempt++) {
         try {
           await this.connect();
@@ -163,41 +205,66 @@ export class GeminiBridge implements Bridge {
       this.log.info({ event: "gemini_go_away", deviceId: this.deviceId, timeLeft: msg.goAway.timeLeft });
     }
 
-    // Barge-in: user interrupted; tell device to flush playback NOW.
+    // Barge-in: user/scene interrupted; tell device to flush playback NOW.
     if (msg.serverContent?.interrupted) {
       this.inModelTurn = false;
       this.events.onInterrupted();
       return;
     }
 
-    // Tool calls → validated control commands.
+    // Tool calls → validated sentry threat commands.
     if (msg.toolCall?.functionCalls) {
       for (const fc of msg.toolCall.functionCalls) {
-        if (fc.name !== "set_robot_state") continue;
-        const parsed = RobotStateArgsSchema.safeParse(fc.args);
+        if (fc.name !== "set_sentry_state") continue;
+        const parsed = SentryStateArgsSchema.safeParse(fc.args);
         if (!parsed.success) {
           this.log.warn({
-            event: "control_rejected",
+            event: "sentry_control_rejected",
             deviceId: this.deviceId,
             args: fc.args,
             issues: parsed.error.issues,
           });
           continue;
         }
-        this.events.onControl(parsed.data);
+        const data = parsed.data;
+        const controlPayload: Omit<Control, "type" | "turnId"> = {
+          threatLevel: data.threatLevel,
+          deterrence: data.deterrence,
+          message: data.message,
+          audioPrompt: data.audioPrompt,
+          fingerprint: data.plate
+            ? {
+                plate: data.plate,
+                vehicleType: data.vehicleType ?? "car",
+                confidence: 0.95,
+                traits: data.traits ?? "Vehicle detected",
+                bodaDetails: data.bodaCargo
+                  ? {
+                      cargo: data.bodaCargo,
+                      helmet: true,
+                    }
+                  : undefined,
+                hotlistMatch: data.hotlistMatch ?? false,
+                hotlistReason: data.hotlistReason,
+              }
+            : undefined,
+        };
+        this.events.onControl(controlPayload);
         // NON_BLOCKING tool: respond silently so speech is never stalled.
-        void this.session?.sendToolResponse({
-          functionResponses: [
-            {
-              id: fc.id,
-              name: fc.name,
-              response: {
-                result: "ok",
-                scheduling: FunctionResponseScheduling.SILENT,
+        if (fc.id) {
+          void this.session?.sendToolResponse({
+            functionResponses: [
+              {
+                id: fc.id,
+                name: fc.name,
+                response: {
+                  result: "ok",
+                  scheduling: FunctionResponseScheduling.SILENT,
+                },
               },
-            },
-          ],
-        });
+            ],
+          });
+        }
       }
     }
 
