@@ -1,6 +1,6 @@
 # 🛡️ Iborain Safety — Master Project & Submission Report
 
-**Repository:** [https://github.com/bobybarack/smartB0t](https://github.com/bobybarack/smartB0t)  
+**Repository:** [https://github.com/bobybarack/iborain-safety](https://github.com/bobybarack/iborain-safety)  
 **Local Monorepo Path:** [`/Users/radebe49/smartB0t`](file:///Users/radebe49/smartB0t)  
 **Competition Target:** [Build with Gemini XPRIZE — Devpost ($2,000,000)](https://xprize.devpost.com/)  
 **Submission Category:** **Entrepreneurship & Job Creation** (and Small Business Services)  
@@ -100,6 +100,6 @@ smartB0t/
 ## 5. XPRIZE Submission Fields
 
 * **Title:** Iborain Safety: The Community Public Safety Platform
-* **GitHub Repository:** `https://github.com/bobybarack/smartB0t`
+* **GitHub Repository:** `https://github.com/bobybarack/iborain-safety`
 * **Google Cloud Products:** Cloud Run, Gemini 3.7 Flash & Multimodal Live API, Cloud Logging, Secret Manager
 * **Category:** Entrepreneurship & Job Creation (and Small Business Services)
