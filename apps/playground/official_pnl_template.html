@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Build with Gemini XPRIZE - Profit & Loss Statement</title>
+  <style>
+    @page {
+      size: A4 landscape;
+      margin: 10mm 15mm;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      color: #000000;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+      font-size: 11px;
+    }
+    .sheet-container {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .banner {
+      background: #0f9d58;
+      color: #ffffff;
+      font-weight: bold;
+      padding: 8px 12px;
+      font-size: 14px;
+      border: 1px solid #0b8043;
+    }
+    .sub-banner {
+      background: #f1f3f4;
+      color: #5f6368;
+      font-size: 10px;
+      padding: 4px 12px;
+      border-left: 1px solid #dadce0;
+      border-right: 1px solid #dadce0;
+      border-bottom: 1px solid #dadce0;
+    }
+    .meta-bar {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: bold;
+    }
+    table.pl-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #dadce0;
+    }
+    table.pl-table th {
+      background: #f8f9fa;
+      color: #202124;
+      font-weight: bold;
+      text-align: right;
+      padding: 6px 10px;
+      border: 1px solid #dadce0;
+      font-size: 11px;
+    }
+    table.pl-table th:first-child {
+      text-align: left;
+      width: 45%;
+    }
+    table.pl-table td {
+      padding: 5px 10px;
+      border: 1px solid #dadce0;
+      text-align: right;
+      font-size: 11px;
+    }
+    table.pl-table td:first-child {
+      text-align: left;
+    }
+    tr.section-header {
+      background: #e8f0fe;
+      font-weight: bold;
+      color: #1a73e8;
+    }
+    tr.sub-header {
+      background: #f8f9fa;
+      font-weight: bold;
+      color: #3c4043;
+    }
+    tr.total-row {
+      background: #f1f3f4;
+      font-weight: bold;
+      border-top: 2px solid #202124;
+      border-bottom: 2px solid #202124;
+    }
+    tr.net-income-row {
+      background: #e6f4ea;
+      font-weight: bold;
+      color: #137333;
+      border-top: 2px solid #137333;
+      border-bottom: 3px double #137333;
+      font-size: 12px;
+    }
+    .legend-box {
+      margin-top: 14px;
+      border: 1px solid #dadce0;
+      background: #fafafa;
+      padding: 10px 14px;
+      font-size: 9.5px;
+      line-height: 1.4;
+      color: #3c4043;
+    }
+    .legend-box b {
+      color: #202124;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="banner">
+    Build with Gemini XPRIZE — PROFIT & LOSS STATEMENT
+  </div>
+  <div class="sub-banner">
+    Confidential Submission • Project: Iborain Safety (bobybarack/iborain-safety) • Category: Entrepreneurship & Job Creation
+  </div>
+
+  <div class="meta-bar">
+    <div><b>Program Period:</b> May 19, 2026 – August 17, 2026 (90 Days)</div>
+    <div><b>Accounting Method:</b> Cash Basis</div>
+    <div><b>Currency:</b> USD ($) | Exchange: 1 USD = 130 KES</div>
+  </div>
+
+  <table class="pl-table">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>May</th>
+        <th>June</th>
+        <th>July</th>
+        <th>August</th>
+        <th>Full 90 Days</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="section-header">
+        <td colspan="6">REVENUE</td>
+      </tr>
+      <tr>
+        <td>Independent Sales (ie. sales of product or service)</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td><b>$0.00</b></td>
+      </tr>
+      <tr>
+        <td>Related Party Revenue (ie. see Rules)</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td><b>$0.00</b></td>
+      </tr>
+      <tr class="total-row">
+        <td>TOTAL REVENUE</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td><b>$0.00</b></td>
+      </tr>
+
+      <tr class="section-header">
+        <td colspan="6">EXPENSES</td>
+      </tr>
+      <tr class="sub-header">
+        <td colspan="6">COGS (Cost of Goods Sold)</td>
+      </tr>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;Hardware Prototyping & Edge Sentry BOM (ChipuRobo Lab)</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$110.00</td>
+        <td>$110.00</td>
+      </tr>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;Discrete Sensors & Prototyping Stock (AliExpress Order)</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$20.00</td>
+        <td>$0.00</td>
+        <td>$20.00</td>
+      </tr>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;Personnel</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+      </tr>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;Software Subscriptions / Infrastructure</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+      </tr>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;Tokens (Gemini API & Cloud Compute - GCP Free Tier/Credits)</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+      </tr>
+
+      <tr class="sub-header">
+        <td colspan="6">SG&A (Selling, General, and Administrative)</td>
+      </tr>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;Personnel</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+      </tr>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;Software Subscriptions</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+      </tr>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;Tokens</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+      </tr>
+
+      <tr class="sub-header">
+        <td colspan="6">Other Expenses</td>
+      </tr>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;Platform Domain Registration & Identity</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$10.00</td>
+        <td>$10.00</td>
+      </tr>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;Fieldwork & On-Site Estate Demonstration Travel (Nairobi)</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$6.00</td>
+        <td>$6.00</td>
+      </tr>
+
+      <tr class="total-row">
+        <td>TOTAL EXPENSES</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>$20.00</td>
+        <td>$126.00</td>
+        <td><b>$146.00</b></td>
+      </tr>
+
+      <tr class="net-income-row">
+        <td>PROFIT (LOSS)</td>
+        <td>$0.00</td>
+        <td>$0.00</td>
+        <td>($20.00)</td>
+        <td>($126.00)</td>
+        <td><b>($146.00)</b></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="legend-box">
+    <b>LEGEND & STATEMENT COMPLIANCE:</b><br>
+    ■ <b>COGS ($130):</b> Direct costs to assemble and fabricate the working edge sentry node ($110 for Raspberry Pi Zero 2 W, Sony IMX500 AI Camera, GC9A01 LCD, MAX98357A Amp, MPU-6500 IMU, TCRT5000 IR tripwire, and 3D printed mount fabricated at ChipuRobo) + $20 initial component stock received via AliExpress.<br>
+    ■ <b>SG&A / Other Expenses ($16):</b> $10 for official web domain registration + $6 local transportation for on-site meetings with Nairobi estate security committees.<br>
+    ■ <b>Cash Basis Method:</b> Recorded strictly when cash was paid out. All software/compute tokens covered under Google Cloud Free Tier / credits ($0 cash out).<br>
+    ■ <b>Pre-Revenue Pipeline:</b> 3 residential estate security committees in Nairobi committed to 14-day Zero-CapEx pilot deployments (KES 6,500/mo subscription).
+  </div>
+
+</body>
+</html>
