@@ -74,6 +74,31 @@ In the United States, **Flock Safety** built a multi-billion dollar public safet
 └─────────────────────────┴───────────────────────────────┴───────────────────────────────────────┘
 ```
 
+### 3.1 Commercial GTM Strategy: "Package A — The Zero-CapEx Lease"
+To eliminate sales friction and long committee approval cycles across Kenyan estates, BomaSentry leads with **Package A (The Zero-CapEx Hardware Lease)**:
+
+* **Upfront Hardware Cost to Estate**: **KES 0 (FREE Hardware Unit)**
+* **One-Time Installation & Setup**: **KES 3,500 ($27 USD)**
+* **Monthly SaaS & Maintenance Subscription**: **KES 6,500 / month ($49 USD)** on a 12-month contract.
+* **Why Package A Closes Deals in 48 Hours**:
+  * Eliminates the need for estate committees to organize expensive AGM fundraisers (*harambees*).
+  * Chairmen and Treasurers can approve KES 6,500/month immediately from existing petty cash or monthly security service charge pools.
+* **Unit Economics & Payback**:
+  * Hardware production BOM: **KES 14,200 ($110 USD)**.
+  * Payback period: **2.2 months**.
+  * Months 3–12 generate **KES 65,000 ($500 USD) in net recurring cash profit per gate**.
+
+### 3.2 The 14-Day Free Pilot Closing Playbook
+1. **Targeting**: Approach Estate Chairmen / Security Committees in gated courts across Nairobi (Nyayo, Syokimau, Ruiru, Membley, Kilimani).
+2. **The Risk-Free Offer**: *"We install a full BomaSentry unit at your gate for 14 days at zero cost. If residents do not experience 90% faster queues and seamless WhatsApp approvals, we remove the unit for free."*
+3. **Activation**: Add the 10–20 committee members to the BomaSentry WhatsApp test group. Every time their vehicles arrive, the gate opens automatically and sends an instant WhatsApp clearance ping.
+4. **Closing**: On Day 14, present the automated entry audit log and sign the 1-year KES 6,500/month agreement.
+
+### 3.3 Automated Billing via M-Pesa Daraja API
+* On the 1st of each month, BomaSentry fires an automated **M-Pesa STK Push** to the Estate Treasurer’s registered mobile number.
+* Instant digital receipt is issued over WhatsApp, and event logs remain seamlessly accessible.
+* **LTV/CAC Metric**: Customer Acquisition Cost (CAC) = **$35 USD**; Lifetime Value (LTV, 36 months) = **$1,800 USD** $\rightarrow$ **LTV/CAC = 51x**.
+
 ---
 
 ## 4. Hardware Pinout & Wiring Specification
