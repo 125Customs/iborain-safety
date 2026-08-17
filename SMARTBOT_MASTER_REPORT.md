@@ -3,14 +3,15 @@
 **Repository:** [https://github.com/bobybarack/iborain-safety](https://github.com/bobybarack/iborain-safety)  
 **Local Monorepo Path:** [`/Users/radebe49/smartB0t`](file:///Users/radebe49/smartB0t)  
 **Competition Target:** [Build with Gemini XPRIZE — Devpost ($2,000,000)](https://xprize.devpost.com/)  
-**Submission Category:** **Entrepreneurship & Job Creation** (and Small Business Services)  
+**Submission Category:** **Entrepreneurship & Job Creation**  
 **Submission Deadline:** August 17, 2026 @ 1:00 PM PDT  
+**Hardware Incubation & Fabrication Partner:** [ChipuRobo](https://chipurobo.com/) (Nairobi, Kenya)  
 
 ---
 
 ## 1. Executive Summary & Value Proposition
 
-**Iborain Safety** is a decentralized Vision-Language AI public safety and crime elimination network. Born in Nairobi, Iborain reverses the narrative on urban security. Powered by **Google Gemini 3.7 Flash & Live** on Google Cloud Run and edge sentry hardware (Raspberry Pi Zero 2 W + Sony IMX500 AI Camera), Iborain Safety captures multimodal African transit fingerprints, detects community crime hotlist matches in real time, executes autonomous acoustic and visual deterrence, and provides natural-language FreeForm™ crime investigation for security teams and detectives.
+**Iborain Safety** is a decentralized Vision-Language AI public safety and crime elimination network. Born in Nairobi, Iborain reverses the narrative on urban security. Powered by **Google Gemini 3.7 Flash & Live** on Google Cloud Run and edge sentry hardware (Raspberry Pi Zero 2 W + Sony IMX500 AI Camera fabricated in partnership with ChipuRobo), Iborain Safety captures multimodal African transit fingerprints, detects community crime hotlist matches in real time, executes autonomous acoustic and visual deterrence, and provides natural-language FreeForm™ crime investigation for security teams and detectives.
 
 ```
 ┌────────────────────────────────────────────────────────┐
@@ -23,7 +24,7 @@
                            │ • AudioOut (24kHz Acoustic Warnings/Chimes)
                            │ • JSON Control {threatLevel, deterrence, fingerprint}
 ┌──────────────────────────▼─────────────────────────────┐
-│             TACTICAL SENTRY UNIT                       │
+│             TACTICAL SENTRY UNIT (CHIPUROBO LAB)       │
 │  • Raspberry Pi Zero 2 W + Sony IMX500 AI Camera       │
 │  • GC9A01 1.28" Round LCD (Active Sentry Strobe)       │
 │  • MAX98357A I2S DAC + 3W Acoustic Warning Speaker     │
@@ -41,7 +42,7 @@
 | :--- | :--- |
 | **1. Business Viability & Revenue** | **High-Margin Zero-CapEx SaaS:** Free hardware installation + KES 6,500/mo ($49/mo) community safety subscription billed via automated M-Pesa STK Push. 2.2-month installer payback, 51x LTV/CAC. |
 | **2. AI-Native Operations** | **Multimodal Forensic Perception:** Gemini multimodal vision classifies African transit realities (Boda Bodas, helmets, cargo, modified plates), synchronizes regional hotlist meshes, and enables sub-600ms natural-language FreeForm evidence queries. |
-| **3. Category Impact (Job Creation)** | Creates the **BomaTech Installer Network**, training youth and informal technicians (*Jua Kali*) to franchise assembly, mounting, and maintenance with a 75-day hardware payback. |
+| **3. Category Impact (Job Creation)** | Partnered with **ChipuRobo** to create the **Iborain Installer Network**, training youth and informal technicians (*Jua Kali*) to franchise assembly, mounting, and maintenance with a 75-day hardware payback. |
 
 ---
 
@@ -102,4 +103,4 @@ smartB0t/
 * **Title:** Iborain Safety: The Community Public Safety Platform
 * **GitHub Repository:** `https://github.com/bobybarack/iborain-safety`
 * **Google Cloud Products:** Cloud Run, Gemini 3.7 Flash & Multimodal Live API, Cloud Logging, Secret Manager
-* **Category:** Entrepreneurship & Job Creation (and Small Business Services)
+* **Category:** Entrepreneurship & Job Creation
