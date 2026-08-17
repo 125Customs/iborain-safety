@@ -8,21 +8,21 @@
 
 ---
 
-## 1. Executive Summary & The ChipuRobo Hardware Origin Story
+## 1. Executive Summary & The City-Scale Public Safety Grid
 
 ### The Problem: The $4 Billion Monopoly That Failed Africa
-In the United States, **Flock Safety** built a $4 Billion public safety monopoly by leasing solar-powered automated license plate recognition (ALPR) cameras to 12,000+ communities to eliminate property crime.
+In the United States, **Flock Safety** built a $4 Billion public safety monopoly by leasing solar-powered automated license plate recognition (ALPR) cameras to 12,000+ communities to eliminate property crime across roads and municipal corridors.
 
 However, Flock’s architecture costs **$3,000 to $5,500+ per camera/year** and fails completely across Africa:
-1. **Cost Exclusion:** It is financially unattainable for 99% of African neighborhoods, schools, and transport hubs.
+1. **Cost Exclusion:** It is financially unattainable for 99% of African neighborhoods, schools, SACCO stages, and transport corridors.
 2. **Transit Reality Blindspot:** Rigid OCR models fail on African transit realities—unregistered **Boda Bodas** (motorcycles), missing/muddy plates, modified **Toyota Proboxes**, and informal cargo.
-3. **Siloed Defenses:** When a burglary strikes in one estate, neighboring communities receive zero warning because they share zero threat intelligence.
+3. **Siloed Defenses:** When a burglary or carjacking strikes in one area, neighboring corridors receive zero warning because communities share zero threat intelligence.
 4. **The Evidence Black Hole:** Over 70% of violent and property crimes rely on getaway vehicles and motorbikes. When crime happens, detectives face an evidence void with zero searchable leads.
 
-### The Hardware Breakthrough & The ChipuRobo Partnership
-Early in the development cycle, overseas component delivery failures from standard e-commerce channels threatened our hardware deployment timeline. We received a decisive lifeline and strategic partnership from **ChipuRobo** (Nairobi, Kenya), an established robotics innovation organization dedicated to empowering 4 million African youth through hands-on robotics and CBC-aligned makerspaces.
+### The Solution: Iborain Safety
+Born in Nairobi, **Iborain Safety** reverses the narrative on urban security. Powered by a **$110 production hardware BOM** running on a **Raspberry Pi Zero 2 W** paired with the **Sony IMX500 AI Camera** and **Google Gemini 3.7 Flash & Live on Google Cloud Run**, Iborain Safety blankets communities in an infrastructure-free, solar-ready sentry grid.
 
-Utilizing ChipuRobo's local makerspaces, Raspberry Pi hardware distribution (Raspberry Pi Zero 2 W + Sony IMX500 AI Camera), and in-house 3D printing/fabrication facilities, we transitioned to an industrial, solar-ready **$110 production sentry unit** assembled locally in Nairobi.
+Mounted on **street light poles, road intersections, arterial transit corridors, commercial logistics hubs, and neighborhood perimeters**, Iborain automatically captures multimodal vehicle and Boda fingerprints, detects regional crime hotlist matches in real time, executes autonomous acoustic and visual deterrence, and provides natural-language FreeForm™ crime investigation for detectives and security teams.
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -37,7 +37,7 @@ Utilizing ChipuRobo's local makerspaces, Raspberry Pi hardware distribution (Ras
                                                │ • 1fps JPEG Vision Diffs (IMX500 HDR)
                                                │ • JSON Structured Threat Payload
 ┌──────────────────────────────────────────────▼───────────────────────────────────────────────────┐
-│                       TACTICAL SENTRY UNIT (FABRICATED AT CHIPUROBO)                             │
+│              TACTICAL CORRIDOR & STREET SENTRY UNIT (FABRICATED AT CHIPUROBO)                    │
 │  • Edge Compute: Raspberry Pi Zero 2 W (Quad-Core 64-bit ARM, 5V/0.5A Ultra-Low Draw)            │
 │  • Vision Sensor: Raspberry Pi AI Camera (Sony IMX500 Neural DSP)                                │
 │  • Visual Deterrence: GC9A01 1.28" Round LCD (Active Sentry Strobe & Radar Beacon)               │
@@ -54,14 +54,15 @@ Utilizing ChipuRobo's local makerspaces, Raspberry Pi hardware distribution (Ras
 
 | Feature / Dimension | 🦅 Flock Safety (US Market) | 🛡️ Iborain Safety (African Market) |
 | :--- | :--- | :--- |
-| **Annual Cost per Camera** | **$3,000 – $5,500+ USD / year** | **$49 / month ($588 USD / year)** |
+| **Annual Cost per Sentry** | **$3,000 – $5,500+ USD / year** | **$49 / month ($588 USD / year)** |
 | **Hardware BOM Cost** | Proprietary Western HW ($1,500+) | **$110 USD (KES 14,200)** via ChipuRobo Lab |
+| **Deployment Footprint** | Street poles, intersections, HOAs | **Street poles, road junctions, SACCO stages, perimeters** |
 | **Edge Hardware Platform** | Custom Industrial Board (High Power) | **Raspberry Pi Zero 2 W + Sony IMX500 AI Cam** |
 | **Vision Intelligence** | Rigid LPR / Plate OCR | **African Transit Fingerprinting™ (Gemini 3.7)** |
 | **Boda Boda & Cargo Profiling**| ❌ None (US Vehicle biased) | ✅ Full (Fuel tanks, helmets, 13kg gas cylinders, sacks) |
 | **Muddy / Obscured Plates** | ❌ Fails / Zero Detection | ✅ Semantic Context Reasoning |
 | **Threat Intelligence Mesh** | Centralized US Police Database | **Decentralized Inter-Community Hotlist Grid** |
-| **Resident Communication** | Email / Proprietary App | **Real-Time 2-Way WhatsApp Security Mesh** |
+| **Resident & Patrol Comms** | Email / Proprietary App | **Real-Time 2-Way WhatsApp Security Mesh** |
 | **Billing & Payments** | Western Annual Net-30 Invoices | **Automated Monthly M-Pesa STK Push (Daraja API)** |
 | **Job Creation Engine** | Silicon Valley Corporate Techs | **The Iborain Installer Network (ChipuRobo Youth)** |
 
@@ -75,17 +76,17 @@ Powered by Gemini 3.7 Flash, Iborain extracts the **complete physical fingerprin
 * **Vehicle Make, Model & Customizations**: Identifies modifications (e.g. *"White Toyota Probox, tinted rear windows, heavy-duty roof rack, right rear bumper dent"*).
 * **Boda Boda Classification & Cargo**: Identifies motorbike models (*Boxer 150, TVS King, Bajaj*), fuel tank colors, rider reflector jacket color, helmet compliance, and distinctive cargo (*13kg gas cylinders, courier backpacks, sacks*).
 
-### Pillar 2: Decentralized Inter-Estate Hotlist & Threat Mesh
-* When an incident occurs in one estate, a high-priority threat fingerprint is published to the regional mesh.
-* Every Iborain unit within a 10km radius is synchronized immediately.
-* When that vehicle passes any connected checkpoint, Iborain triggers:
-  1. **Instant WhatsApp Alert** to local security patrols with photo proof.
+### Pillar 2: Decentralized Corridor Hotlist & Threat Mesh
+* When an incident occurs anywhere in a ward or neighborhood, a high-priority threat fingerprint is published to the regional mesh.
+* Every Iborain unit within a 10km radius is synchronized immediately across street poles, intersections, and access points.
+* When that suspect vehicle passes any connected corridor, Iborain triggers:
+  1. **Instant WhatsApp Alert** to local security patrols and neighborhood watch with photo proof.
   2. **Active Edge Deterrence**: GC9A01 LCD flashes Red/Blue police strobe; MAX98357A speaker delivers verbal warning (*"Warning: Vehicle flagged on community crime watch"*).
 
 ### Pillar 3: FreeForm™ Natural Language Crime Investigation Search
-Detectives and estate chairmen search forensic records in plain natural language:
-> *"Show all motorbikes carrying gas cylinders entering Syokimau Court 4 between 1:00 AM and 4:30 AM."*  
-> *"Find any white Toyota Probox with a dented bumper and no front plate seen in the last 48 hours."*
+Detectives and community leaders search city-scale transit records in plain natural language:
+> *"Show all motorbikes carrying gas cylinders traveling along Mombasa Road corridors between 1:00 AM and 4:30 AM."*  
+> *"Find any white Toyota Probox with a dented bumper and no front plate seen crossing Syokimau junctions in the last 48 hours."*
 
 ---
 
@@ -102,7 +103,7 @@ Detectives and estate chairmen search forensic records in plain natural language
 │                                │ $49/mo M-Pesa recurring subscription business model.            │
 ├────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
 │ 3. The Economic Outcome        │ Trained youth graduate into independent Iborain franchisees,    │
-│                                │ earning KES 58,000/mo ($450/mo) per 10 deployed gates!          │
+│                                │ earning KES 58,000/mo ($450/mo) per 10 deployed sentry nodes!   │
 └────────────────────────────────┴─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -111,14 +112,14 @@ Detectives and estate chairmen search forensic records in plain natural language
 ## 5. Commercial Go-to-Market & Financial P&L
 
 ### Package A: The Zero-CapEx Safety Lease
-* **Upfront Hardware Cost to Community:** **KES 0 ($0 CapEx)**
+* **Upfront Hardware Cost to Communities & SACCOs:** **KES 0 ($0 CapEx)**
 * **Setup & Network Calibration Fee:** **KES 3,500 ($27 USD)**
-* **Monthly SaaS Subscription:** **KES 6,500 / month ($49 USD)** per gate, billed via **M-Pesa STK Push**.
+* **Monthly SaaS Subscription:** **KES 6,500 / month ($49 USD)** per sentry node, billed via **M-Pesa STK Push**.
 
 ### Unit Economics:
 * **Hardware BOM Cost:** KES 14,200 ($110 USD)
 * **Monthly Operating Cost (Cloud/IoT):** KES 700 ($5 USD)
-* **Monthly Net Cash Flow per Gate:** KES 5,800 ($44 USD)
+* **Monthly Net Cash Flow per Sentry Node:** KES 5,800 ($44 USD)
 * **Payback Period:** **2.44 months (74 days)**
-* **Year 1 Net Operating Income (150 Units):** **$86,400 USD (78.1% Gross Margin)**
+* **Year 1 Net Operating Income (150 Sentry Nodes):** **$86,400 USD (78.1% Gross Margin)**
 * **LTV / CAC Ratio:** **50.4x** ($1,764 LTV vs. $35 CAC)

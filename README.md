@@ -1,8 +1,8 @@
 # 🛡️ Iborain Safety — Edge AI Public Safety & Crime Elimination Network
 
-**Cloud Run Vision-Language Sentry Broker ↔ Google Gemini (Live API & Gemini 3.7 Flash) ↔ Edge Sentry Unit (Raspberry Pi Zero 2 W + Sony IMX500 AI Camera)**
+**Cloud Run Vision-Language Sentry Broker ↔ Google Gemini (Live API & Gemini 3.7 Flash) ↔ Edge Sentry Nodes (Raspberry Pi Zero 2 W + Sony IMX500 AI Camera)**
 
-Iborain Safety is a decentralized Vision-Language AI public safety and crime elimination platform. Born in Nairobi, Iborain reverses the narrative on urban security by replacing passive surveillance and manual security records with real-time African transit forensics, inter-community crime hotlist meshes, autonomous acoustic/visual deterrence, and natural-language FreeForm™ crime investigation search.
+Iborain Safety is a decentralized Vision-Language AI public safety and crime elimination platform. Born in Nairobi, Iborain reverses the narrative on urban security by replacing passive surveillance and manual records with an infrastructure-free sentry network mounted across **street light poles, road intersections, arterial transit corridors, commercial logistics hubs, and community perimeters**.
 
 ---
 
@@ -18,8 +18,8 @@ Iborain Safety is a decentralized Vision-Language AI public safety and crime eli
                            │ • Jpeg (Vision diffs from Sony IMX500)
                            │ • AudioOut (24kHz Acoustic Warning/Chime)
                            │ • JSON Control {threatLevel, deterrence, fingerprint}
-┌──────────────────────────▼─────────────────────────────┐
-│             TACTICAL SENTRY UNIT                       │
+┌────────────────────────────────────────────────────────┐
+│             TACTICAL SENTRY NODE (CHIPUROBO LAB)       │
 │  • Raspberry Pi Zero 2 W + Sony IMX500 AI Camera       │
 │  • GC9A01 1.28" Round LCD (Threat Beacon & Strobe)     │
 │  • MAX98357A I2S 3W DAC + Acoustic Warning Speaker     │
