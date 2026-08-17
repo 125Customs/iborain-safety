@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Iborain Safety — Master Project & Technical Specification</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 15mm;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #0f172a;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .header {
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .header h1 {
+      margin: 0 0 4px 0;
+      font-size: 20px;
+      color: #0f172a;
+    }
+    .header p {
+      margin: 0;
+      color: #64748b;
+      font-size: 11px;
+    }
+    .section-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 12px 0 6px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid #cbd5e1;
+      padding-bottom: 2px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 8px;
+    }
+    th {
+      background: #f1f5f9;
+      text-align: left;
+      padding: 5px 8px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #475569;
+      border-bottom: 1px solid #cbd5e1;
+      text-transform: uppercase;
+    }
+    td {
+      padding: 5px 8px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #334155;
+      font-size: 11px;
+    }
+    .callout {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #2563eb;
+      padding: 8px 12px;
+      border-radius: 4px;
+      margin: 8px 0;
+      font-size: 11px;
+    }
+    .footer {
+      margin-top: 15px;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 8px;
+      font-size: 10px;
+      color: #94a3b8;
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div>
+      <h1>🛡️ Iborain Safety: The Community Public Safety Platform</h1>
+      <p>Decentralized AI Transit Forensics & Crime Elimination Network • Nairobi, Kenya</p>
+    </div>
+    <div style="text-align: right; font-size: 10px; color: #475569;">
+      <div><b>Category:</b> Entrepreneurship & Job Creation</div>
+      <div><b>Partner:</b> ChipuRobo STEM Makerspaces</div>
+      <div><b>Target:</b> Build with Gemini XPRIZE ($2M)</div>
+    </div>
+  </div>
+
+  <div class="section-title">1. Executive Summary & The Problem We Solve</div>
+  <p style="margin: 0 0 8px 0;">
+    In Sub-Saharan Africa, over 70% of violent and property crime is transit-borne (getaway cars with cloned plates, unplated Boda Bodas). Flock Safety costs $5,000/year (pricing out 99% of Africa), while dumb CCTV only records passive video without real-time deterrence. <b>Iborain Safety</b> deploys a $49/mo infrastructure-free public safety grid powered by Google Gemini (Gemini 3.7 Flash & Live API) and locally fabricated edge sentries to eliminate crime in real time.
+  </p>
+
+  <div class="section-title">2. Sentry Hardware Specifications (3 Modular Tiers)</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Tier / Model</th>
+        <th>Hardware Architecture</th>
+        <th>BOM Cost</th>
+        <th>Pricing & Model</th>
+        <th>Payback</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Tier 1: Iborain Lite</b></td>
+        <td>Raspberry Pi Zero 2 W + 12MP Sony IMX708 + MAX98357A 3W Amp + MPU-6500 IMU</td>
+        <td>$68.00 (KES 8,840)</td>
+        <td>$49/mo (KES 6,500/mo)</td>
+        <td><b>46 Days</b></td>
+      </tr>
+      <tr>
+        <td><b>Tier 2: Tactical (Live Demo)</b></td>
+        <td>RPi Zero 2 + Sony IMX500 Neural AI Camera + GC9A01 LCD + 4G LTE HAT + 5W Horn</td>
+        <td>$148.00 (KES 19,240)</td>
+        <td>$73/mo (KES 9,500/mo)</td>
+        <td><b>50–68 Days</b></td>
+      </tr>
+      <tr>
+        <td><b>Tier 3: Solar Pro</b></td>
+        <td>30W Solar + LiFePO4 Battery + Sony IMX500 Telephoto + Dual-SIM 4G + 30m IR Array</td>
+        <td>$258.00 (KES 33,540)</td>
+        <td>$104/mo (KES 13,500/mo)</td>
+        <td><b>46–84 Days</b></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="section-title">3. The 3 Pillars of Iborain Safety</div>
+  <div class="callout">
+    <b>Pillar 1 — African Transit Fingerprinting™:</b> Reads muddy plates, identifies vehicle customizations, and profiles Boda Bodas (models, helmet compliance, rider jackets, and cargo such as 13kg gas cylinders).<br>
+    <b>Pillar 2 — Regional Threat Mesh & Instant WhatsApp Alert:</b> Synchronizes hotlists across a 10km grid with sub-600ms latency, triggering active strobes and voice warnings.<br>
+    <b>Pillar 3 — FreeForm™ Natural Language Crime Search:</b> Detectives query multi-day forensic history using plain English or Swahili (e.g. <i>"Show unplated motorbikes carrying gas cylinders between 1 AM and 4 AM"</i>).
+  </div>
+
+  <div class="section-title">4. Job Creation & The ChipuRobo Micro-Franchise Flywheel</div>
+  <p style="margin: 0 0 8px 0;">
+    In direct partnership with <b>ChipuRobo</b> (empowering 4M youth by 2030 through hands-on robotics), Iborain trains young technicians from Kenya's informal sector (<i>Jua Kali</i>) to assemble, mount, and service sentry nodes. Installers earn <b>KES 30,400 to KES 58,000/mo ($233 - $450/mo)</b> managing 10 local sentry nodes—creating high-value, sustainable middle-class careers.
+  </p>
+
+  <div class="footer">
+    <div>Iborain Safety Ltd. • Nairobi, Kenya • Monorepo: <a href="https://github.com/bobybarack/iborain-safety">https://github.com/bobybarack/iborain-safety</a></div>
+    <div>Submission Dossier</div>
+  </div>
+
+</body>
+</html>
