@@ -1,21 +1,21 @@
-# 🛡️ BomaSafety — Master Project & Submission Report
+# 🛡️ Iborain Safety — Master Project & Submission Report
 
 **Repository:** [https://github.com/bobybarack/smartB0t](https://github.com/bobybarack/smartB0t)  
 **Local Monorepo Path:** [`/Users/radebe49/smartB0t`](file:///Users/radebe49/smartB0t)  
 **Competition Target:** [Build with Gemini XPRIZE — Devpost ($2,000,000)](https://xprize.devpost.com/)  
-**Submission Category:** **Small Business Services**  
+**Submission Category:** **Entrepreneurship & Job Creation** (and Small Business Services)  
 **Submission Deadline:** August 17, 2026 @ 1:00 PM PDT  
 
 ---
 
 ## 1. Executive Summary & Value Proposition
 
-**BomaSafety** is Africa's first decentralized Vision-Language AI public safety and crime elimination network. Powered by the **Google Gemini Multimodal Live API** on Google Cloud Run and edge sentry hardware (Raspberry Pi Zero 2 W + Sony IMX500 AI Camera), BomaSafety captures multimodal African transit fingerprints, detects community crime hotlist matches in real time, executes autonomous acoustic and visual deterrence, and provides natural-language FreeForm™ crime investigation for security teams and detectives.
+**Iborain Safety** is a decentralized Vision-Language AI public safety and crime elimination network. Born in Nairobi, Iborain reverses the narrative on urban security. Powered by **Google Gemini 3.7 Flash & Live** on Google Cloud Run and edge sentry hardware (Raspberry Pi Zero 2 W + Sony IMX500 AI Camera), Iborain Safety captures multimodal African transit fingerprints, detects community crime hotlist matches in real time, executes autonomous acoustic and visual deterrence, and provides natural-language FreeForm™ crime investigation for security teams and detectives.
 
 ```
 ┌────────────────────────────────────────────────────────┐
-│               BOMASAFETY CLOUD BRAIN                   │
-│      Google Cloud Run ↔ Gemini Multimodal Live API     │
+│               IBORAIN SAFETY CLOUD BRAIN               │
+│       Google Cloud Run ↔ Gemini 3.7 Flash / Live       │
 └──────────────────────────▲─────────────────────────────┘
                            │ WebSocket (Protocol v1)
                            │ • AudioIn (16kHz Sentry Mic Stream)
@@ -37,17 +37,15 @@
 
 ## 2. XPRIZE Alignment & Judging Strategy
 
-| Judging Pillar (Stage 2) | How BomaSafety Wins |
+| Judging Pillar (Stage 2) | How Iborain Safety Wins |
 | :--- | :--- |
 | **1. Business Viability & Revenue** | **High-Margin Zero-CapEx SaaS:** Free hardware installation + KES 6,500/mo ($49/mo) community safety subscription billed via automated M-Pesa STK Push. 2.2-month installer payback, 51x LTV/CAC. |
 | **2. AI-Native Operations** | **Multimodal Forensic Perception:** Gemini multimodal vision classifies African transit realities (Boda Bodas, helmets, cargo, modified plates), synchronizes regional hotlist meshes, and enables sub-600ms natural-language FreeForm evidence queries. |
-| **3. Category Impact** | Protects 200,000+ African gated communities, SACCO stages, and commercial logistics hubs that cannot afford $5,000+ imported Western systems. |
+| **3. Category Impact (Job Creation)** | Creates the **BomaTech Installer Network**, training youth and informal technicians (*Jua Kali*) to franchise assembly, mounting, and maintenance with a 75-day hardware payback. |
 
 ---
 
-## 3. Master Hardware Wiring & Pinout Guide
-
-### Raspberry Pi Zero 2 W (Active Sentry Platform)
+## 3. Master Hardware Wiring & Pinout Guide (Raspberry Pi Zero 2 W)
 
 ```
                               ┌─────────────────────────┐
@@ -74,21 +72,6 @@
                                └─────────────────────────┘
 ```
 
-#### Pin Mapping Table:
-| Peripheral | Pin Name | Connects to Pi Zero 2 W Pin | Interface & Function |
-| :--- | :--- | :--- | :--- |
-| **RPi AI Camera** | MIPI CSI Ribbon | **CSI Camera Port** | Sony IMX500 Neural DSP |
-| **GC9A01 1.28" LCD** | `VCC` / `GND` | **Pin 1** (3.3V) / **Pin 14** (GND) | Visual Deterrence Beacon |
-| | `SCL` (Clock) | **Pin 23** (GPIO 11) | SPI0_SCLK |
-| | `SDA` (Data) | **Pin 19** (GPIO 10) | SPI0_MOSI |
-| | `DC` / `CS` / `RST` | **Pins 18, 24, 22** (GPIO 24, 8, 25) | Control Lines |
-| | `BLK` (Backlight) | **Pin 17** (3.3V) | Always-on power |
-| **MAX98357A Amp** | `VIN` / `GND` | **Pin 2** (5V) / **Pin 6** (GND) | 3W Acoustic Deterrence |
-| | `BCLK` / `LRC` / `DIN`| **Pins 12, 35, 40** (GPIO 18, 19, 21)| I2S Digital Audio Bus |
-| **MPU-6500 IMU** | `SDA` / `SCL` | **Pins 3 & 5** (GPIO 2, 3) | I2C Bus (`0x68`) — Anti-tamper |
-| **TCRT5000 IR** | `DO` | **Pin 11** (GPIO 17) | Optical Arrival Tripwire |
-| **CD4069UBE Logic** | Hex Inverter | Interlock Circuit | Hardware tamper clamp |
-
 ---
 
 ## 4. Software Repository Structure
@@ -98,7 +81,7 @@ smartB0t/
 ├── packages/
 │   └── protocol/              # Wire framing & Zod schemas (threatLevel, deterrence, fingerprints)
 ├── apps/
-│   ├── backend/               # Google Cloud Run Broker (Gemini Multimodal Live Bridge)
+│   ├── backend/               # Google Cloud Run Broker (Gemini 3.7 Flash & Live Bridge)
 │   │   ├── src/               # gemini.ts, session.ts, bridge.ts, cost-guard.ts, latency.ts
 │   │   ├── scripts/soak-test.ts # 30-min automated soak test with fault injection
 │   │   └── Dockerfile, deploy.sh
@@ -108,25 +91,15 @@ smartB0t/
 │       ├── test_hardware.py   # One-command smoke test (I2C scan + GC9A01 sentry beacon)
 │       └── robot.py           # Live WebSocket client streaming Camera/Mic to Gemini
 ├── PROTOCOL.md                # Frozen wire specification (v1)
-├── BOMASENTRY_MASTER_SPECIFICATION.md # Master project spec, GTM, and XPRIZE narrative
+├── IBORAIN_MASTER_SPECIFICATION.md # Master project spec, GTM, and XPRIZE narrative
 └── IMPLEMENTATION_PLAN.md     # Architecture decisions & cost caps
 ```
 
 ---
 
-## 5. XPRIZE Submission Checklist & Script
+## 5. XPRIZE Submission Fields
 
-### 🎬 3-Minute Demo Video Script
-* **0:00 – 0:30 (The Pitch):** "This is BomaSafety — the $110 decentralized AI public safety network eliminating community and transit crime across Africa. Powered by Google Gemini Multimodal Live, it captures vehicle fingerprints and stops transit crime without expensive infrastructure."
-* **0:30 – 1:30 (Live Physical Demo):**
-  1. Present the Raspberry Pi Zero 2 W + Sony IMX500 AI Camera + GC9A01 display + MAX98357A speaker.
-  2. Hold up verified resident plate `KDA 482B` $\rightarrow$ Gemini clears vehicle, LCD glows green beacon.
-  3. Hold up suspect Boda `KMDF 892Z` (Red Boxer, gas cylinder) $\rightarrow$ Gemini flags community hotlist match, GC9A01 flashes red alert strobe, MAX98357A speaks verbal warning, and WhatsApp incident alert fires instantly!
-* **1:30 – 2:15 (FreeForm™ Crime Search & Latency):** Query: *"Show all motorbikes carrying gas cylinders between 8 AM and 12 PM."* Show sub-600ms latency metrics HUD.
-* **2:15 – 3:00 (Business Model & Scaling):** Package A ($0 CapEx, KES 6,500/mo via M-Pesa) and expansion roadmap across East Africa.
-
-### 📝 Devpost Form Fields
-* **Title:** BomaSafety — Africa's Vision-Language AI Public Safety Network
+* **Title:** Iborain Safety: The Community Public Safety Platform
 * **GitHub Repository:** `https://github.com/bobybarack/smartB0t`
-* **Google Cloud Products:** Cloud Run, Gemini 2.5 Multimodal Live API, Cloud Logging, Secret Manager
-* **Category:** Small Business Services
+* **Google Cloud Products:** Cloud Run, Gemini 3.7 Flash & Multimodal Live API, Cloud Logging, Secret Manager
+* **Category:** Entrepreneurship & Job Creation (and Small Business Services)

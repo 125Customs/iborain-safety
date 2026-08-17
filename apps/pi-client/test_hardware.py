@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Hardware Smoke Test for BomaSafety Tactical Sentry on Raspberry Pi Zero 2 W.
+Hardware Smoke Test for Iborain Safety Tactical Sentry on Raspberry Pi Zero 2 W.
 Tests:
 1. I2C Bus & Anti-Tamper: MPU-6500 6-Axis Accelerometer (0x68/0x69)
 2. Optical Arrival Tripwire: TCRT5000 IR Sensor on GPIO 17
@@ -11,7 +11,7 @@ import time
 import sys
 
 print("==================================================")
-print("  🛡️ BomaSafety Edge Sentry Hardware Smoke Test")
+print("  🛡️ Iborain Safety Edge Sentry Hardware Smoke Test")
 print("==================================================")
 
 # 1. Test I2C Bus (MPU-6500 Anti-Tamper)
@@ -100,7 +100,7 @@ try:
     draw.line((10, 120, 230, 120), fill=(0, 140, 220), width=1)
 
     # Tactical Header Text
-    draw.text((65, 35), "BOMASAFETY", fill=(255, 255, 255))
+    draw.text((65, 35), "IBORAIN", fill=(255, 255, 255))
     draw.text((70, 195), "SENTRY ACTIVE", fill=(0, 255, 180))
 
     send_cmd(0x2A); send_data([0, 0, 0, 239])
@@ -117,7 +117,7 @@ try:
     for i in range(0, len(raw), 4096):
         spi.xfer2(raw[i:i+4096])
 
-    print("  ✅ GC9A01 LCD successfully rendering BomaSafety Sentry Radar & Beacon!")
+    print("  ✅ GC9A01 LCD successfully rendering Iborain Safety Sentry Radar & Beacon!")
 except Exception as e:
     print(f"  ❌ LCD test error: {e}")
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-BomaSafety Edge Sentry Client for Raspberry Pi Zero 2 W + Sony IMX500 AI Camera.
+Iborain Safety Edge Sentry Client for Raspberry Pi Zero 2 W + Sony IMX500 AI Camera.
 Connects to apps/backend over WebSocket, streams high-speed camera frames & mic audio,
 plays returned Gemini 24kHz acoustic deterrence via MAX98357A I2S DAC, and renders
 active sentry threat beacons & strobes on the GC9A01 LCD.
@@ -17,7 +17,7 @@ BACKEND_URL = os.getenv("BACKEND_URL", "ws://192.168.1.100:8080")
 DEVICE_ID = os.getenv("DEVICE_ID", "sentry-nairobi-001")
 TOKEN = os.getenv("DEVICE_TOKEN", "local-secret")
 
-print(f"🛡️ Starting BomaSafety Sentry -> Connecting to {BACKEND_URL} as {DEVICE_ID}...")
+print(f"🛡️ Starting Iborain Safety Sentry -> Connecting to {BACKEND_URL} as {DEVICE_ID}...")
 
 async def run_sentry():
     url = f"{BACKEND_URL}/?device={DEVICE_ID}&token={TOKEN}"
@@ -25,7 +25,7 @@ async def run_sentry():
         try:
             print(f"Connecting to {url}...")
             async with websockets.connect(url) as ws:
-                print("✅ Connected to BomaSafety Cloud Brain!")
+                print("✅ Connected to Iborain Safety Cloud Brain!")
                 # Send hello
                 await ws.send(json.dumps({
                     "type": "hello",
@@ -57,15 +57,15 @@ async def run_sentry():
                         # Binary frame: [1B type][8B timestamp][payload]
                         if len(message) >= 9:
                             frame_type = message[0]
-                            if frame_type == 0x11: # AudioOut (24kHz PCM Acoustic Deterrence)
+                            if frame_type == 0x03: # AudioOut (24kHz PCM Acoustic Deterrence)
                                 audio_payload = message[9:]
-                                # Write to ALSA / I2S speaker playback queue
+                                print(f"🔊 Received {len(audio_payload)} bytes acoustic warning audio")
         except Exception as e:
-            print(f"⚠️ Connection error: {e}. Reconnecting in 3s...")
+            print(f"⚠️ Sentry connection dropped: {e}. Reconnecting in 3s...")
             await asyncio.sleep(3)
 
 if __name__ == "__main__":
     try:
         asyncio.run(run_sentry())
     except KeyboardInterrupt:
-        print("\nSentry unit stopped.")
+        print("\nSentry deactivated.")

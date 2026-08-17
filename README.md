@@ -1,8 +1,8 @@
-# 🛡️ BomaSafety — Edge AI Public Safety & Crime Elimination Network
+# 🛡️ Iborain Safety — Edge AI Public Safety & Crime Elimination Network
 
-**Cloud Run Vision-Language Sentry Broker ↔ Google Gemini Multimodal Live API ↔ Edge Sentry Unit (Raspberry Pi Zero 2 W + Sony IMX500 AI Camera)**
+**Cloud Run Vision-Language Sentry Broker ↔ Google Gemini (Live API & Gemini 3.7 Flash) ↔ Edge Sentry Unit (Raspberry Pi Zero 2 W + Sony IMX500 AI Camera)**
 
-BomaSafety is Africa's first decentralized Vision-Language AI public safety and crime elimination platform. It replaces passive surveillance and manual security records with real-time African transit forensics, inter-community crime hotlist meshes, autonomous acoustic/visual deterrence, and natural-language FreeForm™ crime investigation search.
+Iborain Safety is a decentralized Vision-Language AI public safety and crime elimination platform. Born in Nairobi, Iborain reverses the narrative on urban security by replacing passive surveillance and manual security records with real-time African transit forensics, inter-community crime hotlist meshes, autonomous acoustic/visual deterrence, and natural-language FreeForm™ crime investigation search.
 
 ---
 
@@ -10,8 +10,8 @@ BomaSafety is Africa's first decentralized Vision-Language AI public safety and 
 
 ```
 ┌────────────────────────────────────────────────────────┐
-│               BOMASAFETY CLOUD BRAIN                   │
-│      Google Cloud Run ↔ Gemini Multimodal Live API     │
+│               IBORAIN SAFETY CLOUD BRAIN               │
+│       Google Cloud Run ↔ Gemini 3.7 Flash / Live       │
 └──────────────────────────▲─────────────────────────────┘
                            │ WebSocket (Protocol v1)
                            │ • AudioIn (16kHz PCM from Sentry Mic)
@@ -49,7 +49,7 @@ Open the printed URL, click **Activate Sentry & Stream**, allow mic + camera, an
 
 ---
 
-## Live Gemini Multimodal Live Mode
+## Live Gemini Mode
 
 ```bash
 cp apps/backend/.env.example apps/backend/.env   # Set GEMINI_API_KEY, MODE=gemini
@@ -87,4 +87,4 @@ Simulates high-speed edge sentries, sends synthetic acoustic waveforms, and inje
 - `apps/backend` — Google Cloud Run broker: auth, session lifecycle, Gemini Multimodal Live bridge, cost guards, latency telemetry.
 - `apps/playground/pixel-mock` — Browser Sentry Intelligence & WhatsApp Dispatch Simulator: mic→PCM16, camera→JPEG diffs, GC9A01 sentry beacon mock, latency HUD.
 - `apps/pi-client` — Native Raspberry Pi Zero 2 W Python client (`test_hardware.py`, `robot.py`).
-- `BOMASENTRY_MASTER_SPECIFICATION.md` — Complete master project specification, commercial model, and XPRIZE Devpost submission blueprint.
+- `IBORAIN_MASTER_SPECIFICATION.md` — Complete master project specification, commercial model, and XPRIZE Devpost submission blueprint.

@@ -1,77 +1,203 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>BomaSafety — Crime Elimination &amp; Sentry Intelligence Portal</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root { color-scheme: dark; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace; }
-    body { margin: 0; background: #0b0f17; color: #c9d1d9; display: grid; grid-template-columns: 360px 1fr; height: 100vh; }
-    aside { padding: 16px; border-right: 1px solid #1f2937; overflow-y: auto; background: #111827; }
-    main { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 24px; }
-    h1 { font-size: 16px; margin: 0 0 12px; display: flex; align-items: center; gap: 8px; color: #60a5fa; }
-    label { display: block; font-size: 11px; margin: 8px 0 2px; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.5px; }
-    input { width: 100%; box-sizing: border-box; background: #1f2937; color: #f3f4f6; border: 1px solid #374151; border-radius: 6px; padding: 7px 10px; font: inherit; font-size: 12px; }
-    button { margin-top: 12px; width: 100%; padding: 9px; border-radius: 6px; border: 1px solid #374151; background: #2563eb; color: #fff; font: inherit; font-weight: 600; cursor: pointer; transition: background 0.2s; }
-    button:hover { background: #1d4ed8; }
-    button.stop { background: #dc2626; }
-    button.stop:hover { background: #b91c1c; }
-    #face { border-radius: 50%; box-shadow: 0 0 50px rgba(37,99,235,.25); background: #000; }
-    #hud { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; font-size: 12px; text-align: center; width: 100%; max-width: 600px; background: #111827; padding: 12px; border-radius: 8px; border: 1px solid #1f2937; }
-    #hud .v { font-size: 20px; font-weight: 700; color: #60a5fa; }
-    #hud .v.bad { color: #ef4444; }
-    #forensics { width: 100%; max-width: 600px; background: #111827; border: 1px solid #1f2937; border-radius: 8px; padding: 12px 16px; box-sizing: border-box; }
-    .threat-badge { display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 12px; background: #374151; color: #fff; }
-    .threat-CLEAR { background: #059669; color: #ecfdf5; }
-    .threat-SUSPICIOUS { background: #d97706; color: #fffbeb; }
-    .threat-HOTLIST_MATCH, .threat-EMERGENCY { background: #dc2626; color: #fef2f2; animation: pulse 1s infinite; }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
-    #log { font-size: 10px; white-space: pre-wrap; color: #9ca3af; margin-top: 12px; max-height: 25vh; overflow-y: auto; background: #0b0f17; padding: 8px; border-radius: 6px; border: 1px solid #1f2937; }
-    #cam { width: 100%; border-radius: 6px; border: 1px solid #374151; margin-top: 8px; }
-    .status { font-size: 12px; margin-top: 10px; display: flex; align-items: center; }
-    .status .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #ef4444; margin-right: 6px; }
-    .status.on .dot { background: #10b981; }
-    .whatsapp-preview { margin-top: 12px; padding: 10px; background: #064e3b; border: 1px solid #059669; border-radius: 6px; font-size: 11px; color: #d1fae5; line-height: 1.4; }
-  </style>
-</head>
-<body>
-  <aside>
-    <h1>🛡️ BomaSafety Sentry Mock</h1>
-    <label>Cloud Brain URL</label>
-    <input id="url" value="ws://localhost:8080" />
-    <label>Sentry Unit ID</label>
-    <input id="device" value="sentry-nairobi-001" />
-    <label>Bearer Token</label>
-    <input id="token" value="local-secret" />
-    <button id="connect">Activate Sentry &amp; Stream</button>
-    <div class="status" id="status"><span class="dot"></span><span id="statusText">offline</span></div>
-    <video id="cam" muted playsinline></video>
-    <div class="whatsapp-preview" id="whatsappBox">
-      <b>💬 WhatsApp Security Mesh:</b><br />
-      <span id="whatsappMsg">Awaiting incident broadcast...</span>
-    </div>
-    <div id="log"></div>
-  </aside>
-  <main>
-    <canvas id="face" width="300" height="300"></canvas>
-    <div id="forensics">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-        <span style="font-weight:600; font-size:13px;">TRANSIT FORENSIC RADAR</span>
-        <span class="threat-badge threat-CLEAR" id="threatBadge">CLEAR</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iborain Safety — Crime Elimination & Sentry Intelligence Portal</title>
+    <style>
+      :root {
+        --bg: #090d16;
+        --card: #121826;
+        --border: #222f46;
+        --primary: #3b82f6;
+        --danger: #ef4444;
+        --warning: #f59e0b;
+        --success: #10b981;
+        --text: #f3f4f6;
+        --muted: #9ca3af;
+      }
+      body {
+        margin: 0;
+        padding: 24px;
+        background: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        box-sizing: border-box;
+      }
+      .container {
+        max-width: 900px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 16px;
+      }
+      h1 {
+        margin: 0;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: 20px;
+      }
+      @media (max-width: 768px) {
+        .grid { grid-template-columns: 1fr; }
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .display-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #000;
+        border-radius: 12px;
+        padding: 20px;
+        border: 2px solid var(--border);
+        position: relative;
+      }
+      canvas {
+        background: #000;
+        border-radius: 50%;
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+      }
+      .threat-badge {
+        font-weight: bold;
+        font-size: 14px;
+        padding: 6px 12px;
+        border-radius: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 10px;
+      }
+      .threat-CLEAR { background: rgba(16, 185, 129, 0.2); color: var(--success); border: 1px solid var(--success); }
+      .threat-SUSPICIOUS { background: rgba(245, 158, 11, 0.2); color: var(--warning); border: 1px solid var(--warning); }
+      .threat-HOTLIST_MATCH { background: rgba(239, 68, 68, 0.2); color: var(--danger); border: 1px solid var(--danger); animation: pulse 1s infinite; }
+      .threat-EMERGENCY { background: rgba(239, 68, 68, 0.4); color: #fff; border: 1px solid var(--danger); animation: pulse 0.5s infinite; }
+      
+      @keyframes pulse {
+        0% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.8; transform: scale(1.05); }
+        100% { opacity: 1; transform: scale(1); }
+      }
+      
+      .btn {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: opacity 0.2s;
+      }
+      .btn:hover { opacity: 0.9; }
+      .btn-danger { background: var(--danger); }
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .metric-box {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 10px;
+      }
+      .metric-label { font-size: 11px; color: var(--muted); text-transform: uppercase; }
+      .metric-value { font-size: 18px; font-weight: bold; margin-top: 4px; }
+      
+      .forensics-box {
+        background: #0b111e;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px;
+        font-family: monospace;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .whatsapp-alert {
+        background: #064e3b;
+        border-left: 4px solid #10b981;
+        padding: 10px;
+        border-radius: 4px;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🛡️ Iborain Safety — Sentry Intelligence Portal</h1>
+        <div id="connectionStatus" style="font-size: 13px; color: var(--muted);">Disconnected</div>
+      </header>
+
+      <div class="grid">
+        <!-- Left: Sentry Hardware Beacon & Radar -->
+        <div class="card">
+          <h3>Tactical Visual Sentry (GC9A01 LCD)</h3>
+          <div class="display-container">
+            <canvas id="sentryCanvas" width="240" height="240"></canvas>
+            <div id="threatBadge" class="threat-badge threat-CLEAR">SCANNING PATROL</div>
+          </div>
+          <button id="toggleStreamBtn" class="btn">⚡ Activate Sentry & Stream</button>
+          <div class="metrics-grid">
+            <div class="metric-box">
+              <div class="metric-label">Hop Latency (p50)</div>
+              <div id="latencyVal" class="metric-value">-- ms</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-label">Frames Processed</div>
+              <div id="framesVal" class="metric-value">0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Transit Forensics & WhatsApp Incident Dispatch -->
+        <div class="card">
+          <h3>African Transit Forensics & Evidence Grid</h3>
+          <div class="forensics-box" id="forensicDetails">
+            <div><b>Status:</b> Awaiting vehicle/boda arrival trigger...</div>
+            <div><b>Optical Tripwire:</b> TCRT5000 Active (0ms)</div>
+            <div><b>Anti-Tamper IMU:</b> MPU-6500 Armed</div>
+          </div>
+
+          <h3>High-Priority WhatsApp Security Dispatch</h3>
+          <div class="whatsapp-alert" id="whatsappAlertBox">
+            📲 <b>WhatsApp Mesh:</b> Syokimau / Ruiru Estate Security Grid Connected.
+          </div>
+
+          <div style="font-size: 12px; color: var(--muted); line-height: 1.4;">
+            <b>Live Production Protocol:</b> 16kHz AudioIn, Binary JPEG Diff (&lt;1fps), 24kHz Acoustic Warning Out, Non-blocking <code>set_sentry_state</code> tool calls.
+          </div>
+        </div>
       </div>
-      <div style="font-size:12px; color:#9ca3af;" id="forensicDetails">
-        Plate: <b id="fpPlate" style="color:#f3f4f6;">--</b> &middot;
-        Type: <b id="fpType" style="color:#f3f4f6;">--</b> &middot;
-        Traits: <span id="fpTraits">Awaiting camera trigger</span>
-      </div>
     </div>
-    <div id="hud">
-      <div>Turn Latency<br /><span class="v" id="rtt">–</span> ms</div>
-      <div>p50 Median<br /><span class="v" id="rttMed">–</span> ms</div>
-      <div>Security Turns<br /><span class="v" id="turns">0</span></div>
-      <div>Frames Ingested<br /><span class="v" id="jpegs">0</span></div>
-    </div>
-  </main>
-  <script type="module" src="/src/main.ts"></script>
-</body>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>

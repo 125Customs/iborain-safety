@@ -196,7 +196,7 @@ function openSocket(base: string, device: string, token: string): void {
           if (msg.threatLevel === "HOTLIST_MATCH" || msg.threatLevel === "EMERGENCY") {
             waBox.innerHTML = `<span style="color:#f87171;">🚨 <b>HIGH-PRIORITY THREAT ALERT:</b><br />Suspect vehicle ${msg.fingerprint?.plate ?? "UNPLATED"} flagged on Community Crime Watch. Dispatched to security patrols.</span>`;
           } else {
-            waBox.innerHTML = `🛡️ <b>BomaSafety Ping:</b> ${msg.message}`;
+            waBox.innerHTML = `🛡️ <b>Iborain Safety Ping:</b> ${msg.message}`;
           }
 
           log(`threat [${msg.threatLevel}] · deterrence [${msg.deterrence}] · ${msg.message}`);

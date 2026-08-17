@@ -1,6 +1,6 @@
-# BomaSafety — Implementation Plan (Pre-Seed Edition)
+# Iborain Safety — Implementation Plan (Pre-Seed Edition)
 
-**Status:** Phases 1–4 scaffolded and fully implemented in this monorepo. Deployment and live Gemini Live testing require your GCP project and `GEMINI_API_KEY`.
+**Status:** Phases 1–4 scaffolded and fully implemented in this monorepo. Deployment and live Gemini Live / 3.7 Flash testing require your GCP project and `GEMINI_API_KEY`.
 
 ---
 
@@ -8,8 +8,8 @@
 
 | Decision | Choice | Why / Tradeoff |
 |---|---|---|
-| **Gemini Model** | `gemini-2.5-flash-native-audio-preview-12-2025` (env `GEMINI_MODEL`) | Native audio output (bypasses separate TTS step) **and** NON_BLOCKING function calling, allowing `{threatLevel, deterrence, fingerprint}` control commands to stream simultaneously with speech/acoustic warnings. |
-| **Control JSON Transport** | Gemini **function calling** (`set_sentry_state` tool, `behavior: NON_BLOCKING`, `scheduling: SILENT`) | Native-audio Live models communicate via `AUDIO` responses; tool calls provide structured forensic telemetry. Backend Zod-validates arguments; invalid calls are dropped and logged. |
+| **Gemini Models** | `gemini-3.7-flash` & `gemini-2.5-flash-native-audio-preview` | `gemini-3.7-flash` delivers $0.75/1M token pricing and 30.4% AutomationBench reasoning for FreeForm crime search; Live model provides sub-600ms native audio/tool edge streaming. |
+| **Control JSON Transport** | Gemini **function calling** (`set_sentry_state` tool, `behavior: NON_BLOCKING`, `scheduling: SILENT`) | Native Live models communicate via `AUDIO` responses; tool calls provide structured forensic telemetry. Backend Zod-validates arguments; invalid calls are dropped and logged. |
 | **Wire Framing** | Binary WS frames with 9-byte header: `[1B type][8B uint64 LE capture-ts ms]` + payload; JSON text frames for control plane | Eliminates base64 overhead (~33% bandwidth savings), simple parsing on embedded Linux / C++, capture timestamps enable exact hop-by-hop latency logging. |
 | **Audio Pipeline** | In: 16kHz PCM16 mono LE (native Gemini input rate). Out: **24kHz** PCM16 (Gemini native output; edge I2S clocks at 24kHz for playback) | Zero transcoding latency on device or cloud broker. |
 | **Gemini 2-Min Audio/Video Session Cap** | Transparent cloud-side **session resumption** (resumption handle + context window compression) on `goAway` or disconnect | Ensures continuous 24/7 sentry monitoring without edge reconnect storms. |
@@ -27,7 +27,7 @@ smartB0t/
 ├── packages/
 │   └── protocol/              # Frozen wire spec: Zod schemas, binary framing, threat enums
 ├── apps/
-│   ├── backend/               # Google Cloud Run Broker (Gemini Multimodal Live Bridge)
+│   ├── backend/               # Google Cloud Run Broker (Gemini 3.7 Flash & Live Bridge)
 │   │   ├── src/               # gemini.ts, session.ts, bridge.ts, cost-guard.ts, latency.ts
 │   │   ├── scripts/soak-test.ts # 30-min automated soak test with fault injection
 │   │   └── Dockerfile, deploy.sh
@@ -37,7 +37,7 @@ smartB0t/
 │       ├── test_hardware.py   # One-command smoke test (I2C scan + GC9A01 sentry beacon)
 │       └── robot.py           # Live WebSocket sentry streaming Camera/Mic to Gemini
 ├── PROTOCOL.md                # Frozen wire specification (v1)
-├── BOMASENTRY_MASTER_SPECIFICATION.md # Master project spec, GTM, and XPRIZE narrative
+├── IBORAIN_MASTER_SPECIFICATION.md # Master project spec, GTM, and XPRIZE narrative
 └── IMPLEMENTATION_PLAN.md     # Architecture decisions & cost caps
 ```
 

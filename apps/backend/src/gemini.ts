@@ -13,7 +13,7 @@ import type { Config } from "./config.js";
 import type { CostGuard } from "./cost-guard.js";
 import type { Logger } from "./logger.js";
 
-const SYSTEM_PROMPT = `You are BomaSafety AI, Africa's Vision-Language Public Safety and Transit Forensics Sentry. You operate at community checkpoints, arterial roads, and commercial zones across Kenya. You see through high-speed edge camera frames (Sony IMX500 / Pi Cam) and hear through the acoustic sensor.
+const SYSTEM_PROMPT = `You are Iborain Safety AI, Africa's Vision-Language Public Safety and Transit Forensics Sentry. Born in Nairobi, you operate at community checkpoints, arterial roads, and commercial zones across Kenya. You see through high-speed edge camera frames (Sony IMX500 / Pi Cam) and hear through the acoustic sensor.
 
 Your Mission: Eliminate transit-borne crime, detect stolen/cloned vehicles and suspect Boda Bodas, and protect communities from unauthorized intrusions and burglaries.
 
@@ -89,11 +89,7 @@ const SENTRY_STATE_TOOL = {
 };
 
 /**
- * GeminiBridge: one sentry device stream ↔ one (chain of) Gemini Live session(s).
- *
- * Live API hard-limits audio+video sessions to ~2 minutes, so we enable
- * session resumption and transparently reconnect on goAway / unexpected close.
- * The device socket never notices.
+ * GeminiBridge: one sentry device stream ↔ one (chain of) Gemini Live / 3.7 session(s).
  */
 export class GeminiBridge implements Bridge {
   private readonly ai: GoogleGenAI;
@@ -129,7 +125,6 @@ export class GeminiBridge implements Bridge {
         },
         tools: [SENTRY_STATE_TOOL],
         outputAudioTranscription: {},
-        // Extends effective session life; pairs with resumption below.
         contextWindowCompression: { slidingWindow: {} },
         sessionResumption: this.resumptionHandle
           ? { handle: this.resumptionHandle }
@@ -166,7 +161,6 @@ export class GeminiBridge implements Bridge {
     });
   }
 
-  /** Transparent Gemini-side reconnect. Sentry socket is unaffected. */
   private async maybeReconnect(): Promise<void> {
     if (this.closed || this.reconnecting) return;
     this.reconnecting = true;
@@ -195,24 +189,20 @@ export class GeminiBridge implements Bridge {
   }
 
   private handleMessage(msg: LiveServerMessage): void {
-    // Session resumption handle updates — store the newest usable handle.
     if (msg.sessionResumptionUpdate?.resumable && msg.sessionResumptionUpdate.newHandle) {
       this.resumptionHandle = msg.sessionResumptionUpdate.newHandle;
     }
 
-    // Server announces imminent disconnect (e.g. 2-min A/V cap) — reconnect early.
     if (msg.goAway) {
       this.log.info({ event: "gemini_go_away", deviceId: this.deviceId, timeLeft: msg.goAway.timeLeft });
     }
 
-    // Barge-in: user/scene interrupted; tell device to flush playback NOW.
     if (msg.serverContent?.interrupted) {
       this.inModelTurn = false;
       this.events.onInterrupted();
       return;
     }
 
-    // Tool calls → validated sentry threat commands.
     if (msg.toolCall?.functionCalls) {
       for (const fc of msg.toolCall.functionCalls) {
         if (fc.name !== "set_sentry_state") continue;
@@ -250,7 +240,6 @@ export class GeminiBridge implements Bridge {
             : undefined,
         };
         this.events.onControl(controlPayload);
-        // NON_BLOCKING tool: respond silently so speech is never stalled.
         if (fc.id) {
           void this.session?.sendToolResponse({
             functionResponses: [
@@ -268,7 +257,6 @@ export class GeminiBridge implements Bridge {
       }
     }
 
-    // Audio out.
     const parts = msg.serverContent?.modelTurn?.parts ?? [];
     for (const part of parts) {
       if (part.inlineData?.data) {
@@ -293,7 +281,6 @@ export class GeminiBridge implements Bridge {
       this.events.onTurnComplete();
     }
 
-    // Cost accounting from usage metadata.
     if (msg.usageMetadata?.responseTokensDetails || msg.usageMetadata?.promptTokensDetails) {
       const counts = { audioIn: 0, videoIn: 0, textIn: 0, audioOut: 0, textOut: 0 };
       for (const d of msg.usageMetadata.promptTokensDetails ?? []) {

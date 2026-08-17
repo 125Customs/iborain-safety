@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# Deploy the BomaSafety broker to Google Cloud Run. Run from the monorepo root.
+# Deploy the Iborain Safety broker to Google Cloud Run. Run from the monorepo root.
 # ASSUMPTION: region us-central1; edit below. Requires: gcloud auth login + a project set.
 set -euo pipefail
 
 PROJECT="${GCP_PROJECT:?set GCP_PROJECT}"
 REGION="${GCP_REGION:-us-central1}"
-SERVICE="bomasafety-broker"
+SERVICE="iborain-broker"
 
 gcloud builds submit --project "$PROJECT" --tag "gcr.io/$PROJECT/$SERVICE" .
 
@@ -23,6 +23,6 @@ gcloud run deploy "$SERVICE" \
   --memory=512Mi \
   --allow-unauthenticated \
   --set-env-vars "MODE=${MODE:-echo},GEMINI_MODEL=${GEMINI_MODEL:-gemini-2.5-flash-native-audio-preview-12-2025}" \
-  --set-secrets "GEMINI_API_KEY=bomasafety-gemini-api-key:latest,DEVICE_TOKENS=bomasafety-device-tokens:latest"
+  --set-secrets "GEMINI_API_KEY=iborain-gemini-api-key:latest,DEVICE_TOKENS=iborain-device-tokens:latest"
 
-echo "Deployed BomaSafety Broker. wss URL: $(gcloud run services describe "$SERVICE" --project "$PROJECT" --region "$REGION" --format 'value(status.url)' | sed 's/^https/wss/')"
+echo "Deployed Iborain Safety Broker. wss URL: $(gcloud run services describe "$SERVICE" --project "$PROJECT" --region "$REGION" --format 'value(status.url)' | sed 's/^https/wss/')"

@@ -1,4 +1,4 @@
-# 📊 BomaSafety Automated Sentry & Latency Verification Report
+# 📊 Iborain Safety Automated Sentry & Latency Verification Report
 
 **Execution Timestamp:** 2026-08-15 14:47:00 UTC  
 **Environment:** Localhost Node.js + WebSocket Broker (`MODE=echo`)  
@@ -9,7 +9,7 @@
 
 ## 1. Executive Summary & Test Verdict
 
-The **Option A: Fully Automated Soak & Latency Test** was executed for 2 minutes against the live BomaSafety backend broker. The test simulated high-speed edge sentry units by generating synthetic 16kHz acoustic waveforms, binary JPEG camera frames, and randomly injecting socket terminations to stress-test resilience.
+The **Option A: Fully Automated Soak & Latency Test** was executed for 2 minutes against the live Iborain Safety backend broker. The test simulated high-speed edge sentry units by generating synthetic 16kHz acoustic waveforms, binary JPEG camera frames, and randomly injecting socket terminations to stress-test resilience.
 
 | Metric | Result | Target Benchmark | Status |
 | :--- | :--- | :--- | :--- |
@@ -69,4 +69,4 @@ During the 2-minute test run, 4 intentional network/socket kills were injected:
 ---
 
 ## 5. XPRIZE Submission Evidence
-This automated test report serves as direct proof for **XPRIZE Devpost Stage 2 (AI-Native Operations & Product Reliability)**, demonstrating that the BomaSafety edge-to-cloud architecture is fully production-ready, fault-tolerant, and delivers consistent sub-600ms latency.
+This automated test report serves as direct proof for **XPRIZE Devpost Stage 2 (AI-Native Operations & Product Reliability)**, demonstrating that the Iborain Safety edge-to-cloud architecture is fully production-ready, fault-tolerant, and delivers consistent sub-600ms latency.

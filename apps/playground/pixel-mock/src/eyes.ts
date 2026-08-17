@@ -103,7 +103,7 @@ export class SentryBeacon {
       c.fillStyle = "#6ee7b7";
       c.font = "bold 13px monospace";
       c.textAlign = "center";
-      c.fillText("BOMASAFETY SENTRY", W / 2, W / 2 + 35);
+      c.fillText("IBORAIN SENTRY", W / 2, W / 2 + 35);
       c.fillStyle = "#9ca3af";
       c.font = "11px monospace";
       c.fillText("ACTIVE PATROL", W / 2, W / 2 + 55);
