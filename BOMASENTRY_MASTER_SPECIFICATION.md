@@ -15,7 +15,7 @@ In the United States, **Flock Safety** built a multi-billion dollar public safet
 2. It cannot categorize African transit realities (unregistered **Boda Bodas**, delivery cargo, **Matatus**, modified **Proboxes**, missing/muddy plates).
 3. It lacks two-way resident interaction through Africa's primary digital channel: **WhatsApp**.
 
-**BomaSentry** is the next-generation, Flock-style multimodal intelligence platform built specifically for Africa. Powered by a **$32 hardware Bill of Materials (BOM)** running on a **Raspberry Pi Zero 2 W** and the **Google Gemini Multimodal Live API on Cloud Run**, BomaSentry replaces manual paper logbooks with automated barrier actuation, real-time WhatsApp visitor approvals, and natural-language "FreeForm" security search for gated communities, schools, SACCO stages, and hospitals.
+**BomaSentry** is the next-generation, Flock-style multimodal intelligence platform built specifically for Africa. Powered by a **$110 production hardware Bill of Materials (BOM)** running on a **Raspberry Pi Zero 2 W** paired with the **Raspberry Pi AI Camera (Sony IMX500)** and the **Google Gemini Multimodal Live API on Cloud Run**, BomaSentry replaces manual paper logbooks with automated barrier actuation, real-time WhatsApp visitor approvals, and natural-language "FreeForm" security search for gated communities, schools, SACCO stages, and hospitals.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -31,7 +31,7 @@ In the United States, **Flock Safety** built a multi-billion dollar public safet
 ┌──────────────────────────────────────────────▼──────────────────────────────────────────────────┐
 │                                 EDGE HARDWARE SENTRY UNIT                                       │
 │  • Compute: Raspberry Pi Zero 2 W (Quad-Core 64-bit ARM, 512MB RAM, 5V/0.5A)                   │
-│  • Vision: Sony IMX500 AI Camera (On-sensor neural motion trigger + hardware HDR)               │
+│  • Vision: Raspberry Pi AI Camera (Sony IMX500 with On-sensor Neural DSP + Hardware HDR)        │
 │  • Visual Interface: GC9A01 1.28" Round RGB TFT LCD (Animated status & clearance eyes)          │
 │  • Physical Actuation: SG90 Micro Servo (90° Boom Barrier Gate Arm)                            │
 │  • Presence & Safety: TCRT5000 Infrared Reflective Proximity Sensor (Anti-Crush Cutoff)        │
@@ -45,8 +45,8 @@ In the United States, **Flock Safety** built a multi-billion dollar public safet
 
 | Feature / Dimension | 🦅 Flock Safety (US Market) | 🛡️ BomaSentry (African Market) |
 | :--- | :--- | :--- |
-| **Year 1 Cost / Gate** | **$3,000 – $5,500 USD** | **$49 / month ($65 BOM hardware lease)** |
-| **Edge Hardware** | Custom proprietary solar-cellular pole camera | **Raspberry Pi Zero 2 W + Sony IMX500 AI Camera** |
+| **Year 1 Cost / Gate** | **$3,000 – $5,500 USD** | **$49 / month ($110 BOM hardware lease)** |
+| **Edge Hardware** | Custom proprietary solar-cellular pole camera | **Raspberry Pi Zero 2 W + Raspberry Pi AI Camera (IMX500)** |
 | **Machine Vision Engine** | Rigid OCR + Proprietary Vehicle Fingerprint™ | **Gemini Multimodal Live (Vision-Language Model)** |
 | **African Transit Support** | None (Fails on missing front plates & Bodas) | **Full Boda Boda classification (helmets, cargo, jackets)** |
 | **User & Resident Interface** | Web dispatch portal & email alerts | **Interactive 2-Way WhatsApp Bot (Twilio/Meta)** |
@@ -61,15 +61,15 @@ In the United States, **Flock Safety** built a multi-billion dollar public safet
 ┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
 │                                    BOMASENTRY PRODUCT TIERS                                     │
 ├─────────────────────────┬───────────────────────────────┬───────────────────────────────────────┤
-│ Tier 1: LITE            │ Tier 2: PRO (Core MVP)        │ Tier 3: ENTERPRISE                    │
+│ Tier 1: LITE            │ Tier 2: PRO (Our Active Build)│ Tier 3: ENTERPRISE                    │
 │ (Courts & Small Gates)  │ (Gated Estates & SACCOs)      │ (Malls, Hospitals, County Borders)   │
 ├─────────────────────────┼───────────────────────────────┼───────────────────────────────────────┤
 │ • Pi Zero 2 W           │ • Pi Zero 2 W                 │ • Raspberry Pi 5                      │
-│ • OV5647 Camera         │ • Sony IMX500 AI Camera       │ • Dual IMX500 (Entry & Exit Lanes)    │
-│ • WhatsApp API Webhook  │ • GC9A01 LCD + SG90 Servo     │ • 4G LTE Cellular + Industrial Relay  │
-│ • Cloud Gemini API      │ • TCRT5000 IR + WhatsApp API  │ • Local SQLite Cache + Multi-Lane LPR │
-│                         │ • 10W Solar + Battery Pack    │                                       │
-│ BOM: KSh 3,200 ($25)    │ BOM: KSh 8,500 ($65)          │ BOM: KSh 22,000 ($170)                │
+│ • OV5647 Camera         │ • Raspberry Pi AI Camera      │ • Dual AI Cameras (Entry & Exit Lanes)│
+│ • WhatsApp API Webhook  │   (Sony IMX500 Neural DSP)    │ • 4G LTE Cellular + Industrial Relay  │
+│ • Cloud Gemini API      │ • GC9A01 LCD + SG90 Servo     │ • Local SQLite Cache + Multi-Lane LPR │
+│                         │ • TCRT5000 IR + WhatsApp API  │ • Solar + Heavy Battery Backup        │
+│ BOM: KSh 4,500 ($35)    │ BOM: KSh 14,200 ($110)        │ BOM: KSh 30,000 ($230)                │
 │ Lease: $19 / month      │ Lease: $49 / month            │ Lease: $129 / month                   │
 └─────────────────────────┴───────────────────────────────┴───────────────────────────────────────┘
 ```
@@ -136,7 +136,7 @@ BomaSentry transforms gate security through an AI-native operational model:
 * **What Humans Do**: Estate security guards shift from mundane data entry clerks to dignified rapid-response officers who only handle escalated anomalies flagged by the AI. Residents retain final clearance authority through one-tap WhatsApp confirmations.
 
 #### 3. Jobs and Economic Opportunities Created
-Rather than displacing local workers, BomaSentry creates sustainable high-value technical jobs. We are establishing the **BomaTech Installer Network**, training youth from Kenya’s informal *Jua Kali* sector to assemble, install, and maintain solar-powered BomaSentry units across residential estates and commercial centers. By keeping our hardware Bill of Materials under $35, we enable local entrepreneurs to franchise BomaSentry installations with payback in month one.
+Rather than displacing local workers, BomaSentry creates sustainable high-value technical jobs. We are establishing the **BomaTech Installer Network**, training youth from Kenya’s informal *Jua Kali* sector to assemble, install, and maintain solar-powered BomaSentry units across residential estates and commercial centers. By keeping our production hardware Bill of Materials at $35 (Lite) and $110 (Pro with Sony IMX500 AI Camera), we enable local entrepreneurs to franchise BomaSentry installations with payback in under 2.5 months.
 
 #### 4. Privacy, Safety & Regulatory Compliance
 In strict compliance with the **Kenya Data Protection Act (2019)**, BomaSentry enforces a strict **Zero Facial Recognition** policy. The system captures only vehicle attributes and license plates, and all event data is automatically purged after 7 days unless preserved by authorized community administrators.
@@ -161,11 +161,11 @@ In strict compliance with the **Kenya Data Protection Act (2019)**, BomaSentry e
 
 * **0:00 – 0:30 (The Urgent African Crisis)**: Open with a shot of a Nairobi estate gate. Show the guard struggling with a paper logbook while cars wait. Explain how BomaSentry solves this for $49/mo.
 * **0:30 – 1:30 (The Live Hardware Demonstration)**:
-  * Camera focuses on the Pi Zero 2 W + Sony IMX500 AI Camera + GC9A01 LCD.
+  * Camera focuses on the Pi Zero 2 W + Raspberry Pi AI Camera (Sony IMX500) + GC9A01 LCD.
   * Hold up plate `KDA 482B`.
   * Show Gemini identifying the plate, LCD flashing Green ("ACCESS GRANTED"), and the SG90 servo lifting the barrier arm!
   * Hold up `KMDF 892Z` (Boda). Show the simulated WhatsApp push asking for resident clearance.
 * **1:30 – 2:15 (Cloud Architecture & Gemini Logs)**:
   * Show screen recording of Google Cloud Run logs running live WebSocket inferences at <600ms latency.
 * **2:15 – 3:00 (Business Model & Expansion Vision)**:
-  * Present the 3 product tiers, the $32 BOM economics, and the roadmap to secure 5,000+ gates across East Africa.
+  * Present the 3 product tiers ($35 Lite, $110 Pro, $230 Enterprise), the rapid 2-month payback economics, and the roadmap to secure 5,000+ gates across East Africa.
