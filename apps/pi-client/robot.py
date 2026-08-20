@@ -11,7 +11,18 @@ import json
 import time
 import struct
 import asyncio
-import websockets
+
+# Check for demo mode early before requiring network dependencies
+if __name__ == "__main__" and ("--demo" in sys.argv or "-d" in sys.argv):
+    # Ensure current directory is in python path
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    try:
+        from demo_sentry import main as run_demo_main
+        run_demo_main()
+        sys.exit(0)
+    except ImportError as e:
+        print(f"❌ demo_sentry.py could not be loaded: {e}")
+        sys.exit(1)
 
 try:
     from display import SentryDisplay
@@ -26,6 +37,7 @@ TOKEN = os.getenv("DEVICE_TOKEN", "local-secret")
 print(f"🛡️ Starting Iborain Safety Sentry -> Connecting to {BACKEND_URL} as {DEVICE_ID}...")
 
 async def run_sentry():
+    import websockets
     url = f"{BACKEND_URL}/?device={DEVICE_ID}&token={TOKEN}"
     while True:
         try:
