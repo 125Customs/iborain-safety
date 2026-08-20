@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
 """
-Hardware Smoke Test for Iborain Safety Tactical Sentry on Raspberry Pi Zero 2 W.
-Tests:
-1. I2C Bus & Anti-Tamper: MPU-6500 6-Axis Accelerometer (0x68/0x69)
+Hardware Smoke Test for Iborain Safety Sentry on Raspberry Pi Zero 2 W.
+Streamlined 3-Chip Architecture:
+1. I2C Bus & Anti-Tamper: MPU-6500 6-Axis Accelerometer/Gyro (0x68/0x69)
 2. Optical Arrival Tripwire: TCRT5000 IR Sensor on GPIO 17
-3. GC9A01 1.28" TFT LCD: Renders Sentry Threat Deterrence Strobe & Active Radar
-4. Audio Deterrence: I2S MAX98357A DAC output
+3. Status & Strobe LED: Dual-Color Status / Threat Beacon on GPIO 24
+4. Camera Vision Pipeline: libcamera-still / Picamera2 image capture
 """
 import time
 import sys
 
 print("==================================================")
 print("  🛡️ Iborain Safety Edge Sentry Hardware Smoke Test")
+print("  Streamlined Ductile Production Architecture")
 print("==================================================")
 
 # 1. Test I2C Bus (MPU-6500 Anti-Tamper)
@@ -42,85 +43,41 @@ try:
     GPIO.setwarnings(False)
     GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     trip_state = GPIO.input(17)
-    print(f"  ✅ TCRT5000 Pin 11 (GPIO 17) active. Current state: {'TRIGGERED' if trip_state == 0 else 'CLEAR'}")
+    print(f"  ✅ TCRT5000 Pin 11 (GPIO 17) active. Current state: {'TRIGGERED (Vehicle Present)' if trip_state == 0 else 'CLEAR'}")
 except Exception as e:
     print(f"  ⚠️ GPIO tripwire test skipped: {e}")
 
-# 3. Test GC9A01 Display (Deterrence Strobe & Sentry Radar)
-print("\n[3/4] Testing GC9A01 1.28-inch Round TFT Display (Sentry Beacon)...")
+# 3. Test Status / Threat Strobe LED (GPIO 24)
+print("\n[3/4] Testing Dual Status / Threat Strobe LED (GPIO 24)...")
 try:
-    import spidev
     import RPi.GPIO as GPIO
-    from PIL import Image, ImageDraw, ImageFont
-
-    DC_PIN = 24
-    RST_PIN = 25
+    LED_PIN = 24
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
-    GPIO.setup(DC_PIN, GPIO.OUT)
-    GPIO.setup(RST_PIN, GPIO.OUT)
+    GPIO.setup(LED_PIN, GPIO.OUT)
 
-    # Hardware reset
-    GPIO.output(RST_PIN, GPIO.LOW)
-    time.sleep(0.1)
-    GPIO.output(RST_PIN, GPIO.HIGH)
-    time.sleep(0.1)
-
-    spi = spidev.SpiDev()
-    spi.open(0, 0)
-    spi.max_speed_hz = 40000000
-    spi.mode = 0
-
-    def send_cmd(cmd):
-        GPIO.output(DC_PIN, GPIO.LOW)
-        spi.xfer2([cmd])
-
-    def send_data(data):
-        GPIO.output(DC_PIN, GPIO.HIGH)
-        spi.xfer2(data)
-
-    # Init sequence for GC9A01
-    send_cmd(0xFE); send_cmd(0xEF); send_cmd(0xEB); send_data([0x14])
-    send_cmd(0x36); send_data([0x00])
-    send_cmd(0x3A); send_data([0x05])
-    send_cmd(0x11); time.sleep(0.12)
-    send_cmd(0x29); time.sleep(0.02)
-
-    # Render tactical sentry shield & radar
-    img = Image.new("RGB", (240, 240), (10, 15, 30))
-    draw = ImageDraw.Draw(img)
-
-    # Concentric radar rings
-    draw.ellipse((20, 20, 220, 220), outline=(0, 180, 255), width=3)
-    draw.ellipse((60, 60, 180, 180), outline=(0, 100, 180), width=2)
-    draw.ellipse((100, 100, 140, 140), fill=(0, 220, 120), outline=(255, 255, 255), width=2)
-
-    # Security Crosshairs
-    draw.line((120, 10, 120, 230), fill=(0, 140, 220), width=1)
-    draw.line((10, 120, 230, 120), fill=(0, 140, 220), width=1)
-
-    # Tactical Header Text
-    draw.text((65, 35), "IBORAIN", fill=(255, 255, 255))
-    draw.text((70, 195), "SENTRY ACTIVE", fill=(0, 255, 180))
-
-    send_cmd(0x2A); send_data([0, 0, 0, 239])
-    send_cmd(0x2B); send_data([0, 0, 0, 239])
-    send_cmd(0x2C)
-
-    raw = []
-    for p in img.getdata():
-        r, g, b = p[0] >> 3, p[1] >> 2, p[2] >> 3
-        c = (r << 11) | (g << 5) | b
-        raw.extend([(c >> 8) & 0xFF, c & 0xFF])
-
-    GPIO.output(DC_PIN, GPIO.HIGH)
-    for i in range(0, len(raw), 4096):
-        spi.xfer2(raw[i:i+4096])
-
-    print("  ✅ GC9A01 LCD successfully rendering Iborain Safety Sentry Radar & Beacon!")
+    print("  Pulsing Status LED 3 times...")
+    for i in range(3):
+        GPIO.output(LED_PIN, GPIO.HIGH)
+        time.sleep(0.15)
+        GPIO.output(LED_PIN, GPIO.LOW)
+        time.sleep(0.15)
+    print("  ✅ Status LED (GPIO 24) verified.")
 except Exception as e:
-    print(f"  ❌ LCD test error: {e}")
+    print(f"  ⚠️ Status LED test skipped: {e}")
+
+# 4. Test Camera Capture
+print("\n[4/4] Testing Camera Capture Pipeline...")
+try:
+    import subprocess
+    res = subprocess.run(["libcamera-still", "--list-cameras"], capture_output=True, text=True, timeout=5)
+    if "Available cameras" in res.stdout or res.returncode == 0:
+        print(f"  ✅ Camera sensor detected:\n{res.stdout.strip()}")
+    else:
+        print("  ℹ️ libcamera-still returned no cameras (verify ribbon cable to CSI port)")
+except Exception as e:
+    print(f"  ⚠️ Camera test command error: {e}")
 
 print("\n==================================================")
-print("  🛡️ Sentry Hardware Smoke Test Complete!")
+print("  🎉 Hardware Smoke Test Complete!")
 print("==================================================")

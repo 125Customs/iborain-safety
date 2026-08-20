@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Cpu, Sun, Volume2, Radio, RotateCw, Layers, ShieldCheck } from "lucide-react";
+import { Cpu, Sun, ShieldCheck, Radio, RotateCw } from "lucide-react";
 
 interface HardwareCardProps {
   name: string;
@@ -119,32 +119,32 @@ function FlipCard({ item }: { item: HardwareCardProps }) {
 export function HardwareFlipCards() {
   const hardwareList: HardwareCardProps[] = [
     {
-      name: "Sentry One Node",
+      name: "Sentry Core Node",
       category: "Edge Neural Unit",
       icon: Cpu,
       studioTitle: "Optical Resolution",
       telemetryMetric: "Sony IMX500 12.3MP",
       studioDesc:
-        "High-density aluminum-encased vision sentry unit engineered with on-sensor neural processing for sub-30ms vehicle classification.",
+        "Streamlined vision sentry unit engineered with on-sensor neural DSP and Raspberry Pi Zero 2 for sub-30ms vehicle classification.",
       specs: [
         "Sony IMX500 Neural Vision Sensor",
         "Raspberry Pi Zero 2 W Co-Processor",
-        "Quad-Band LTE-M / LoRa 10km Mesh",
+        "Quad-Band 4G LTE-M / IoT SIM Uplink",
       ],
       mountedTitle: "Arterial Street Pole Installation",
       mountedDesc:
-        "Mounted at 4.5m height on standard utility poles. Delivers 160-degree field of view covering dual-lane transit corridors with zero optical blind spots.",
+        "Mounted at 2.4m–4.5m height on utility poles or gateposts. Delivers sharp optical coverage across dual-lane transit corridors with zero blind spots.",
     },
     {
       name: "Solar Canopy Kit",
       category: "Power Autonomy",
       icon: Sun,
       studioTitle: "Power Reserve",
-      telemetryMetric: "48-Hour Rainy Buffer",
+      telemetryMetric: "72-Hour Rainy Buffer",
       studioDesc:
         "Cord-free monocrystalline solar roof paired with a temperature-resilient LiFePO4 battery pack and intelligent MPPT power controller.",
       specs: [
-        "25W Monocrystalline PV Surface",
+        "30W Monocrystalline PV Surface",
         "12.8V LiFePO4 Solid-State Battery",
         "Zero Trenching or Grid Cabling",
       ],
@@ -153,21 +153,21 @@ export function HardwareFlipCards() {
         "Engineered with anti-soiling hydrophobic coating to resist African road dust. Harvests full operational charge with only 3.2 peak sunlight hours.",
     },
     {
-      name: "Acoustic Strobe Pack",
-      category: "Active Deterrence",
-      icon: Volume2,
-      studioTitle: "Deterrence Intensity",
-      telemetryMetric: "120Hz Strobe / 3W Audio",
+      name: "Anti-Theft & Stealth Core",
+      category: "Hardware Integrity",
+      icon: ShieldCheck,
+      studioTitle: "Vibration Detection",
+      telemetryMetric: "6-Axis MPU-6500 IMU",
       studioDesc:
-        "Edge-level active intervention module combining a GC9A01 multi-color radar beacon with a MAX98357A directional verbal warning horn.",
+        "Silent stealth operation with dual-color LED status indicators and continuous 6-axis inertial motion tracking to prevent theft or tampering.",
       specs: [
-        "GC9A01 High-Lumen Radar Flash",
-        "MAX98357A I2S 3W Verbal Speaker",
-        "Dynamic Swahili/English Warning Engine",
+        "MPU-6500 6-Axis Motion/Tilt IMU",
+        "High-Intensity Status LED Beacon",
+        "Instant WhatsApp Theft Dispatch",
       ],
-      mountedTitle: "Active Point-of-Arrival Warning",
+      mountedTitle: "Active Anti-Tamper Protection",
       mountedDesc:
-        "Triggers instantly upon hotlisted vehicle arrival. Emits verbal acoustic warnings and high-visibility flashing strobes to deter criminal ingress.",
+        "Detects pole impacts, physical vibration, or unauthorized removal attempts, triggering instant encrypted alerts to neighborhood patrols.",
     },
     {
       name: "FreeForm™ Mesh Gateway",
@@ -176,9 +176,9 @@ export function HardwareFlipCards() {
       studioTitle: "Mesh Propagation",
       telemetryMetric: "<400ms Hotlist Sync",
       studioDesc:
-        "Decentralized edge coordinator maintaining a persistent 10km LoRa mesh radio and synchronized vector memory bank for inter-community grids.",
+        "Decentralized edge coordinator maintaining continuous cellular sync and synchronized vector memory bank for inter-community grids.",
       specs: [
-        "10km Line-of-Sight LoRa Transceiver",
+        "Dual-SIM 4G LTE Cellular Modem",
         "Encrypted SQLite Vector Hotlist Cache",
         "Automated WhatsApp Dispatch Bridge",
       ],

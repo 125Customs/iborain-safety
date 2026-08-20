@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """
 Iborain Safety Edge Sentry Client for Raspberry Pi Zero 2 W + Sony IMX500 AI Camera.
-Connects to apps/backend over WebSocket, streams high-speed camera frames & mic audio,
-plays returned Gemini 24kHz acoustic deterrence via MAX98357A I2S DAC, and renders
-active sentry threat beacons & strobes on the GC9A01 LCD.
+Connects to apps/backend over WebSocket, streams high-speed camera frames & sensor telemetry,
+toggles the dual status/strobe LED, and receives real-time Gemini threat classifications.
 """
 import os
 import sys
@@ -49,7 +48,7 @@ async def run_sentry():
                             if fp:
                                 print(f"   📋 Transit Forensic Record: Plate={fp.get('plate')} | Type={fp.get('vehicleType')} | Traits={fp.get('traits')}")
                         elif msg_type == "interrupted":
-                            print("⚡ Scene interrupted -> Immediate audio buffer flush!")
+                            print("⚡ Scene interrupted -> Resetting optical buffer!")
                         elif msg_type == "bye":
                             print(f"🚪 Session closed by server ({data.get('reason')})")
                             break
@@ -57,9 +56,8 @@ async def run_sentry():
                         # Binary frame: [1B type][8B timestamp][payload]
                         if len(message) >= 9:
                             frame_type = message[0]
-                            if frame_type == 0x03: # AudioOut (24kHz PCM Acoustic Deterrence)
-                                audio_payload = message[9:]
-                                print(f"🔊 Received {len(audio_payload)} bytes acoustic warning audio")
+                            if frame_type == 0x02: # JPEG Vision Diff Ack
+                                print(f"📷 Vision frame processed: {len(message)} bytes")
         except Exception as e:
             print(f"⚠️ Sentry connection dropped: {e}. Reconnecting in 3s...")
             await asyncio.sleep(3)
