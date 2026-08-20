@@ -9,7 +9,8 @@
     "dev:backend": "pnpm --filter @pixel-bot/backend dev",
     "dev:mock": "pnpm --filter @pixel-bot/pixel-mock dev",
     "dev:landing": "pnpm --filter landing dev",
-    "soak": "pnpm --filter @pixel-bot/backend soak"
+    "soak": "pnpm --filter @pixel-bot/backend soak",
+    "cad": "./.venv/bin/python3 cad/generate_all.py"
   },
   "devDependencies": {
     "typescript": "^5.5.4"
