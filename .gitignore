@@ -6,3 +6,6 @@ dist/
 .venv/
 __pycache__/
 *.pyc
+CINEMATIC_PITCH_SCRIPT_AND_ACTOR_NOTES.md
+*cinematic*
+*pitch_script*
