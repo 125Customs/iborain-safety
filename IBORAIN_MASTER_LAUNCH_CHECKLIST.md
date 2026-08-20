@@ -1,9 +1,12 @@
 # 🚀 Iborain Safety — Master Launch, Fabrication & Sales Execution Checklist
-*The Ductile Production Architecture: Streamlined, Stealth, Solar-Ready Public Safety Sentry*
+*The Unified Hardware & Software SaaS Strategy: Scaling the African Public Safety Network*
 
 **Company:** Iborain Safety Ltd. (Nairobi, Kenya)  
-**Fabrication Hub:** [ChipuRobo STEM Makerspaces](https://chipurobo.com/)  
-**Core Architecture:** Ultra-Lean Edge Vision (Raspberry Pi Zero 2 W + Sony/Pi Camera + MPU-6500 Anti-Tamper + Dual Status LED)
+**Hardware Incubation Partner:** [ChipuRobo STEM Makerspaces](https://chipurobo.com/)  
+**Core Commercial Model:**
+* **Package A (Grid Sentry):** $49/mo (KES 6,500/mo) — Gated Estate Gates (Zero CapEx)
+* **Package B (Solar Sentry):** $99/mo (KES 12,870/mo) — Off-Grid Street Poles
+* **Package C (Smart CCTV Cloud):** $20/camera/mo (KES 2,600/mo) — Hospitals & Existing CCTVs ($0 Hardware)
 
 ---
 
@@ -11,7 +14,7 @@
 ┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
 │                                 THE 6-PHASE MASTER LAUNCH ROADMAP                                │
 ├────────────────────────────────┬─────────────────────────────────────────────────────────────────┤
-│ 🟢 Phase 1: Bench Demo Rig     │ Solder 3-chip perfboard, connect camera & IMU, verify loop.     │
+│ 🟢 Phase 1: Bench Demo Rig     │ Solder 3-chip perfboard (Pi Zero 2 + IMX500 + IMU), verify loop.│
 ├────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
 │ 🔵 Phase 2: 3D Print Packaging │ Single-aperture weatherproof PETG box + universal pole clamp.   │
 ├────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
@@ -21,7 +24,7 @@
 ├────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
 │ 🔴 Phase 5: 14-Day Pilot Sales │ Estate Chairman pitch, gate mounting, 14-day M-Pesa conversion. │
 ├────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
-│ 🟠 Phase 6: Youth Franchise    │ Train ChipuRobo installers, 10-node franchises (KES 58k/mo).    │
+│ 🟠 Phase 6: CCTV SaaS Upsell   │ Onboard hospitals & malls at $20/camera/mo (91% profit margin). │
 └────────────────────────────────┴─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -31,9 +34,9 @@
 
 *Objective: Assemble your streamlined 3-chip physical electronics on a clean perfboard and verify live multimodal scanning with Google Gemini.*
 
-### 1.1 Physical Hardware Soldering & Wiring (Zero Clutter)
+### 1.1 Physical Hardware Soldering & Wiring (The Unified Board)
 - [ ] **Mount Raspberry Pi Zero 2 W:** Solder male 40-pin GPIO header pins.
-- [ ] **Connect Vision Sensor:** Attach the Camera Module (Sony IMX500 / 12MP Camera) ribbon cable to the CSI camera port (blue stiffener tab facing the board).
+- [ ] **Connect Vision Sensor:** Attach the Sony IMX500 AI Camera ribbon cable to the CSI camera port (blue stiffener tab facing the board).
 - [ ] **Wire Anti-Tamper & Anti-Theft Sensor (MPU-6500 6-Axis IMU):**
   - [ ] Connect `SDA` to Raspberry Pi `GPIO 2` (Pin 3).
   - [ ] Connect `SCL` to Raspberry Pi `GPIO 3` (Pin 5).
@@ -91,13 +94,6 @@
 - [ ] **Print Component 3 (Sun/Rain Visor Hood):** 25mm overhang hood protecting lens from direct rain and sunlight glare.
 - [ ] **Print Component 4 (Universal Pole Mount):** Curved rear bracket with dual 15mm slots for stainless jubilee hose clamps.
 
-### 2.2 Assembly & Waterproof Sealing
-- [ ] **Optical Window:** Install a 2mm circular anti-reflective acrylic/glass window over the camera aperture using neutral-cure silicone sealant.
-- [ ] **LED Seal:** Insert 5mm rubber LED bezel grommet.
-- [ ] **Cable Gland:** Thread power/solar cables through an **IP68 PG7 waterproof cable gland**.
-- [ ] **Anti-Tamper Mount:** Fasten MPU-6500 IMU firmly to inner chassis wall using two M2 screws for direct vibration coupling.
-- [ ] **Internal Fasteners:** Secure Pi Zero 2 onto threaded brass standoffs using M2.5 stainless steel screws.
-
 ---
 
 ## 🟣 PHASE 3: Production Cloud & Web Infrastructure Deployment
@@ -107,13 +103,12 @@
 ### 3.1 Google Cloud Run Backend (`apps/backend`)
 - [ ] Set environment secrets in Google Secret Manager (`GEMINI_API_KEY`, `DEVICE_AUTH_TOKENS`, `WHATSAPP_TOKEN`).
 - [ ] Execute automated deployment: `GCP_PROJECT=your-project-id MODE=gemini bash apps/backend/deploy.sh`.
-- [ ] Verify Cloud Run configuration: `--min-instances=1`, `--session-affinity=true`, `--timeout=3600s`.
 - [ ] Verify live WebSocket URL: `wss://iborain-broker-<hash>.a.run.app/ws/device`.
 
 ### 3.2 Public Web Landing Page (`apps/landing`)
 - [ ] Build Next.js application: `cd apps/landing && pnpm build`.
-- [ ] Deploy to production hosting (Vercel / Cloud Run) on custom domain (`iborain.com` / `iborainsafety.com`).
-- [ ] Verify sections: Hero, Streamlined Hardware Flip Cards (Tier 1-3), Interactive Terminal, and Pricing/Waitlist matrix.
+- [ ] Deploy to production hosting on custom domain (`iborain.com` / `iborainsafety.com`).
+- [ ] Verify interactive pricing matrix featuring **Package A ($49/mo)**, **Package B ($99/mo)**, and **Package C ($20/cam/mo)**.
 
 ### 3.3 WhatsApp Business & M-Pesa Daraja Integration
 - [ ] **WhatsApp Cloud API:** Configure webhook to dispatch instant JSON alert payloads (Photo proof + Plate + Cargo) directly to registered security group chats in under 1 second.
@@ -127,7 +122,6 @@
 
 ### 4.1 Optical & Scene Calibration
 - [ ] **Focal Distance:** Adjust telephoto lens focus at **3 meters, 6 meters, and 10 meters** for maximum plate sharpness.
-- [ ] **Night Vision:** Verify infrared LED array illuminates plates in pitch-black 0-lux conditions without blinding overexposure.
 - [ ] **Angle Optimization:** Set mounting pitch to **15° downward tilt** to eliminate oncoming headlight glare.
 
 ### 4.2 Cellular & Network Resilience
@@ -139,7 +133,7 @@
 
 ## 🔴 PHASE 5: The 14-Day Pilot Customer Rollout (Selling to Estates)
 
-*Objective: Deploy working sentry units to your 3 pilot estate security committees and convert them into paying monthly subscriptions.*
+*Objective: Deploy Package A (Grid Sentry) to your 3 pilot estate security committees and convert them into paying monthly subscriptions.*
 
 ### 5.1 The Chairman Pitch & Agreement
 - [ ] **Target:** Meet with Estate Security Committee Chairman & Treasurer (e.g. Syokimau Court, Ruiru Gated Court, Membley).
@@ -148,31 +142,21 @@
 
 ### 5.2 On-Site Gate Installation (Takes 20 Minutes)
 - [ ] **Mounting:** Strap enclosure securely to barrier post or light pole at **2.4 meters height** using stainless steel jubilee straps.
-- [ ] **Power:** Plug 5V/3A power adapter into gatehouse AC outlet (or connect 30W solar panel).
+- [ ] **Power:** Plug 5V/3A power adapter into gatehouse AC outlet.
 - [ ] **Group Setup:** Create official estate security WhatsApp group (add Estate Chairman, Security Committee, and Head Guard).
-- [ ] **Guard Onboarding (3 Minutes):** Show the security guards (*askaris*) how threat cards ping directly on their WhatsApp.
 
 ### 5.3 Day 1 to 14 Pilot Monitoring & Conversion
-- [ ] **Day 3 Check-In:** Verify guards are receiving WhatsApp clearance cards smoothly.
-- [ ] **Day 7 Mid-Pilot Report:** Send an automated 1-page PDF summary to the Estate Chairman showing total vehicles fingerprinted (e.g. *1,420 entries, 0 unauthorized breaches*).
-- [ ] **Day 14 Final Conversion:**
-  - [ ] Present monthly crime elimination report at committee meeting.
-  - [ ] Sign 12-month recurring contract (**KES 6,500/month**).
-  - [ ] Trigger initial M-Pesa STK Push to Estate Treasurer.
+- [ ] **Day 7 Mid-Pilot Report:** Send an automated 1-page PDF summary to the Estate Chairman showing total vehicles fingerprinted.
+- [ ] **Day 14 Final Conversion:** Sign 12-month recurring contract (**KES 6,500/month**) via automated M-Pesa STK Push.
 
 ---
 
-## 🟠 PHASE 6: Scaling the ChipuRobo Youth Installer Network
+## 🟠 PHASE 6: Scaling Package C (Smart CCTV Cloud at $20/Camera/Mo)
 
-*Objective: Transform local youth technicians into independent micro-franchisees who assemble, install, and maintain sentry clusters.*
+*Objective: Onboard hospitals, malls, and enterprise facilities with existing CCTV cameras at 91% pure profit margin.*
 
-### 6.1 Assembly Line Training at ChipuRobo
-- [ ] **Standardized Assembly SOP:** Standardize the **15-minute 3-chip assembly manual** (Pi Zero 2 + Camera + IMU + LED).
-- [ ] **Quality Assurance (QA) Checklist:** Every assembled unit passes:
-  1. 5-minute burn-in test on `test_hardware.py`.
-  2. Submersion spray test (IP66 seal check).
-  3. Camera focus test at 5 meters.
-- [ ] **Technician Compensation:** Pay **KES 1,000 ($8 USD)** cash bounty to student technicians per verified unit assembled.
-
-### 6.2 Franchise Expansion (10 Nodes per Installer)
-- [ ] Assign certified installers to 10-node clusters; installers earn **KES 30,400 to KES 58,000/month ($233 - $450 USD/mo)** in recurring maintenance royalties.
+### 6.1 The Hospital / Mall Pitch
+- [ ] **Target:** Head of Security / Procurement at Kenyatta National Hospital, Aga Khan, MP Shah, Sarit Centre, Two Rivers.
+- [ ] **The Pitch:** *"Turn your existing 20+ Hikvision/Dahua CCTV cameras into real-time AI sentries. Instant WhatsApp threat detection and natural language crime search for only $20/camera/month with ZERO new hardware to buy."*
+- [ ] **Integration (1 Hour):** Connect their existing NVR RTSP stream URLs to Iborain Cloud Run.
+- [ ] **Financial Yield:** 25 connected cameras generate **$500/month (KES 65,000/mo)** with **$455/mo in net profit**!

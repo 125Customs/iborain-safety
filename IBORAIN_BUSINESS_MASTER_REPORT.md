@@ -1,66 +1,93 @@
-# 📊 Iborain Safety — Master Commercial & Financial Execution Report
-*Private Commercial Blueprint & Investor / Partnership Dossier*
+# 📊 Iborain Safety — Master Commercial & Financial Blueprint
+*The Unified Hardware & Software SaaS Strategy: Scaling the African Public Safety Network*
 
 **Company:** Iborain Safety Ltd. (Nairobi, Kenya)  
 **Hardware Incubation Partner:** [ChipuRobo STEM Makerspaces](https://chipurobo.com/)  
-**Core Model:** Hardware-Enabled B2B SaaS & Installer Micro-Franchise Network  
+**Core Model:** Single Unified Hardware Core + Pure Software SaaS Cloud Bridge  
 **Target Market:** Sub-Saharan Africa (Beachhead: Nairobi Metro, Kenya)  
 **Currency Standard:** Kenyan Shillings (KES) & US Dollars (USD @ 1 USD = 130 KES)
 
 ---
 
-## 1. Executive Summary & Market Sizing
+## 1. Executive Summary & The Scaling Flywheel (The Flock Playbook)
 
-**Iborain Safety** is a decentralized Vision-Language AI public safety and crime elimination network born in Nairobi. Over 70% of urban violent and property crime in Sub-Saharan Africa is transit-borne, carried out using unplated/cloned vehicles and motorcycles (*Boda Bodas*).
-
-Existing Western ALPR systems (Flock Safety at $5,000/camera/year) are cost-prohibitive for 99% of African communities and fail completely on local transit realities (muddy plates, modified Proboxes, informal cargo). Dumb CCTV systems (Hikvision/Dahua) only record passive video without real-time detection.
-
-Iborain delivers **Stealth, Real-Time Crime Elimination starting at $49/month (KES 6,500/mo) with Zero Upfront CapEx**, powered by Google Gemini (Gemini 3.7 Flash & Live API) on Google Cloud Run and streamlined edge sentry hardware fabricated locally at ChipuRobo makerspaces in Nairobi.
-
----
-
-## 2. The 3 Hardware Tiers: Full Bill of Materials & Manufacturing Specs
+Inspired by the historic scaling path of **Flock Safety ($7.5B valuation)**, Iborain Safety solves the transit crime crisis across African communities through a **3-stage evolutionary playbook**:
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                 THE 3 IBORAIN HARDWARE TIERS                                     │
-├────────────────────────────────┬────────────────────────────────┬────────────────────────────────┤
-│ 🟢 Tier 1: Iborain Lite        │ 🔵 Tier 2: Iborain Tactical    │ 🟣 Tier 3: Iborain Solar Pro   │
-│    (High-Velocity Checkpoint)  │    (Neural Transit Sentry)     │    (Off-Grid Corridor Node)    │
-├────────────────────────────────┼────────────────────────────────┼────────────────────────────────┤
-│ • BOM Cost: $59.50 (KES 7,735) │ • BOM Cost: $135.00 (KES 17.5k)│ • BOM Cost: $235.00 (KES 30.5k)│
-│ • Subscription: $49/mo (6.5k)  │ • Subscription: $73/mo (9.5k)  │ • Subscription: $104/mo (13.5k)│
-│ • Payback: 39 Days (1.3 mo)    │ • Payback: 43–61 Days (1.4 mo) │ • Payback: 41–75 Days (2.5 mo) │
-│ • Power: AC/Grid (5V/2A)       │ • Power: AC / 12V Grid + 4G    │ • Power: 100% Solar + LiFePO4  │
-└────────────────────────────────┴────────────────────────────────┴────────────────────────────────┘
+│                                 THE IBORAIN 3-STAGE SCALING FLYWHEEL                             │
+├────────────────────────────────┬─────────────────────────────────────────────────────────────────┤
+│ 🏡 Stage 1: Estate Beachhead   │ Deploy Package A (Grid Sentry) to gated residential estates     │
+│    (Zero-CapEx 14-Day Trial)   │ at $49/mo via M-Pesa. Fast 3-day close, zero government red tape│
+├────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
+│ 🚓 Stage 2: Public Corridors   │ Give police & local patrols FREE WhatsApp access. When crimes   │
+│    (Package B Solar Sentries)  │ are solved, scale Package B (Solar Sentry at $99/mo) to poles.  │
+├────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
+│ 💻 Stage 3: Smart CCTV Cloud   │ Convert existing hospital, mall & municipal CCTV cameras to AI  │
+│    (Package C at $20/cam/mo)   │ at $20/camera/mo with ZERO new hardware (91% profit margin).    │
+└────────────────────────────────┴─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-### 🟢 TIER 1: Iborain Lite (The High-Velocity Checkpoint Node)
+## 2. The Single Unified Hardware Core: Build Only ONE Board
 
-**Ideal Deployment:** Residential estate barrier gates, school entrances, quiet gated courts (Grid-powered, Wi-Fi or basic 4G).
+To eliminate manufacturing overhead, inventory complexity, and firmware branching, ChipuRobo makerspaces assemble **only ONE standardized hardware circuit board**:
 
-#### 1. Material & Component Bill of Materials (BOM)
+```
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                               THE UNIFIED IBORAIN HARDWARE CORE ($126 BOM)                       │
+├────────────────────────────────┬─────────────────────────────────────────────────────────────────┤
+│ 🧠 1. Compute Board            │ Raspberry Pi Zero 2 W (Quad-Core 64-bit ARM) ($25.00)           │
+├────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
+│ 📷 2. Neural Vision Sensor     │ Sony IMX500 AI Camera with On-Chip Neural DSP ($70.00)          │
+├────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
+│ 📶 3. Cellular IoT Modem       │ Quectel 4G LTE Cellular HAT + High-Gain Antenna ($24.00)        │
+├────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
+│ 🛡️ 4. Anti-Tamper Sensor       │ MPU-6500 6-Axis Motion & Vibration IMU ($2.00)                  │
+├────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
+│ 💡 5. Status / Threat Indicator│ High-Intensity Dual-Color Green/Red Status LED ($0.50)          │
+├────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
+│ 📦 6. 3D Weatherproof Box      │ 180g UV-Resistant PETG Casing with Sunshade Hood ($4.50)        │
+└────────────────────────────────┴─────────────────────────────────────────────────────────────────┘
+```
 
-| Subsystem / Part | Technical Specification | Unit Cost (USD) | Unit Cost (KES) | Sourcing / Fabrication |
-| :--- | :--- | :---: | :---: | :--- |
-| **Compute Board** | Raspberry Pi Zero 2 W (Quad-Core 64-bit ARM) | $25.00 | KES 3,250 | Official RPi Distro / ChipuRobo |
-| **Vision Sensor** | Raspberry Pi Camera Module 3 (12MP Sony IMX708 Autofocus/HDR) | $25.00 | KES 3,250 | Camera Supplier |
-| **Anti-Tamper Sensor** | MPU-6500 6-Axis Gyro/Accelerometer (I2C 0x68) | $2.00 | KES 260 | ChipuRobo Lab Stock |
-| **Optical Tripwire** | TCRT5000 Infrared Reflective Sensor (GPIO 17) | $1.00 | KES 130 | Sensor Importer |
-| **Status Indicator** | High-Intensity Dual-Color Green/Red Status LED | $0.50 | KES 65 | Electronics Wholesale |
-| **3D Printed Enclosure** | 120g UV-Resistant PETG filament ($2.40) + Machine Time ($0.60) | $3.00 | KES 390 | ChipuRobo 3D Print Farm |
-| **Power Supply** | 5V 3A AC/DC Wall Adapter with Surge Protection | $2.00 | KES 260 | Electronics Wholesale |
-| **Fasteners & Glands** | Stainless M3 Screws, IP68 PG7 Cable Gland, JST Wire Harness | $1.00 | KES 130 | Local Hardware Sourcing |
-| **TOTAL TIER 1 BOM** | **Complete Assembled Iborain Lite Node** | **$59.50** | **KES 7,735** | **100% Fully Built** |
+---
 
-#### 2. Tier 1 Commercial & Monthly Cash Flow Model
+## 3. The 3 Commercial Packages & Unit Economics
 
+```
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                   THE 3 COMMERCIAL PACKAGES                                      │
+├───────────────────────────────┬────────────────────────────────┬─────────────────────────────────┤
+│ 🟢 Package A: Grid Sentry     │ 🟣 Package B: Solar Sentry     │ 💻 Package C: Smart CCTV Cloud  │
+│    (Gatehouses & Checkpoints) │    (Public Street Poles)       │    (Hospitals & Existing CCTVs) │
+├───────────────────────────────┼────────────────────────────────┼─────────────────────────────────┤
+│ • Hardware: Core Box + AC Plug│ • Hardware: Core Box + Solar   │ • Hardware: $0 (Pure Software!) │
+│ • Subscription: $49/mo (6.5k) │ • Subscription: $99/mo (12.8k) │ • Subscription: $20/camera/mo   │
+│ • BOM Cost: $126.00 USD       │ • BOM Cost: $215.00 USD        │ • BOM Cost: $0.00 USD           │
+│ • Net Payback: 50 Days ⚡     │ • Net Payback: 45 Days ⚡      │ • Net Margin: 91.0% Pure Profit!│
+└───────────────────────────────┴────────────────────────────────┴─────────────────────────────────┘
+```
+
+---
+
+### 🟢 PACKAGE A: Iborain Grid Sentry (Gatehouse & Checkpoint Node)
+*Target: Residential Estate Barriers, School Gates, Transport Yards with AC Power.*
+
+#### 1. Bill of Materials (BOM)
+| Component | Specification | Cost (USD) | Cost (KES) |
+| :--- | :--- | :---: | :---: |
+| **Unified Hardware Core** | Pi Zero 2 W + Sony IMX500 AI Camera + 4G LTE + MPU-6500 | $121.50 | KES 15,795 |
+| **PETG Weatherproof Casing** | UV-Resistant Enclosure with Sunshade & Mount | $4.50 | KES 585 |
+| **5V/3A Power Adapter** | AC/DC Wall Adapter with Surge Protection | $2.00 | KES 260 |
+| **TOTAL PACKAGE A BOM** | **Complete Grid Sentry Unit** | **$128.00** | **KES 16,640** |
+
+#### 2. Cash Flow & Unit Economics
 $$\begin{aligned}
 \text{Upfront Hardware Cost to Customer} &= \text{KES } 0 \text{ (\$0 CapEx)} \\
-\text{One-Time Setup \& Network Calibration Fee} &= \text{KES } 3,500 \text{ (\$27.00 USD)} \\
-\text{Monthly Recurring Subscription (MRR)} &= \text{KES } 6,500 \text{ / month (\$49.00 USD)} \\
+\text{One-Time Network Setup Fee} &= \text{KES } 3,500 \text{ (\$27.00 USD)} \\
+\text{Monthly SaaS Subscription (MRR)} &= \text{KES } 6,500 \text{ / month (\$49.00 USD)} \\
 \hline
 \text{Less: Google Cloud Run Compute} &= -\text{KES } 260 \text{ (-\$2.00 USD)} \\
 \text{Less: Gemini 3.7 Flash API Tokens} &= -\text{KES } 195 \text{ (-\$1.50 USD)} \\
@@ -68,101 +95,79 @@ $$\begin{aligned}
 \hline
 \mathbf{\text{Monthly Net Contribution Margin}} &= \mathbf{\text{KES } 5,800 \text{ / month (\$44.62 USD)}} \\
 \mathbf{\text{Gross Contribution Margin \%}} &= \mathbf{89.2\%} \\
-\mathbf{\text{Capital Payback Period}} &= \frac{\text{KES } 7,735}{\text{KES } 5,800 \text{/mo}} = \mathbf{1.33 \text{ Months (39 Days!)}}
+\mathbf{\text{Capital Payback Period}} &= \frac{\text{KES } 16,640 - \text{KES } 3,500}{\text{KES } 5,800 \text{/mo}} = \mathbf{1.69 \text{ Months (50 Days!)}}
 \end{aligned}$$
 
 ---
 
-### 🔵 TIER 2: Iborain Tactical (The Neural Transit & SACCO Sentry)
+### 🟣 PACKAGE B: Iborain Solar Sentry (Off-Grid Public Corridor Node)
+*Target: Municipal Street Light Poles, Arterial Highway Feeder Junctions, Unpowered SACCO Stages.*
 
-**Ideal Deployment:** Transport SACCO stages, warehouse logistics yards, commercial petrol stations, high-traffic gated communities (Grid-powered or 12V line, 4G LTE).
+#### 1. Bill of Materials (BOM)
+| Component | Specification | Cost (USD) | Cost (KES) |
+| :--- | :--- | :---: | :---: |
+| **Unified Hardware Core** | Pi Zero 2 W + Sony IMX500 AI Camera + 4G LTE + MPU-6500 | $121.50 | KES 15,795 |
+| **PETG Weatherproof Casing** | UV-Resistant Enclosure with Universal Pole Clamp | $4.50 | KES 585 |
+| **30W Solar Panel** | Monocrystalline Weatherproof Panel | $22.00 | KES 2,860 |
+| **12V LiFePO4 Battery Pack**| 12V 12Ah Solid-State Battery (>2,500 cycles, 72-hr buffer) | $28.00 | KES 3,640 |
+| **MPPT Solar Controller** | Smart MPPT Solar Charge Controller + 5V Stepdown | $10.00 | KES 1,300 |
+| **Night Vision IR Array** | 12V High-Power 850nm Infrared LED Array (30m Night Vision) | $12.00 | KES 1,560 |
+| **Heavy-Duty Mount & Straps**| Galvanized Steel Pole-Mount Arm & Stainless Straps | $5.00 | KES 650 |
+| **TOTAL PACKAGE B BOM** | **Complete Off-Grid Solar Sentry** | **$203.00** | **KES 26,390** |
 
-#### 1. Material & Component Bill of Materials (BOM)
-
-| Subsystem / Part | Technical Specification | Unit Cost (USD) | Unit Cost (KES) | Sourcing / Fabrication |
-| :--- | :--- | :---: | :---: | :--- |
-| **Compute Board** | Raspberry Pi Zero 2 W (Quad-Core 64-bit ARM) | $25.00 | KES 3,250 | Official RPi Distro / ChipuRobo |
-| **Neural AI Camera** | Raspberry Pi AI Camera (12.3MP Sony IMX500 with On-Chip Neural DSP) | $70.00 | KES 9,100 | ChipuRobo Lab Stock |
-| **Cellular IoT Modem** | Quectel / Waveshare 4G LTE Cellular HAT + High-Gain Antenna | $24.00 | KES 3,120 | RF / Cellular Importer |
-| **Anti-Tamper Sensor** | MPU-6500 6-Axis Gyro/Accelerometer (I2C 0x68) | $2.00 | KES 260 | ChipuRobo Lab Stock |
-| **Optical Tripwire** | TCRT5000 Infrared Reflective Sensor (GPIO 17) | $1.00 | KES 130 | Sensor Importer |
-| **Status Indicator** | High-Intensity Dual-Color Green/Red Status LED | $0.50 | KES 65 | Electronics Wholesale |
-| **3D Printed Enclosure** | 180g PETG with Sunshade Hood ($3.60) + Machine Time ($0.90) | $4.50 | KES 585 | ChipuRobo 3D Print Farm |
-| **Power Subsystem** | 12V to 5V 3A DC Buck Converter & Power Line Filter | $3.00 | KES 390 | Electronics Importer |
-| **Pole Mounting Bracket**| Stainless Steel Adjustable Pole Clamp & Arm | $3.00 | KES 390 | Local Metal Fabrication |
-| **Fasteners & Glands** | Stainless M3 Screws, IP68 PG7 Cable Glands, JST Wire Harness | $2.00 | KES 260 | Local Hardware Sourcing |
-| **TOTAL TIER 2 BOM** | **Complete Assembled Iborain Tactical Node** | **$135.00** | **KES 17,550** | **100% Fully Built** |
-
-#### 2. Tier 2 Commercial & Monthly Cash Flow Model
-
+#### 2. Cash Flow & Unit Economics
 $$\begin{aligned}
-\text{Upfront Hardware Cost to Customer} &= \text{KES } 5,000 \text{ (\$38.00 USD)} \\
-\text{Monthly Recurring Subscription (MRR)} &= \text{KES } 9,500 \text{ / month (\$73.00 USD)} \\
+\text{One-Time Pole Installation \& Setup Fee} &= \text{KES } 15,000 \text{ (\$115.00 USD)} \\
+\text{Monthly SaaS Subscription (MRR)} &= \text{KES } 12,870 \text{ / month (\$99.00 USD)} \\
 \hline
-\text{Less: Google Cloud Run Compute} &= -\text{KES } 325 \text{ (-\$2.50 USD)} \\
-\text{Less: Gemini 3.7 Flash API Tokens} &= -\text{KES } 260 \text{ (-\$2.00 USD)} \\
-\text{Less: 4G LTE IoT SIM Data (Safaricom/Airtel)} &= -\text{KES } 365 \text{ (-\$2.80 USD)} \\
+\text{Less: Google Cloud Run Compute} &= -\text{KES } 390 \text{ (-\$3.00 USD)} \\
+\text{Less: Gemini 3.7 Flash API Tokens} &= -\text{KES } 325 \text{ (-\$2.50 USD)} \\
+\text{Less: 4G LTE IoT SIM Data} &= -\text{KES } 365 \text{ (-\$2.80 USD)} \\
 \hline
-\mathbf{\text{Monthly Net Contribution Margin}} &= \mathbf{\text{KES } 8,550 \text{ / month (\$65.70 USD)}} \\
-\mathbf{\text{Gross Contribution Margin \%}} &= \mathbf{90.0\%} \\
-\mathbf{\text{Capital Payback Period}} &= \frac{\text{KES } 17,550 - \text{KES } 5,000 \text{ (Upfront)}}{\text{KES } 8,550 \text{/mo}} = \mathbf{1.46 \text{ Months (43 Days)}} \\
-&(\text{Without Upfront: } \frac{\text{KES } 17,550}{\text{KES } 8,550} = \mathbf{2.05 \text{ Months / 61 Days}})
+\mathbf{\text{Monthly Net Contribution Margin}} &= \mathbf{\text{KES } 11,790 \text{ / month (\$90.70 USD)}} \\
+\mathbf{\text{Gross Contribution Margin \%}} &= \mathbf{91.6\%} \\
+\mathbf{\text{Capital Payback Period}} &= \frac{\text{KES } 26,390 - \text{KES } 15,000}{\text{KES } 11,790 \text{/mo}} = \mathbf{0.96 \text{ Months (29 Days!)}} \\
+&(\text{Without Upfront: } \frac{\text{KES } 26,390}{\text{KES } 11,790} = \mathbf{2.23 \text{ Months / 67 Days}})
 \end{aligned}$$
 
 ---
 
-### 🟣 TIER 3: Iborain Solar Pro (The Off-Grid Corridor Node — "The Falcon Equivalent")
+### 💻 PACKAGE C: Iborain Smart CCTV Cloud (Pure Software SaaS)
+*Target: Hospitals (KNH, Aga Khan, MP Shah), Shopping Malls, Gated Estates with Existing CCTV NVRs.*
 
-**Ideal Deployment:** Public street light poles, arterial highway feeder junctions, unpowered municipal avenues (100% Solar Off-Grid, Dual 4G + GPS, 30m Night Vision).
+#### 1. How It Works
+* **Zero Hardware Manufacturing:** Connects to existing Hikvision, Dahua, Uniview, and Axis IP cameras via standard RTSP video stream bridge.
+* **Instant Intelligence:** Automatically pulls snapshots on motion, runs Gemini 3.7 Flash transit classification, and sends real-time WhatsApp threat alerts.
 
-#### 1. Material & Component Bill of Materials (BOM)
-
-| Subsystem / Part | Technical Specification | Unit Cost (USD) | Unit Cost (KES) | Sourcing / Fabrication |
-| :--- | :--- | :---: | :---: | :--- |
-| **Compute Board** | Raspberry Pi Zero 2 W (Quad-Core 64-bit ARM) | $25.00 | KES 3,250 | Official RPi Distro / ChipuRobo |
-| **Neural AI Vision** | Sony IMX500 AI Camera + C/CS Mount Telephoto Optical Zoom Lens | $82.00 | KES 10,660 | Optical / AI Sensor Supplier |
-| **Solar Panel** | 30W Monocrystalline Anodized Aluminum Weatherproof Panel | $22.00 | KES 2,860 | Local Solar Wholesaler |
-| **Battery Storage** | 12V 12Ah LiFePO4 Battery Pack (>2,500 Cycles, Thermal Grade) | $28.00 | KES 3,640 | Lithium Battery Depot |
-| **MPPT Solar Controller** | Intelligent MPPT Solar Charge Controller + 5V/3A DC-DC Buck Stepdown | $10.00 | KES 1,300 | Electronics Importer |
-| **Cellular & GPS** | Quectel EC25-E Global 4G LTE HAT + High-Gain Omni Antenna + GPS | $28.00 | KES 3,640 | RF / IoT Telecom |
-| **Carrier Dual-SIM** | Dual-SIM IoT Carrier Board (Safaricom / Airtel Auto-Failover) | $2.00 | KES 260 | Telecom Hardware |
-| **Night Vision IR Array** | 12V High-Power 850nm Infrared LED Array (30m Night Vision) | $12.00 | KES 1,560 | CCTV Component Wholesaler |
-| **Anti-Tamper Sensor** | MPU-6500 6-Axis Gyro/Accelerometer (I2C 0x68) | $2.00 | KES 260 | ChipuRobo Lab Stock |
-| **Doppler Radar Sensor** | 10.525GHz Microwave Doppler Radar (15m wide-road detection) | $3.00 | KES 390 | Sensor Importer |
-| **Industrial Enclosure** | IP66 Die-Cast Aluminum & Polycarbonate Box with Gore-Tex Vent | $12.00 | KES 1,560 | Industrial Plastics / Metal |
-| **Heavy-Duty Mount** | Galvanized Steel Universal Pole-Mount Arm & Stainless Straps | $5.00 | KES 650 | Local Metal Fabrication |
-| **Fasteners, Glands & QA**| IP68 Glands, Silicon O-Rings, Wire Harness, ChipuRobo QA | $4.00 | KES 520 | ChipuRobo Makerspace QA |
-| **TOTAL TIER 3 BOM** | **Complete Industrial Off-Grid Corridor Sentry** | **$235.00** | **KES 30,550** | **100% Fully Built** |
-
-#### 2. Tier 3 Commercial & Monthly Cash Flow Model
-
+#### 2. Cash Flow & Unit Economics (Per Connected Camera)
 $$\begin{aligned}
-\text{One-Time Pole Installation \& Calibration Fee} &= \text{KES } 15,000 \text{ (\$115.00 USD)} \\
-\text{Monthly Recurring Subscription (MRR)} &= \text{KES } 13,500 \text{ / month (\$104.00 USD)} \\
+\text{Upfront Hardware Cost} &= \mathbf{\$0.00 \text{ USD (KES 0)}} \\
+\text{Monthly SaaS Subscription per Camera} &= \mathbf{\$20.00 \text{ USD / month (KES 2,600/mo)}} \\
 \hline
-\text{Less: Google Cloud Run Compute} &= -\text{KES } 455 \text{ (-\$3.50 USD)} \\
-\text{Less: Gemini 3.7 Flash API Tokens} &= -\text{KES } 390 \text{ (-\$3.00 USD)} \\
-\text{Less: Dual-SIM 4G LTE IoT SIM Data} &= -\text{KES } 555 \text{ (-\$4.27 USD)} \\
+\text{Less: Google Cloud Run Ingestion} &= -\text{KES } 130 \text{ (-\$1.00 USD)} \\
+\text{Less: Gemini 3.7 Flash API Tokens} &= -\text{KES } 104 \text{ (-\$0.80 USD)} \\
 \hline
-\mathbf{\text{Monthly Net Contribution Margin}} &= \mathbf{\text{KES } 12,100 \text{ / month (\$93.08 USD)}} \\
-\mathbf{\text{Gross Contribution Margin \%}} &= \mathbf{89.6\%} \\
-\mathbf{\text{Capital Payback Period}} &= \frac{\text{KES } 30,550 - \text{KES } 15,000 \text{ (Setup)}}{\text{KES } 12,100 \text{/mo}} = \mathbf{1.28 \text{ Months (38 Days)}} \\
-&(\text{Without Setup: } \frac{\text{KES } 30,550}{\text{KES } 12,100} = \mathbf{2.52 \text{ Months / 75 Days}})
+\mathbf{\text{Monthly Net Profit per Camera}} &= \mathbf{\text{KES } 2,366 \text{ / month (\$18.20 USD)}} \\
+\mathbf{\text{Gross Profit Margin}} &= \mathbf{91.0\% \text{ Pure Profit!}}
 \end{aligned}$$
+
+* **Example Enterprise Customer (Hospital with 25 Cameras):**
+  * Monthly Revenue: **$500 / month (KES 65,000/mo)**
+  * Monthly Cloud Cost: **$45 / month (KES 5,850/mo)**
+  * **Annual Net Profit: $5,460 / year (KES 709,800/yr) with ZERO hardware cost!**
 
 ---
 
-## 3. Side-by-Side Unit Economics Comparison Table
+## 4. Side-by-Side Commercial Comparison
 
-| Metric / Dimension | 🟢 Tier 1: Lite | 🔵 Tier 2: Tactical | 🟣 Tier 3: Solar Pro |
+| Metric / Dimension | 🟢 Package A: Grid Sentry | 🟣 Package B: Solar Sentry | 💻 Package C: Smart CCTV Cloud |
 | :--- | :---: | :---: | :---: |
-| **Production Hardware BOM** | **$59.50 (KES 7,735)** | **$135.00 (KES 17,550)** | **$235.00 (KES 30,550)** |
-| **Setup / Installation Fee** | $27.00 (KES 3,500) | $58.00 (KES 7,500) | $115.00 (KES 15,000) |
-| **Monthly Subscription (MRR)** | **$49.00 (KES 6,500)** | **$73.00 (KES 9,500)** | **$104.00 (KES 13,500)** |
-| **Monthly Cloud & IoT OpEx** | $5.38 (KES 700) | $7.30 (KES 950) | $10.77 (KES 1,400) |
-| **Monthly Net Cash Profit** | **$44.62 (KES 5,800)** | **$65.70 (KES 8,550)** | **$93.08 (KES 12,100)** |
-| **Gross Contribution Margin** | **89.2%** | **90.0%** | **89.6%** |
-| **Net Payback Period (Days)** | **39 Days** ⚡ | **43–61 Days** | **38–75 Days** |
-| **3-Year Customer LTV** | **$1,606.32 USD** | **$2,365.20 USD** | **$3,350.88 USD** |
-| **Blended CAC** | $35.00 USD | $50.00 USD | $85.00 USD |
-| **LTV / CAC Ratio** | **45.9x** | **47.3x** | **39.4x** |
+| **Delivery Model** | Hardware + Cloud SaaS | Solar Hardware + Cloud SaaS | **100% Pure Software SaaS** |
+| **Manufacturing BOM** | **$128.00 (KES 16.6k)** | **$203.00 (KES 26.3k)** | **$0.00 (Zero Hardware!)** |
+| **Setup Fee** | $27.00 (KES 3,500) | $115.00 (KES 15,000) | $0.00 |
+| **Monthly Subscription** | **$49.00 / mo (KES 6,500)** | **$99.00 / mo (KES 12,870)**| **$20.00 / camera / mo (KES 2,600)**|
+| **Monthly Net Cash Profit** | **$44.62 / mo (KES 5,800)** | **$90.70 / mo (KES 11,790)**| **$18.20 / camera / mo (KES 2,366)**|
+| **Gross Profit Margin** | **89.2%** | **91.6%** | **91.0%** |
+| **Net Payback Period** | **50 Days** ⚡ | **29–67 Days** ⚡ | **Instant (Day 1)** 🚀 |
+| **3-Year Customer LTV** | **$1,606.32 USD** | **$3,265.20 USD** | **$655.20 USD / camera** |
+| **LTV / CAC Ratio** | **45.9x** | **38.4x** | **65.5x** |
