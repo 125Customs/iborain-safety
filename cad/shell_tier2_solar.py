@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
 Iborain Safety — Desert-Grade Aerodynamic Bullet Pod 3D CAD Generator for Shell 2 (Package B: Solar Sentry)
-Design Language: Smooth Stadium Capsule / 15° Angled Semicircular Bulging Umbrella Hood
+Design Language: Smooth Stadium Capsule / Upward-Facing 15° Semicircular Umbrella Hood
   1. Base Casing: Aerodynamic 24mm-radius stadium body with integrated rear pole saddle (100mm radius),
      dual 15mm Jubilee clamp slots, direct Pi Zero 2 W + 12V buck regulator standoffs, dual PG7 ports & SMA port.
-  2. Front Bezel & Umbrella Visor: Streamlined front plate with integrated 15° angled semicircular
-     umbrella hood (R=18mm arch), 20.4mm optical aperture, and direct Sony IMX500 camera mounting standoffs.
+  2. Front Bezel & Umbrella Visor: Streamlined front plate with upward-projecting 15° angled semicircular
+     umbrella hood (R=18mm arch, facing straight UP into +Z), 20.4mm optical aperture, and direct camera mounts.
 
-100% Pure Stealth: Aerodynamic Dust-Shedding Silhouette, Smooth Double Curves, Zero Loose Gaps.
+100% Pure Stealth: Aerodynamic Dust-Shedding Silhouette, Smooth Double Curves, Upward Visor Orientation.
 """
 import os
 import sys
@@ -120,7 +120,7 @@ def build_tier2_front_bezel():
     cam_y = 38.0
 
     with BuildPart() as bezel:
-        # 1. Smooth Stadium Front Faceplate
+        # 1. Smooth Stadium Front Faceplate (z = 0 to plate_t)
         with BuildSketch() as s:
             Rectangle(w, h)
             fillet(s.vertices(), radius=r)
@@ -130,23 +130,20 @@ def build_tier2_front_bezel():
         with Locations((0, cam_y, 0)):
             Hole(radius=10.2, depth=plate_t + 2.0)
 
-        # 3. Semicircular Bulging Umbrella / Eyebrow Canopy (R=18mm Smooth Arch, 22mm Overhang)
-        with BuildSketch(Plane.XZ.offset(cam_y + 2.0)) as s_visor:
-            with Locations((0, plate_t)):
+        # 3. Upward-Facing Semicircular Umbrella Canopy (Extruded along +Z out of the front face)
+        with BuildSketch(Plane.XY.offset(plate_t)) as s_visor:
+            with Locations((0, cam_y)):
+                # Outer semicircular arch
                 with BuildLine():
                     Line((-18.0, 0), (18.0, 0))
                     RadiusArc((18.0, 0), (-18.0, 0), radius=18.0)
                 make_face()
-        extrude(amount=22.0)
-
-        # Hollow optical cavity inside umbrella hood
-        with BuildSketch(Plane.XZ.offset(cam_y + 2.0)) as s_cut:
-            with Locations((0, plate_t)):
+                # Inner hollow cutout
                 with BuildLine():
                     Line((-15.4, 0), (15.4, 0))
                     RadiusArc((15.4, 0), (-15.4, 0), radius=15.4)
-                make_face()
-        extrude(amount=22.0 - 2.6, mode=Mode.SUBTRACT)
+                make_face(mode=Mode.SUBTRACT)
+        extrude(amount=22.0) # Extrudes upwards towards +Z!
 
         # 4. Integrated 15° Angled Camera Mount Standoffs on the Inside (z < 0)
         cam_offsets = [
@@ -187,7 +184,7 @@ if __name__ == "__main__":
     out_dir = os.path.join(os.path.dirname(__file__), "output")
     os.makedirs(out_dir, exist_ok=True)
 
-    print("🛡️ Compiling Desert-Grade Bullet Pod Shell 2 (Package B: Solar Sentry)...")
+    print("🛡️ Compiling Desert-Grade Bullet Pod Shell 2 (Upward Facing Visor)...")
     base = build_tier2_base_casing()
     bezel = build_tier2_front_bezel()
 
@@ -202,4 +199,4 @@ if __name__ == "__main__":
         bezel.moved(Location((0, 0, 32.0)))
     ])
     export_step(assembly, os.path.join(out_dir, "shell_tier2_complete_assembly.step"))
-    print("  ✅ Shell 2 (Bullet Pod with Semicircular Umbrella Visor) Compiled Successfully!")
+    print("  ✅ Shell 2 (Upward-Facing Bullet Pod) Compiled Successfully!")

@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
 Iborain Safety — Desert-Grade Pebble Dome 3D CAD Generator for Shell 1 (Package A: Grid Sentry)
-Design Language: Smooth Double-Curved Pebble Capsule / Semicircular Bulging Umbrella Hood
+Design Language: Smooth Double-Curved Pebble Capsule / Upward-Facing Semicircular Umbrella Hood
   1. Base Casing: Organic 20mm-radius rounded bowl with direct Pi Zero 2 W standoffs, IMU bracket,
      bottom PG7 power gland, top SMA antenna port, and continuous perimeter gasket track.
-  2. Front Bezel & Umbrella Visor: Smooth rounded dome plate with an organic semicircular arched
-     umbrella lens canopy (R=16mm arch), 20.4mm optical aperture, and direct Sony IMX500 camera mounts.
+  2. Front Bezel & Umbrella Visor: Smooth rounded dome plate with an upward-projecting semicircular
+     umbrella lens canopy (R=16mm arch, facing straight UP into +Z), 20.4mm optical aperture, and direct camera mounts.
 
-100% Pure Stealth: Ultra-Slim (26mm depth), Continuous Dust-Shedding Arcs, Zero Sharp Corners.
+100% Pure Stealth: Ultra-Slim (26mm depth), Continuous Dust-Shedding Arcs, Upward Visor Orientation.
 """
 import os
 import sys
@@ -101,7 +101,7 @@ def build_tier1_front_bezel():
     cam_y = 16.0
 
     with BuildPart() as bezel:
-        # 1. Smooth Rounded Pebble Faceplate
+        # 1. Smooth Rounded Pebble Faceplate (z = 0 to plate_t)
         with BuildSketch() as s:
             Rectangle(w, h)
             fillet(s.vertices(), radius=r)
@@ -111,24 +111,20 @@ def build_tier1_front_bezel():
         with Locations((0, cam_y, 0)):
             Hole(radius=10.2, depth=plate_t + 2.0)
 
-        # 3. Semicircular Bulging Umbrella / Eyebrow Canopy (R=16mm Smooth Arch)
-        # Semicircular dome hood extending 16mm forward with zero sharp corners
-        with BuildSketch(Plane.XZ.offset(cam_y + 2.0)) as s_visor:
-            with Locations((0, plate_t)):
+        # 3. Upward-Facing Semicircular Umbrella Canopy (Extruded along +Z out of the front face)
+        with BuildSketch(Plane.XY.offset(plate_t)) as s_visor:
+            with Locations((0, cam_y)):
+                # Outer semicircular umbrella arch
                 with BuildLine():
                     Line((-16.0, 0), (16.0, 0))
                     RadiusArc((16.0, 0), (-16.0, 0), radius=16.0)
                 make_face()
-        extrude(amount=16.0)
-
-        # Hollow optical cavity inside umbrella hood
-        with BuildSketch(Plane.XZ.offset(cam_y + 2.0)) as s_cut:
-            with Locations((0, plate_t)):
+                # Inner hollow cutout
                 with BuildLine():
                     Line((-13.5, 0), (13.5, 0))
                     RadiusArc((13.5, 0), (-13.5, 0), radius=13.5)
-                make_face()
-        extrude(amount=16.0 - 2.4, mode=Mode.SUBTRACT)
+                make_face(mode=Mode.SUBTRACT)
+        extrude(amount=16.0) # Extrudes upwards towards +Z!
 
         # 4. Sony IMX500 Direct Camera Mounting Standoffs on the Inside (z < 0)
         cam_offsets = [
@@ -167,7 +163,7 @@ if __name__ == "__main__":
     out_dir = os.path.join(os.path.dirname(__file__), "output")
     os.makedirs(out_dir, exist_ok=True)
 
-    print("🛡️ Compiling Desert-Grade Pebble Dome Shell 1 (Package A: Grid Sentry)...")
+    print("🛡️ Compiling Desert-Grade Pebble Dome Shell 1 (Upward Facing Visor)...")
     base = build_tier1_base_casing()
     bezel = build_tier1_front_bezel()
 
@@ -182,4 +178,4 @@ if __name__ == "__main__":
         bezel.moved(Location((0, 0, 23.0)))
     ])
     export_step(assembly, os.path.join(out_dir, "shell_tier1_complete_assembly.step"))
-    print("  ✅ Shell 1 (Pebble Dome with Semicircular Umbrella Visor) Compiled Successfully!")
+    print("  ✅ Shell 1 (Upward-Facing Pebble Dome) Compiled Successfully!")
