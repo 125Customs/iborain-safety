@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-Iborain Safety — Streamlined Aerodynamic Stadium 3D CAD Generator for Shell 2 (Package B: Solar Sentry)
-Design Language: Smooth Stadium Capsule / Aerodynamic Utility-Pole Sentry (Strict 2-Piece System)
-  1. Base Casing: Smooth 18mm-radius stadium body with integrated rear pole saddle (100mm radius),
+Iborain Safety — Desert-Grade Aerodynamic Bullet Pod 3D CAD Generator for Shell 2 (Package B: Solar Sentry)
+Design Language: Smooth Stadium Capsule / 15° Angled Semicircular Bulging Umbrella Hood
+  1. Base Casing: Aerodynamic 24mm-radius stadium body with integrated rear pole saddle (100mm radius),
      dual 15mm Jubilee clamp slots, direct Pi Zero 2 W + 12V buck regulator standoffs, dual PG7 ports & SMA port.
-  2. Front Bezel & Dome Visor: Streamlined front plate with integrated 15° angled IMX500 camera mounting
-     standoffs, 20.4mm optical aperture, smooth aerodynamic 25mm eyebrow visor hood, and 6x flush countersunk screws.
+  2. Front Bezel & Umbrella Visor: Streamlined front plate with integrated 15° angled semicircular
+     umbrella hood (R=18mm arch), 20.4mm optical aperture, and direct Sony IMX500 camera mounting standoffs.
 
-100% Pure Stealth: Streamlined Aerodynamic Silhouette, Smooth Continuous Fillets, Zero Loose Gaps.
+100% Pure Stealth: Aerodynamic Dust-Shedding Silhouette, Smooth Double Curves, Zero Loose Gaps.
 """
 import os
 import sys
@@ -15,13 +15,13 @@ from build123d import *
 
 def build_tier2_base_casing():
     # Stadium Capsule Dimensions (mm)
-    w, h, d = 94.0, 114.0, 32.0
+    w, h, d = 92.0, 116.0, 32.0
     wall = 2.6
     floor_t = 2.8
-    r = 18.0
+    r = 24.0
 
     with BuildPart() as base:
-        # 1. Smooth Stadium Rounded Outer Envelope
+        # 1. Smooth Stadium Rounded Envelope
         with BuildSketch() as s1:
             Rectangle(w, h)
             fillet(s1.vertices(), radius=r)
@@ -46,12 +46,12 @@ def build_tier2_base_casing():
         # 5. 6x Perimeter Fastener Bosses for M3 Brass Heat-Set Inserts
         boss_r = 4.4
         screw_positions = [
-            (-w/2 + 7.5, -h/2 + 8.5),
-            ( w/2 - 7.5, -h/2 + 8.5),
-            ( w/2 - 7.5,  0.0),
-            (-w/2 + 7.5,  0.0),
-            ( w/2 - 7.5,  h/2 - 8.5),
-            (-w/2 + 7.5,  h/2 - 8.5),
+            (-w/2 + 8.5, -h/2 + 9.5),
+            ( w/2 - 8.5, -h/2 + 9.5),
+            ( w/2 - 8.5,  0.0),
+            (-w/2 + 8.5,  0.0),
+            ( w/2 - 8.5,  h/2 - 9.5),
+            (-w/2 + 8.5,  h/2 - 9.5),
         ]
         with Locations([(x, y, floor_t) for x, y in screw_positions]):
             Cylinder(radius=boss_r, height=d - floor_t, align=(Align.CENTER, Align.CENTER, Align.MIN))
@@ -61,7 +61,7 @@ def build_tier2_base_casing():
             Hole(radius=2.1, depth=7.0)
 
         # 6. Upper Bay: Raspberry Pi Zero 2 W Floor Standoffs (58mm x 23mm)
-        pi_center_y = 14.0
+        pi_center_y = 16.0
         pi_standoff_h = 5.0
         pi_offsets = [
             (-29.0, pi_center_y - 11.5),
@@ -86,7 +86,7 @@ def build_tier2_base_casing():
             Hole(radius=1.2, depth=5.0)
 
         # 8. MPU-6500 Anti-Tamper Mounting Platform
-        with Locations((w/2 - 16.0, 14.0, floor_t)):
+        with Locations((w/2 - 16.0, 16.0, floor_t)):
             Box(12.0, 18.0, 3.0, align=(Align.CENTER, Align.CENTER, Align.MIN))
             with Locations((0, -5.0, 3.0), (0, 5.0, 3.0)):
                 Hole(radius=1.1, depth=3.0)
@@ -94,13 +94,13 @@ def build_tier2_base_casing():
         # 9. Weatherproof Ingress Ports
         # Bottom Face: 2x PG7 Glands (dia 12.5mm) for Solar Panel & 12V Battery
         with BuildSketch(Plane.XZ.offset(-h/2)):
-            with Locations((-22.0, floor_t + 11.0), (22.0, floor_t + 11.0)):
+            with Locations((-20.0, floor_t + 11.0), (20.0, floor_t + 11.0)):
                 Circle(radius=6.25)
         extrude(amount=wall + 3.0, mode=Mode.SUBTRACT)
 
-        # Top Face: SMA Antenna Bulkhead Port (dia 6.5mm) for 4G LTE
+        # Top Face: SMA Antenna Port (dia 6.5mm) for 4G LTE
         with BuildSketch(Plane.XZ.offset(h/2)):
-            with Locations((26.0, floor_t + 11.0)):
+            with Locations((24.0, floor_t + 11.0)):
                 Circle(radius=3.25)
         extrude(amount=-(wall + 3.0), mode=Mode.SUBTRACT)
 
@@ -115,8 +115,8 @@ def build_tier2_base_casing():
 
 def build_tier2_front_bezel():
     # Front Bezel Dimensions (mm)
-    w, h, plate_t = 94.0, 114.0, 3.5
-    r = 18.0
+    w, h, plate_t = 92.0, 116.0, 3.5
+    r = 24.0
     cam_y = 38.0
 
     with BuildPart() as bezel:
@@ -130,20 +130,23 @@ def build_tier2_front_bezel():
         with Locations((0, cam_y, 0)):
             Hole(radius=10.2, depth=plate_t + 2.0)
 
-        # 3. Smooth Aerodynamic 25mm Eyebrow Visor Hood
-        visor_w = 40.0
-        visor_h = 30.0
-        visor_len = 25.0
-        visor_t = 2.6
+        # 3. Semicircular Bulging Umbrella / Eyebrow Canopy (R=18mm Smooth Arch, 22mm Overhang)
+        with BuildSketch(Plane.XZ.offset(cam_y + 2.0)) as s_visor:
+            with Locations((0, plate_t)):
+                with BuildLine():
+                    Line((-18.0, 0), (18.0, 0))
+                    RadiusArc((18.0, 0), (-18.0, 0), radius=18.0)
+                make_face()
+        extrude(amount=22.0)
 
-        with BuildSketch(Plane.XY.offset(plate_t)) as s_visor:
-            with Locations((0, cam_y + 3.0)):
-                Rectangle(visor_w, visor_h)
-                fillet(s_visor.vertices(), radius=8.0)
-                Rectangle(visor_w - 2*visor_t, visor_h - 2*visor_t, mode=Mode.SUBTRACT)
-                with Locations((0, -visor_h/2 + visor_t/2)):
-                    Rectangle(visor_w + 2.0, visor_t + 1.0, mode=Mode.SUBTRACT)
-        extrude(amount=visor_len)
+        # Hollow optical cavity inside umbrella hood
+        with BuildSketch(Plane.XZ.offset(cam_y + 2.0)) as s_cut:
+            with Locations((0, plate_t)):
+                with BuildLine():
+                    Line((-15.4, 0), (15.4, 0))
+                    RadiusArc((15.4, 0), (-15.4, 0), radius=15.4)
+                make_face()
+        extrude(amount=22.0 - 2.6, mode=Mode.SUBTRACT)
 
         # 4. Integrated 15° Angled Camera Mount Standoffs on the Inside (z < 0)
         cam_offsets = [
@@ -159,12 +162,12 @@ def build_tier2_front_bezel():
 
         # 5. 6x Recessed Countersunk Hex Screw Pockets
         screw_positions = [
-            (-w/2 + 7.5, -h/2 + 8.5),
-            ( w/2 - 7.5, -h/2 + 8.5),
-            ( w/2 - 7.5,  0.0),
-            (-w/2 + 7.5,  0.0),
-            ( w/2 - 7.5,  h/2 - 8.5),
-            (-w/2 + 7.5,  h/2 - 8.5),
+            (-w/2 + 8.5, -h/2 + 9.5),
+            ( w/2 - 8.5, -h/2 + 9.5),
+            ( w/2 - 8.5,  0.0),
+            (-w/2 + 8.5,  0.0),
+            ( w/2 - 8.5,  h/2 - 9.5),
+            (-w/2 + 8.5,  h/2 - 9.5),
         ]
         with Locations([(x, y, 0) for x, y in screw_positions]):
             Hole(radius=1.7, depth=plate_t + 2.0)
@@ -184,7 +187,7 @@ if __name__ == "__main__":
     out_dir = os.path.join(os.path.dirname(__file__), "output")
     os.makedirs(out_dir, exist_ok=True)
 
-    print("🛡️ Compiling Smooth Aerodynamic Shell 2 (Package B: Solar Sentry)...")
+    print("🛡️ Compiling Desert-Grade Bullet Pod Shell 2 (Package B: Solar Sentry)...")
     base = build_tier2_base_casing()
     bezel = build_tier2_front_bezel()
 
@@ -199,4 +202,4 @@ if __name__ == "__main__":
         bezel.moved(Location((0, 0, 32.0)))
     ])
     export_step(assembly, os.path.join(out_dir, "shell_tier2_complete_assembly.step"))
-    print("  ✅ Shell 2 (2-Piece Smooth Stadium Capsule) Compiled Successfully!")
+    print("  ✅ Shell 2 (Bullet Pod with Semicircular Umbrella Visor) Compiled Successfully!")

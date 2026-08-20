@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-Iborain Safety — Ultra-Slim Discreet Capsule 3D CAD Generator for Shell 1 (Package A: Grid Sentry)
-Design Language: Smooth Rounded Pebble / Discreet Minimalist Optical Capsule (Strict 2-Piece System)
-  1. Base Casing: Smooth 14mm-radius rounded body with direct Pi Zero 2 W standoffs, IMU bracket,
-     PG7 power gland port, SMA antenna port, and continuous perimeter gasket groove.
-  2. Front Bezel & Dome Visor: Sleek rounded faceplate with direct Sony IMX500 camera mounting standoffs,
-     20.4mm optical aperture, smooth organic aerodynamic eyebrow visor, and flush countersunk screws.
+Iborain Safety — Desert-Grade Pebble Dome 3D CAD Generator for Shell 1 (Package A: Grid Sentry)
+Design Language: Smooth Double-Curved Pebble Capsule / Semicircular Bulging Umbrella Hood
+  1. Base Casing: Organic 20mm-radius rounded bowl with direct Pi Zero 2 W standoffs, IMU bracket,
+     bottom PG7 power gland, top SMA antenna port, and continuous perimeter gasket track.
+  2. Front Bezel & Umbrella Visor: Smooth rounded dome plate with an organic semicircular arched
+     umbrella lens canopy (R=16mm arch), 20.4mm optical aperture, and direct Sony IMX500 camera mounts.
 
-100% Pure Stealth: Ultra-Slim (27mm total depth), Smooth Organic Contours, Zero Loose Gaps.
+100% Pure Stealth: Ultra-Slim (26mm depth), Continuous Dust-Shedding Arcs, Zero Sharp Corners.
 """
 import os
 import sys
@@ -15,13 +15,13 @@ from build123d import *
 
 def build_tier1_base_casing():
     # Capsule Dimensions (mm)
-    w, h, d = 76.0, 78.0, 24.0
+    w, h, d = 76.0, 80.0, 23.0
     wall = 2.4
     floor_t = 2.4
-    r = 14.0
+    r = 20.0
 
     with BuildPart() as base:
-        # 1. Smooth Rounded Outer Envelope
+        # 1. Smooth Rounded Pebble Envelope
         with BuildSketch() as s1:
             Rectangle(w, h)
             fillet(s1.vertices(), radius=r)
@@ -36,10 +36,10 @@ def build_tier1_base_casing():
         # 3. 4x Corner Fastener Bosses for M3 Brass Heat-Set Inserts
         boss_r = 4.2
         corner_offsets = [
-            (-w/2 + 6.5, -h/2 + 6.5),
-            ( w/2 - 6.5, -h/2 + 6.5),
-            ( w/2 - 6.5,  h/2 - 6.5),
-            (-w/2 + 6.5,  h/2 - 6.5),
+            (-w/2 + 8.5, -h/2 + 8.5),
+            ( w/2 - 8.5, -h/2 + 8.5),
+            ( w/2 - 8.5,  h/2 - 8.5),
+            (-w/2 + 8.5,  h/2 - 8.5),
         ]
         with Locations([(x, y, floor_t) for x, y in corner_offsets]):
             Cylinder(radius=boss_r, height=d - floor_t, align=(Align.CENTER, Align.CENTER, Align.MIN))
@@ -67,28 +67,28 @@ def build_tier1_base_casing():
             with Locations((0, -5.0, 3.0), (0, 5.0, 3.0)):
                 Hole(radius=1.1, depth=3.0)
 
-        # 6. Weatherproof Ports
-        # Bottom Face: PG7 IP68 Cable Gland (dia 12.5mm) for 5V DC power
+        # 6. Weatherproof Ports (Bottom DC Gland & Top SMA Antenna)
+        # Bottom Face: PG7 IP68 Cable Gland (dia 12.5mm)
         with BuildSketch(Plane.XZ.offset(-h/2)):
-            with Locations((0, floor_t + 9.0)):
+            with Locations((0, floor_t + 8.5)):
                 Circle(radius=6.25)
         extrude(amount=wall + 3.0, mode=Mode.SUBTRACT)
 
-        # Top Face: SMA Antenna Port (dia 6.5mm) for 4G LTE
+        # Top Face: SMA Antenna Port (dia 6.5mm)
         with BuildSketch(Plane.XZ.offset(h/2)):
-            with Locations((20.0, floor_t + 9.0)):
+            with Locations((18.0, floor_t + 8.5)):
                 Circle(radius=3.25)
         extrude(amount=-(wall + 3.0), mode=Mode.SUBTRACT)
 
-        # 7. Rear Wall Mounting Holes (4x M4 clearance holes, 48mm x 48mm grid)
-        with Locations([(-24.0, -24.0, 0), (24.0, -24.0, 0), (24.0, 24.0, 0), (-24.0, 24.0, 0)]):
+        # 7. Rear Wall Mounting Holes (4x M4 clearance holes, 46mm x 46mm grid)
+        with Locations([(-23.0, -23.0, 0), (23.0, -23.0, 0), (23.0, 23.0, 0), (-23.0, 23.0, 0)]):
             Hole(radius=2.2, depth=floor_t + 2.0)
 
         # 8. Continuous Perimeter Gasket Groove on Top Lip (Zero-Gap Mating)
         with BuildSketch(Plane.XY.offset(d)):
             Rectangle(w - wall, h - wall)
             fillet(s1.vertices(), radius=max(0.5, r - wall/2))
-            Rectangle(w - wall - 2.8, h - wall - 2.8, mode=Mode.SUBTRACT)
+            Rectangle(w - wall - 2.6, h - wall - 2.6, mode=Mode.SUBTRACT)
         extrude(amount=-1.8, mode=Mode.SUBTRACT)
 
     return base.part
@@ -96,12 +96,12 @@ def build_tier1_base_casing():
 
 def build_tier1_front_bezel():
     # Front Bezel Dimensions (mm)
-    w, h, plate_t = 76.0, 78.0, 3.0
-    r = 14.0
-    cam_y = 18.0
+    w, h, plate_t = 76.0, 80.0, 3.0
+    r = 20.0
+    cam_y = 16.0
 
     with BuildPart() as bezel:
-        # 1. Smooth Rounded Front Faceplate
+        # 1. Smooth Rounded Pebble Faceplate
         with BuildSketch() as s:
             Rectangle(w, h)
             fillet(s.vertices(), radius=r)
@@ -111,25 +111,26 @@ def build_tier1_front_bezel():
         with Locations((0, cam_y, 0)):
             Hole(radius=10.2, depth=plate_t + 2.0)
 
-        # 3. Smooth Organic Aerodynamic Eyebrow Visor (18mm Overhang)
-        visor_w = 34.0
-        visor_h = 26.0
-        visor_len = 18.0
-        visor_t = 2.4
+        # 3. Semicircular Bulging Umbrella / Eyebrow Canopy (R=16mm Smooth Arch)
+        # Semicircular dome hood extending 16mm forward with zero sharp corners
+        with BuildSketch(Plane.XZ.offset(cam_y + 2.0)) as s_visor:
+            with Locations((0, plate_t)):
+                with BuildLine():
+                    Line((-16.0, 0), (16.0, 0))
+                    RadiusArc((16.0, 0), (-16.0, 0), radius=16.0)
+                make_face()
+        extrude(amount=16.0)
 
-        with BuildSketch(Plane.XY.offset(plate_t)) as s_visor:
-            with Locations((0, cam_y + 3.0)):
-                Rectangle(visor_w, visor_h)
-                fillet(s_visor.vertices(), radius=7.0)
-                # Hollow optical cavity
-                Rectangle(visor_w - 2*visor_t, visor_h - 2*visor_t, mode=Mode.SUBTRACT)
-                # Open lower camera cone
-                with Locations((0, -visor_h/2 + visor_t/2)):
-                    Rectangle(visor_w + 2.0, visor_t + 1.0, mode=Mode.SUBTRACT)
-        extrude(amount=visor_len)
+        # Hollow optical cavity inside umbrella hood
+        with BuildSketch(Plane.XZ.offset(cam_y + 2.0)) as s_cut:
+            with Locations((0, plate_t)):
+                with BuildLine():
+                    Line((-13.5, 0), (13.5, 0))
+                    RadiusArc((13.5, 0), (-13.5, 0), radius=13.5)
+                make_face()
+        extrude(amount=16.0 - 2.4, mode=Mode.SUBTRACT)
 
         # 4. Sony IMX500 Direct Camera Mounting Standoffs on the Inside (z < 0)
-        # Allows instant, zero-fuss camera mounting right behind the lens!
         cam_offsets = [
             (-10.5, cam_y - 6.25),
             ( 10.5, cam_y - 6.25),
@@ -143,10 +144,10 @@ def build_tier1_front_bezel():
 
         # 5. 4x Recessed Countersunk Hex Screw Pockets
         corner_offsets = [
-            (-w/2 + 6.5, -h/2 + 6.5),
-            ( w/2 - 6.5, -h/2 + 6.5),
-            ( w/2 - 6.5,  h/2 - 6.5),
-            (-w/2 + 6.5,  h/2 - 6.5),
+            (-w/2 + 8.5, -h/2 + 8.5),
+            ( w/2 - 8.5, -h/2 + 8.5),
+            ( w/2 - 8.5,  h/2 - 8.5),
+            (-w/2 + 8.5,  h/2 - 8.5),
         ]
         with Locations([(x, y, 0) for x, y in corner_offsets]):
             Hole(radius=1.7, depth=plate_t + 2.0)
@@ -156,7 +157,7 @@ def build_tier1_front_bezel():
         # 6. Continuous Perimeter Sealing Tongue (Mates flush into base groove)
         with BuildSketch(Plane.XY):
             Rectangle(w - 2.4 - 0.4, h - 2.4 - 0.4)
-            Rectangle(w - 2.4 - 2.4, h - 2.4 - 2.4, mode=Mode.SUBTRACT)
+            Rectangle(w - 2.4 - 2.2, h - 2.4 - 2.2, mode=Mode.SUBTRACT)
         extrude(amount=-1.5)
 
     return bezel.part
@@ -166,7 +167,7 @@ if __name__ == "__main__":
     out_dir = os.path.join(os.path.dirname(__file__), "output")
     os.makedirs(out_dir, exist_ok=True)
 
-    print("🛡️ Compiling Smooth Ultra-Slim Shell 1 (Package A: Grid Sentry)...")
+    print("🛡️ Compiling Desert-Grade Pebble Dome Shell 1 (Package A: Grid Sentry)...")
     base = build_tier1_base_casing()
     bezel = build_tier1_front_bezel()
 
@@ -178,7 +179,7 @@ if __name__ == "__main__":
     # Complete 2-Piece Assembly
     assembly = Compound([
         base,
-        bezel.moved(Location((0, 0, 24.0)))
+        bezel.moved(Location((0, 0, 23.0)))
     ])
     export_step(assembly, os.path.join(out_dir, "shell_tier1_complete_assembly.step"))
-    print("  ✅ Shell 1 (2-Piece Smooth Capsule) Compiled Successfully!")
+    print("  ✅ Shell 1 (Pebble Dome with Semicircular Umbrella Visor) Compiled Successfully!")
