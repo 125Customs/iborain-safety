@@ -3,7 +3,7 @@
 
 **Company:** Iborain Safety Ltd. (Nairobi, Kenya)  
 **Hardware Incubation Partner:** [ChipuRobo STEM Makerspaces](https://chipurobo.com/)  
-**Core Model:** Single Unified Hardware Core + Pure Software SaaS Cloud Bridge  
+**Core Hardware Architecture:** Pure Stealth Optical Sentry (Zero Lights, Zero Screens, 100% Silent AI Intelligence)  
 **Target Market:** Sub-Saharan Africa (Beachhead: Nairobi Metro, Kenya)  
 **Currency Standard:** Kenyan Shillings (KES) & US Dollars (USD @ 1 USD = 130 KES)
 
@@ -36,7 +36,7 @@ To eliminate manufacturing overhead, inventory complexity, and firmware branchin
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                               THE UNIFIED IBORAIN HARDWARE CORE ($126 BOM)                       │
+│                               THE UNIFIED IBORAIN HARDWARE CORE ($125.50 BOM)                    │
 ├────────────────────────────────┬─────────────────────────────────────────────────────────────────┤
 │ 🧠 1. Compute Board            │ Raspberry Pi Zero 2 W (Quad-Core 64-bit ARM) ($25.00)           │
 ├────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
@@ -46,9 +46,7 @@ To eliminate manufacturing overhead, inventory complexity, and firmware branchin
 ├────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
 │ 🛡️ 4. Anti-Tamper Sensor       │ MPU-6500 6-Axis Motion & Vibration IMU ($2.00)                  │
 ├────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
-│ 💡 5. Status / Threat Indicator│ High-Intensity Dual-Color Green/Red Status LED ($0.50)          │
-├────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
-│ 📦 6. 3D Weatherproof Box      │ 180g UV-Resistant PETG Casing with Sunshade Hood ($4.50)        │
+│ 📦 5. 3D Weatherproof Box      │ 180g Matte-Black PETG Casing with Sunshade Hood ($4.50)         │
 └────────────────────────────────┴─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -65,8 +63,8 @@ To eliminate manufacturing overhead, inventory complexity, and firmware branchin
 ├───────────────────────────────┼────────────────────────────────┼─────────────────────────────────┤
 │ • Hardware: Core Box + AC Plug│ • Hardware: Core Box + Solar   │ • Hardware: $0 (Pure Software!) │
 │ • Subscription: $49/mo (6.5k) │ • Subscription: $99/mo (12.8k) │ • Subscription: $20/camera/mo   │
-│ • BOM Cost: $126.00 USD       │ • BOM Cost: $215.00 USD        │ • BOM Cost: $0.00 USD           │
-│ • Net Payback: 50 Days ⚡     │ • Net Payback: 45 Days ⚡      │ • Net Margin: 91.0% Pure Profit!│
+│ • BOM Cost: $127.50 USD       │ • BOM Cost: $202.50 USD        │ • BOM Cost: $0.00 USD           │
+│ • Net Payback: 50 Days ⚡     │ • Net Payback: 29–67 Days ⚡   │ • Net Margin: 91.0% Pure Profit!│
 └───────────────────────────────┴────────────────────────────────┴─────────────────────────────────┘
 ```
 
@@ -78,10 +76,10 @@ To eliminate manufacturing overhead, inventory complexity, and firmware branchin
 #### 1. Bill of Materials (BOM)
 | Component | Specification | Cost (USD) | Cost (KES) |
 | :--- | :--- | :---: | :---: |
-| **Unified Hardware Core** | Pi Zero 2 W + Sony IMX500 AI Camera + 4G LTE + MPU-6500 | $121.50 | KES 15,795 |
-| **PETG Weatherproof Casing** | UV-Resistant Enclosure with Sunshade & Mount | $4.50 | KES 585 |
+| **Unified Hardware Core** | Pi Zero 2 W + Sony IMX500 AI Camera + 4G LTE + MPU-6500 | $121.00 | KES 15,730 |
+| **PETG Weatherproof Casing** | UV-Resistant Stealth Enclosure with Sunshade & Mount | $4.50 | KES 585 |
 | **5V/3A Power Adapter** | AC/DC Wall Adapter with Surge Protection | $2.00 | KES 260 |
-| **TOTAL PACKAGE A BOM** | **Complete Grid Sentry Unit** | **$128.00** | **KES 16,640** |
+| **TOTAL PACKAGE A BOM** | **Complete Grid Sentry Unit** | **$127.50** | **KES 16,575** |
 
 #### 2. Cash Flow & Unit Economics
 $$\begin{aligned}
@@ -95,7 +93,7 @@ $$\begin{aligned}
 \hline
 \mathbf{\text{Monthly Net Contribution Margin}} &= \mathbf{\text{KES } 5,800 \text{ / month (\$44.62 USD)}} \\
 \mathbf{\text{Gross Contribution Margin \%}} &= \mathbf{89.2\%} \\
-\mathbf{\text{Capital Payback Period}} &= \frac{\text{KES } 16,640 - \text{KES } 3,500}{\text{KES } 5,800 \text{/mo}} = \mathbf{1.69 \text{ Months (50 Days!)}}
+\mathbf{\text{Capital Payback Period}} &= \frac{\text{KES } 16,575 - \text{KES } 3,500}{\text{KES } 5,800 \text{/mo}} = \mathbf{1.69 \text{ Months (50 Days!)}}
 \end{aligned}$$
 
 ---
@@ -106,14 +104,14 @@ $$\begin{aligned}
 #### 1. Bill of Materials (BOM)
 | Component | Specification | Cost (USD) | Cost (KES) |
 | :--- | :--- | :---: | :---: |
-| **Unified Hardware Core** | Pi Zero 2 W + Sony IMX500 AI Camera + 4G LTE + MPU-6500 | $121.50 | KES 15,795 |
+| **Unified Hardware Core** | Pi Zero 2 W + Sony IMX500 AI Camera + 4G LTE + MPU-6500 | $121.00 | KES 15,730 |
 | **PETG Weatherproof Casing** | UV-Resistant Enclosure with Universal Pole Clamp | $4.50 | KES 585 |
 | **30W Solar Panel** | Monocrystalline Weatherproof Panel | $22.00 | KES 2,860 |
 | **12V LiFePO4 Battery Pack**| 12V 12Ah Solid-State Battery (>2,500 cycles, 72-hr buffer) | $28.00 | KES 3,640 |
 | **MPPT Solar Controller** | Smart MPPT Solar Charge Controller + 5V Stepdown | $10.00 | KES 1,300 |
-| **Night Vision IR Array** | 12V High-Power 850nm Infrared LED Array (30m Night Vision) | $12.00 | KES 1,560 |
+| **Night Vision IR Array** | 12V High-Power 850nm Infrared Illuminator (30m Night Vision) | $12.00 | KES 1,560 |
 | **Heavy-Duty Mount & Straps**| Galvanized Steel Pole-Mount Arm & Stainless Straps | $5.00 | KES 650 |
-| **TOTAL PACKAGE B BOM** | **Complete Off-Grid Solar Sentry** | **$203.00** | **KES 26,390** |
+| **TOTAL PACKAGE B BOM** | **Complete Off-Grid Solar Sentry** | **$202.50** | **KES 26,325** |
 
 #### 2. Cash Flow & Unit Economics
 $$\begin{aligned}
@@ -126,8 +124,8 @@ $$\begin{aligned}
 \hline
 \mathbf{\text{Monthly Net Contribution Margin}} &= \mathbf{\text{KES } 11,790 \text{ / month (\$90.70 USD)}} \\
 \mathbf{\text{Gross Contribution Margin \%}} &= \mathbf{91.6\%} \\
-\mathbf{\text{Capital Payback Period}} &= \frac{\text{KES } 26,390 - \text{KES } 15,000}{\text{KES } 11,790 \text{/mo}} = \mathbf{0.96 \text{ Months (29 Days!)}} \\
-&(\text{Without Upfront: } \frac{\text{KES } 26,390}{\text{KES } 11,790} = \mathbf{2.23 \text{ Months / 67 Days}})
+\mathbf{\text{Capital Payback Period}} &= \frac{\text{KES } 26,325 - \text{KES } 15,000}{\text{KES } 11,790 \text{/mo}} = \mathbf{0.96 \text{ Months (29 Days!)}} \\
+&(\text{Without Upfront: } \frac{\text{KES } 26,325}{\text{KES } 11,790} = \mathbf{2.23 \text{ Months / 67 Days}})
 \end{aligned}$$
 
 ---
@@ -151,11 +149,6 @@ $$\begin{aligned}
 \mathbf{\text{Gross Profit Margin}} &= \mathbf{91.0\% \text{ Pure Profit!}}
 \end{aligned}$$
 
-* **Example Enterprise Customer (Hospital with 25 Cameras):**
-  * Monthly Revenue: **$500 / month (KES 65,000/mo)**
-  * Monthly Cloud Cost: **$45 / month (KES 5,850/mo)**
-  * **Annual Net Profit: $5,460 / year (KES 709,800/yr) with ZERO hardware cost!**
-
 ---
 
 ## 4. Side-by-Side Commercial Comparison
@@ -163,7 +156,7 @@ $$\begin{aligned}
 | Metric / Dimension | 🟢 Package A: Grid Sentry | 🟣 Package B: Solar Sentry | 💻 Package C: Smart CCTV Cloud |
 | :--- | :---: | :---: | :---: |
 | **Delivery Model** | Hardware + Cloud SaaS | Solar Hardware + Cloud SaaS | **100% Pure Software SaaS** |
-| **Manufacturing BOM** | **$128.00 (KES 16.6k)** | **$203.00 (KES 26.3k)** | **$0.00 (Zero Hardware!)** |
+| **Manufacturing BOM** | **$127.50 (KES 16.5k)** | **$202.50 (KES 26.3k)** | **$0.00 (Zero Hardware!)** |
 | **Setup Fee** | $27.00 (KES 3,500) | $115.00 (KES 15,000) | $0.00 |
 | **Monthly Subscription** | **$49.00 / mo (KES 6,500)** | **$99.00 / mo (KES 12,870)**| **$20.00 / camera / mo (KES 2,600)**|
 | **Monthly Net Cash Profit** | **$44.62 / mo (KES 5,800)** | **$90.70 / mo (KES 11,790)**| **$18.20 / camera / mo (KES 2,366)**|

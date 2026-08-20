@@ -1,22 +1,21 @@
 #!/usr/bin/env python3
 """
 Hardware Smoke Test for Iborain Safety Sentry on Raspberry Pi Zero 2 W.
-Streamlined 3-Chip Architecture:
+100% Pure Stealth Architecture (Zero LEDs, Zero Screens):
 1. I2C Bus & Anti-Tamper: MPU-6500 6-Axis Accelerometer/Gyro (0x68/0x69)
 2. Optical Arrival Tripwire: TCRT5000 IR Sensor on GPIO 17
-3. Status & Strobe LED: Dual-Color Status / Threat Beacon on GPIO 24
-4. Camera Vision Pipeline: libcamera-still / Picamera2 image capture
+3. Camera Vision Pipeline: libcamera-still / Picamera2 image capture
 """
 import time
 import sys
 
 print("==================================================")
 print("  🛡️ Iborain Safety Edge Sentry Hardware Smoke Test")
-print("  Streamlined Ductile Production Architecture")
+print("  100% Pure Stealth Black-Box Architecture")
 print("==================================================")
 
 # 1. Test I2C Bus (MPU-6500 Anti-Tamper)
-print("\n[1/4] Scanning I2C Bus for Anti-Tamper Sensor...")
+print("\n[1/3] Scanning I2C Bus for Anti-Tamper Sensor...")
 try:
     import smbus2
     bus = smbus2.SMBus(1)
@@ -36,7 +35,7 @@ except Exception as e:
     print(f"  ⚠️ I2C scan skipped or smbus2 not installed: {e}")
 
 # 2. Test TCRT5000 Optical Tripwire
-print("\n[2/4] Testing TCRT5000 Optical Arrival Tripwire (GPIO 17)...")
+print("\n[2/3] Testing TCRT5000 Optical Arrival Tripwire (GPIO 17)...")
 try:
     import RPi.GPIO as GPIO
     GPIO.setmode(GPIO.BCM)
@@ -47,27 +46,8 @@ try:
 except Exception as e:
     print(f"  ⚠️ GPIO tripwire test skipped: {e}")
 
-# 3. Test Status / Threat Strobe LED (GPIO 24)
-print("\n[3/4] Testing Dual Status / Threat Strobe LED (GPIO 24)...")
-try:
-    import RPi.GPIO as GPIO
-    LED_PIN = 24
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setwarnings(False)
-    GPIO.setup(LED_PIN, GPIO.OUT)
-
-    print("  Pulsing Status LED 3 times...")
-    for i in range(3):
-        GPIO.output(LED_PIN, GPIO.HIGH)
-        time.sleep(0.15)
-        GPIO.output(LED_PIN, GPIO.LOW)
-        time.sleep(0.15)
-    print("  ✅ Status LED (GPIO 24) verified.")
-except Exception as e:
-    print(f"  ⚠️ Status LED test skipped: {e}")
-
-# 4. Test Camera Capture
-print("\n[4/4] Testing Camera Capture Pipeline...")
+# 3. Test Camera Capture
+print("\n[3/3] Testing Camera Capture Pipeline (Sony IMX500)...")
 try:
     import subprocess
     res = subprocess.run(["libcamera-still", "--list-cameras"], capture_output=True, text=True, timeout=5)
@@ -79,5 +59,5 @@ except Exception as e:
     print(f"  ⚠️ Camera test command error: {e}")
 
 print("\n==================================================")
-print("  🎉 Hardware Smoke Test Complete!")
+print("  🎉 Pure Stealth Hardware Smoke Test Complete!")
 print("==================================================")

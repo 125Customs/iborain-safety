@@ -159,10 +159,10 @@ export function HardwareFlipCards() {
       studioTitle: "Vibration Detection",
       telemetryMetric: "6-Axis MPU-6500 IMU",
       studioDesc:
-        "Silent stealth operation with dual-color LED status indicators and continuous 6-axis inertial motion tracking to prevent theft or tampering.",
+        "100% silent stealth operation in a sealed matte-black enclosure with continuous 6-axis inertial motion tracking to prevent theft or tampering.",
       specs: [
         "MPU-6500 6-Axis Motion/Tilt IMU",
-        "High-Intensity Status LED Beacon",
+        "100% Stealth Matte-Black Casing",
         "Instant WhatsApp Theft Dispatch",
       ],
       mountedTitle: "Active Anti-Tamper Protection",

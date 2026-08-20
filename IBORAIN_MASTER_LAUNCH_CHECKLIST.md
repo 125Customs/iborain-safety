@@ -1,12 +1,9 @@
 # 🚀 Iborain Safety — Master Launch, Fabrication & Sales Execution Checklist
-*The Unified Hardware & Software SaaS Strategy: Scaling the African Public Safety Network*
+*The 100% Pure Stealth Architecture: Zero Lights, Zero Screens, Pure Optical Intelligence*
 
 **Company:** Iborain Safety Ltd. (Nairobi, Kenya)  
-**Hardware Incubation Partner:** [ChipuRobo STEM Makerspaces](https://chipurobo.com/)  
-**Core Commercial Model:**
-* **Package A (Grid Sentry):** $49/mo (KES 6,500/mo) — Gated Estate Gates (Zero CapEx)
-* **Package B (Solar Sentry):** $99/mo (KES 12,870/mo) — Off-Grid Street Poles
-* **Package C (Smart CCTV Cloud):** $20/camera/mo (KES 2,600/mo) — Hospitals & Existing CCTVs ($0 Hardware)
+**Fabrication Hub:** [ChipuRobo STEM Makerspaces](https://chipurobo.com/)  
+**Hardware Philosophy:** Completely Stealth Black-Box Sentry (Raspberry Pi Zero 2 W + Sony IMX500 AI Camera + 4G LTE + MPU-6500 Anti-Tamper)
 
 ---
 
@@ -14,15 +11,15 @@
 ┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
 │                                 THE 6-PHASE MASTER LAUNCH ROADMAP                                │
 ├────────────────────────────────┬─────────────────────────────────────────────────────────────────┤
-│ 🟢 Phase 1: Bench Demo Rig     │ Solder 3-chip perfboard (Pi Zero 2 + IMX500 + IMU), verify loop.│
+│ 🟢 Phase 1: Bench Demo Rig     │ Solder pure 3-chip perfboard (Pi Zero 2 + IMX500 + IMU).        │
 ├────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
-│ 🔵 Phase 2: 3D Print Packaging │ Single-aperture weatherproof PETG box + universal pole clamp.   │
+│ 🔵 Phase 2: 3D Print Packaging │ Single-lens stealth enclosure (zero LED holes, zero screen cuts)│
 ├────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
-│ 🟣 Phase 3: Cloud & Web Infra  │ Deploy Cloud Run broker, live landing page, M-Pesa & WhatsApp.  │
+│ 🟣 Phase 3: Cloud & Web Infra  │ Deploy Cloud Run broker, Next.js site, M-Pesa & WhatsApp.       │
 ├────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
 │ 🟡 Phase 4: Field Calibration  │ Optical telephoto focus (3-10m), 4G LTE cellular soak test.     │
 ├────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
-│ 🔴 Phase 5: 14-Day Pilot Sales │ Estate Chairman pitch, gate mounting, 14-day M-Pesa conversion. │
+│ 🔴 Phase 5: 14-Day Pilot Sales │ Deploy Package A to estates at $49/mo (14-day free trial).      │
 ├────────────────────────────────┼─────────────────────────────────────────────────────────────────┤
 │ 🟠 Phase 6: CCTV SaaS Upsell   │ Onboard hospitals & malls at $20/camera/mo (91% profit margin). │
 └────────────────────────────────┴─────────────────────────────────────────────────────────────────┘
@@ -34,7 +31,7 @@
 
 *Objective: Assemble your streamlined 3-chip physical electronics on a clean perfboard and verify live multimodal scanning with Google Gemini.*
 
-### 1.1 Physical Hardware Soldering & Wiring (The Unified Board)
+### 1.1 Physical Hardware Soldering & Wiring (Pure 3-Chip Core)
 - [ ] **Mount Raspberry Pi Zero 2 W:** Solder male 40-pin GPIO header pins.
 - [ ] **Connect Vision Sensor:** Attach the Sony IMX500 AI Camera ribbon cable to the CSI camera port (blue stiffener tab facing the board).
 - [ ] **Wire Anti-Tamper & Anti-Theft Sensor (MPU-6500 6-Axis IMU):**
@@ -42,10 +39,7 @@
   - [ ] Connect `SCL` to Raspberry Pi `GPIO 3` (Pin 5).
   - [ ] Connect `VCC` to `3.3V Rail` (Pin 1).
   - [ ] Connect `GND` to `Common Ground` (Pin 9).
-- [ ] **Wire Status / Strobe LED ($0.50):**
-  - [ ] Connect Anode (+) to `GPIO 24` (Pin 18) through a 220Ω resistor.
-  - [ ] Connect Cathode (-) to `Common Ground` (Pin 20).
-- [ ] **Wire Optical Arrival Tripwire (TCRT5000 IR Sensor):**
+- [ ] **Wire Optical Arrival Tripwire (TCRT5000 IR Sensor - Optional):**
   - [ ] Connect `DO (Digital Out)` to `GPIO 17` (Pin 11).
   - [ ] Connect `VCC` to `3.3V` (Pin 17) and `GND` to Common Ground (Pin 25).
 
@@ -60,8 +54,8 @@
  (TCRT5000 IR Tripwire DO) ───┤ [11] (GPIO17) (IO18)[12]│
                               │ [13] (GPIO27) (GND) [14]│
                               │ [15] (GPIO22) (IO23)[16]│
-                 3.3V Power ──┤ [17] (3V3)    (IO24)[18]├── GPIO 24 (Status/Strobe LED +)
-                              │ [19] (MOSI)   (GND) [20]├── Common GND (LED GND via 220Ω)
+                 3.3V Power ──┤ [17] (3V3)    (IO24)[18]│
+                              │ [19] (MOSI)   (GND) [20]│
                               │ [21] (MISO)   (IO25)[22]│
                               │ [23] (SCLK)   (CE0) [24]│
                  Common GND ──┤ [25] (GND)    (CE1) [26]│
@@ -74,23 +68,23 @@
 - [ ] **Run Hardware Smoke Test:**
   - [ ] Execute `python3 apps/pi-client/test_hardware.py`.
   - [ ] Verify I2C bus scan detects `0x68` (MPU-6500 IMU).
-  - [ ] Verify Status LED pulses green (idle) and flashes red (threat trigger).
+  - [ ] Verify camera capture detects Sony IMX500.
 - [ ] **Live Gemini Vision Loop Verification:**
   - [ ] Start Cloud Run or local broker: `MODE=gemini pnpm run dev:backend`.
   - [ ] Launch edge client: `python3 apps/pi-client/robot.py --url ws://localhost:8080/ws/device`.
-  - [ ] Hold up printed license plate `KDA 482B` or Boda Boda photo $\rightarrow$ verify Gemini returns transit fingerprint in sub-600ms and sends simulated WhatsApp alert.
+  - [ ] Hold up printed license plate `KDA 482B` or Boda Boda photo $\rightarrow$ verify Gemini returns transit fingerprint in sub-600ms and sends WhatsApp alert.
 
 ---
 
 ## 🔵 PHASE 2: 3D Printing & Enclosure Packaging (At ChipuRobo)
 
-*Objective: Fabricate a clean, sealed, single-aperture outdoor enclosure with universal pole mounting.*
+*Objective: Fabricate a 100% stealth, single-lens weatherproof outdoor enclosure with zero visible light apertures.*
 
 ### 2.1 3D CAD & Slicing Setup
-- [ ] **Material:** **PETG or ASA** (UV and heat resistant; never use PLA for outdoor Nairobi sun).
+- [ ] **Material:** **Black PETG or ASA** (UV-resistant, matte finish for stealth).
 - [ ] **Print Settings:** 0.20mm layer height, 4 outer walls, 25% Gyroid infill.
-- [ ] **Print Component 1 (Main Casing Box):** Compact enclosure housing Pi Zero 2, IMU, and power stepdown.
-- [ ] **Print Component 2 (Front Faceplate):** Single 20mm camera lens aperture + 5mm status LED hole. (Zero speaker grilles, zero LCD cutouts).
+- [ ] **Print Component 1 (Main Casing Box):** Compact enclosure housing Pi Zero 2, IMU, and 4G modem.
+- [ ] **Print Component 2 (Front Faceplate):** Single 20mm camera lens aperture only. (Zero LED holes, zero display cutouts).
 - [ ] **Print Component 3 (Sun/Rain Visor Hood):** 25mm overhang hood protecting lens from direct rain and sunlight glare.
 - [ ] **Print Component 4 (Universal Pole Mount):** Curved rear bracket with dual 15mm slots for stainless jubilee hose clamps.
 
@@ -108,7 +102,7 @@
 ### 3.2 Public Web Landing Page (`apps/landing`)
 - [ ] Build Next.js application: `cd apps/landing && pnpm build`.
 - [ ] Deploy to production hosting on custom domain (`iborain.com` / `iborainsafety.com`).
-- [ ] Verify interactive pricing matrix featuring **Package A ($49/mo)**, **Package B ($99/mo)**, and **Package C ($20/cam/mo)**.
+- [ ] Verify pricing matrix: **Package A ($49/mo)**, **Package B ($99/mo)**, and **Package C ($20/cam/mo)**.
 
 ### 3.3 WhatsApp Business & M-Pesa Daraja Integration
 - [ ] **WhatsApp Cloud API:** Configure webhook to dispatch instant JSON alert payloads (Photo proof + Plate + Cargo) directly to registered security group chats in under 1 second.
@@ -140,7 +134,7 @@
 - [ ] **The Offer:** *"We install the complete Iborain Safety system at your gate today for KES 0 upfront. Test it for 14 days. If your residents don't love the instant WhatsApp clearance and security alerts, we take it down for free."*
 - [ ] **Execute Pilot Agreement:** Sign the 14-Day Zero-CapEx Safety Lease Pilot Form.
 
-### 5.2 On-Site Gate Installation (Takes 20 Minutes)
+### 5.2 On-Site Gate Installation (Takes 15 Minutes)
 - [ ] **Mounting:** Strap enclosure securely to barrier post or light pole at **2.4 meters height** using stainless steel jubilee straps.
 - [ ] **Power:** Plug 5V/3A power adapter into gatehouse AC outlet.
 - [ ] **Group Setup:** Create official estate security WhatsApp group (add Estate Chairman, Security Committee, and Head Guard).
@@ -156,7 +150,7 @@
 *Objective: Onboard hospitals, malls, and enterprise facilities with existing CCTV cameras at 91% pure profit margin.*
 
 ### 6.1 The Hospital / Mall Pitch
-- [ ] **Target:** Head of Security / Procurement at Kenyatta National Hospital, Aga Khan, MP Shah, Sarit Centre, Two Rivers.
+- [ ] **Target:** Head of Security at Kenyatta National Hospital, Aga Khan, MP Shah, Sarit Centre, Two Rivers.
 - [ ] **The Pitch:** *"Turn your existing 20+ Hikvision/Dahua CCTV cameras into real-time AI sentries. Instant WhatsApp threat detection and natural language crime search for only $20/camera/month with ZERO new hardware to buy."*
-- [ ] **Integration (1 Hour):** Connect their existing NVR RTSP stream URLs to Iborain Cloud Run.
+- [ ] **Integration:** Connect existing NVR RTSP stream URLs to Iborain Cloud Run.
 - [ ] **Financial Yield:** 25 connected cameras generate **$500/month (KES 65,000/mo)** with **$455/mo in net profit**!

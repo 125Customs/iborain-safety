@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
 Iborain Safety Edge Sentry Client for Raspberry Pi Zero 2 W + Sony IMX500 AI Camera.
+100% Pure Stealth Architecture (Zero LEDs, Zero Screens).
 Connects to apps/backend over WebSocket, streams high-speed camera frames & sensor telemetry,
-toggles the dual status/strobe LED, and receives real-time Gemini threat classifications.
+and receives real-time Gemini threat classifications.
 """
 import os
 import sys
@@ -44,7 +45,7 @@ async def run_sentry():
                             deterrence = data.get("deterrence")
                             msg = data.get("message")
                             fp = data.get("fingerprint")
-                            print(f"🚨 Sentry Alert -> Threat: [{threat}] | Deterrence: [{deterrence}] | Status: {msg}")
+                            print(f"🚨 Sentry Alert -> Threat: [{threat}] | Status: {msg}")
                             if fp:
                                 print(f"   📋 Transit Forensic Record: Plate={fp.get('plate')} | Type={fp.get('vehicleType')} | Traits={fp.get('traits')}")
                         elif msg_type == "interrupted":
