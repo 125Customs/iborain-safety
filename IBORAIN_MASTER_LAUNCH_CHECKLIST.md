@@ -31,17 +31,14 @@
 
 *Objective: Assemble your streamlined 3-chip physical electronics on a clean perfboard and verify live multimodal scanning with Google Gemini.*
 
-### 1.1 Physical Hardware Soldering & Wiring (Pure 3-Chip Core)
+### 1.1 Physical Hardware Soldering & Wiring (Pure 2-Chip Core)
 - [ ] **Mount Raspberry Pi Zero 2 W:** Solder male 40-pin GPIO header pins.
-- [ ] **Connect Vision Sensor:** Attach the Sony IMX500 AI Camera ribbon cable to the CSI camera port (blue stiffener tab facing the board).
+- [ ] **Connect Vision Sensor:** Attach the Sony IMX500 AI Camera ribbon cable to the CSI camera port (blue stiffener tab facing the board). Senses vehicle/boda arrivals autonomously via on-sensor Neural ROI at 30 fps.
 - [ ] **Wire Anti-Tamper & Anti-Theft Sensor (MPU-6500 6-Axis IMU):**
   - [ ] Connect `SDA` to Raspberry Pi `GPIO 2` (Pin 3).
   - [ ] Connect `SCL` to Raspberry Pi `GPIO 3` (Pin 5).
   - [ ] Connect `VCC` to `3.3V Rail` (Pin 1).
   - [ ] Connect `GND` to `Common Ground` (Pin 9).
-- [ ] **Wire Optical Arrival Tripwire (TCRT5000 IR Sensor - Optional):**
-  - [ ] Connect `DO (Digital Out)` to `GPIO 17` (Pin 11).
-  - [ ] Connect `VCC` to `3.3V` (Pin 17) and `GND` to Common Ground (Pin 25).
 
 ```
                               ┌─────────────────────────┐
@@ -51,7 +48,7 @@
      (I2C SCL -> MPU-6500) ───┤ [5]  (GPIO3)  (GND) [6] ├── Common Ground
                               │ [7]  (GPIO4)  (TXD) [8] │
                  Common GND ──┤ [9]  (GND)    (RXD) [10]│
- (TCRT5000 IR Tripwire DO) ───┤ [11] (GPIO17) (IO18)[12]│
+                              │ [11] (GPIO17) (IO18)[12]│
                               │ [13] (GPIO27) (GND) [14]│
                               │ [15] (GPIO22) (IO23)[16]│
                  3.3V Power ──┤ [17] (3V3)    (IO24)[18]│

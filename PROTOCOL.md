@@ -58,6 +58,6 @@ All binary frames have a fixed 9-byte header:
   "type": "event",
   "event": "arrival_triggered",
   "timestampMs": 1723891200000,
-  "metadata": { "sensor": "TCRT5000", "gateId": "syokimau-gate-1" }
+  "metadata": { "sensor": "IMX500_NEURAL_ROI", "gateId": "syokimau-gate-1" }
 }
 ```

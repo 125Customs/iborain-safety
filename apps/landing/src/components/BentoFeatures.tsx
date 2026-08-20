@@ -197,29 +197,29 @@ export function BentoFeatures() {
             </div>
           </div>
 
-          {/* Card 3 (4-col): Edge-Level Active Deterrence */}
+          {/* Card 3 (4-col): Instant WhatsApp Threat Mesh */}
           <div className="col-span-12 lg:col-span-4 p-6 sm:p-8 rounded-3xl glass-panel border border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-500 flex flex-col justify-between group">
             <div>
               <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-6 group-hover:scale-110 transition-transform">
-                <Volume2 className="w-5 h-5 text-emerald-400" />
+                <Radio className="w-5 h-5 text-emerald-400" />
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
-                Edge Active Deterrence
+                Instant WhatsApp Threat Mesh
               </h3>
               <p className="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed mb-6">
-                Integrated GC9A01 ultra-bright radar strobes and MAX98357A 3W directional verbal horns
-                actively warn unauthorized entries and hotlisted vehicles at the point of arrival.
+                Direct Cloud Run webhook dispatches high-priority photographic proof, extracted plate numbers,
+                and Boda cargo vectors straight to registered neighborhood security group chats in under 1 second.
               </p>
             </div>
 
             <div className="p-4 rounded-xl bg-[#050e08] border border-emerald-500/15 font-mono text-xs space-y-2">
               <div className="flex items-center gap-2 text-[11px] text-emerald-300">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                <span>GC9A01 Threat Strobe: 120Hz Flash</span>
+                <span>WhatsApp Dispatch: &lt;1.0s Latency</span>
               </div>
               <div className="flex items-center gap-2 text-[11px] text-neutral-400">
                 <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                <span>3W Verbal Audio: Swahili / English</span>
+                <span>Hotlist Mesh: Synchronized 10km Grid</span>
               </div>
             </div>
           </div>

@@ -39,12 +39,10 @@ Mounted on **street light poles, road intersections, arterial transit corridors,
 ┌──────────────────────────────────────────────▼───────────────────────────────────────────────────┐
 │              TACTICAL CORRIDOR & STREET SENTRY UNIT (FABRICATED AT CHIPUROBO)                    │
 │  • Edge Compute: Raspberry Pi Zero 2 W (Quad-Core 64-bit ARM, 5V/0.5A Ultra-Low Draw)            │
-│  • Vision Sensor: Raspberry Pi AI Camera (Sony IMX500 Neural DSP)                                │
-│  • Visual Deterrence: GC9A01 1.28" Round LCD (Active Sentry Strobe & Radar Beacon)               │
-│  • Acoustic Deterrence: MAX98357A I2S 3W Class D DAC Amplifier + Speaker                        │
+│  • Vision Sensor: Raspberry Pi AI Camera (Sony IMX500 On-Sensor Neural DSP & ROI Arrival Trigger)│
+│  • Cellular IoT: Quectel 4G LTE HAT + High-Gain External SMA Antenna                            │
 │  • Anti-Tamper & Anti-Theft: MPU-6500 6-Axis Gyroscope/Accelerometer (I2C 0x68)                  │
-│  • Optical Arrival Tripwire: TCRT5000 Infrared Reflective Sensor (GPIO 17)                       │
-│  • Hardware Tamper Clamp: CD4069UBE CMOS Hex Inverter Logic Gate                                │
+│  • Enclosure: UV-Resistant Stealth Matte-Black PETG (Single 20mm Hooded Lens, Zero Lights)       │
 └──────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -80,8 +78,8 @@ Powered by Gemini 3.7 Flash, Iborain extracts the **complete physical fingerprin
 * When an incident occurs anywhere in a ward or neighborhood, a high-priority threat fingerprint is published to the regional mesh.
 * Every Iborain unit within a 10km radius is synchronized immediately across street poles, intersections, and access points.
 * When that suspect vehicle passes any connected corridor, Iborain triggers:
-  1. **Instant WhatsApp Alert** to local security patrols and neighborhood watch with photo proof.
-  2. **Active Edge Deterrence**: GC9A01 LCD flashes Red/Blue police strobe; MAX98357A speaker delivers verbal warning (*"Warning: Vehicle flagged on community crime watch"*).
+  1. **Instant WhatsApp Alert** to local security patrols and neighborhood watch with photo proof, plate reading, and timestamps.
+  2. **Inter-Community Grid Mesh**: Synchronizes threat vector across all neighboring sentry nodes in $<600\text{ms}$.
 
 ### Pillar 3: FreeForm™ Natural Language Crime Investigation Search
 Detectives and community leaders search city-scale transit records in plain natural language:

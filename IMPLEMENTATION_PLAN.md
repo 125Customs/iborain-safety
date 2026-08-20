@@ -15,7 +15,7 @@
 | **Gemini 2-Min Audio/Video Session Cap** | Transparent cloud-side **session resumption** (resumption handle + context window compression) on `goAway` or disconnect | Ensures continuous 24/7 sentry monitoring without edge reconnect storms. |
 | **Session State** | In-process `Map<deviceId, Session>` | Sufficient for single-instance demo and regional deployment with Cloud Run session affinity. `// SCALE-SEAM: Redis/Firestore for multi-region shards`. |
 | **Cost & Quota Controls** | Token bucket + per-session hard caps + daily budget kill-switch fed by Gemini `usageMetadata` | Prevents runaway costs; logged per session close. |
-| **Edge Hardware Safety** | Hardware tamper loop in CD4069 logic + TCRT5000 optical tripwire | Safety and physical tripwires operate with 0ms latency independent of network connectivity. |
+| **Edge Anti-Tamper Safety** | 6-Axis MPU-6500 IMU vibration/pry interrupt + on-sensor IMX500 Neural ROI arrival trigger | Instant edge-level detection operates with $<5\text{ms}$ latency independent of network connectivity. |
 | **Echo Mode** | `MODE=echo` runs local loopback verification without burning Gemini API quota | Measures baseline infrastructure latency floor before live AI deployment. |
 
 ---
@@ -51,6 +51,6 @@ Timestamps logged at: device capture $\rightarrow$ broker-in $\rightarrow$ gemin
 
 ## 4. Cost Controls & Token Conservation
 
-1. **Scene-Change Throttling**: Edge cameras send frames only on optical tripwire trigger or scene-difference (mean absolute pixel delta > 12), capped at $\le$1 fps.
+1. **Scene-Change & Arrival Throttling**: Edge cameras send frames only when the Sony IMX500 on-sensor Neural ROI detects an entering vehicle/motorcycle, capped at $\le$1 fps.
 2. **Hard Session Lifecycle**: 10-minute session cap $\rightarrow$ clean re-handshake. 60-second acoustic silence $\rightarrow$ idle sleep (`audioStreamEnd` sent at 1s pause to flush Gemini VAD).
 3. **Daily Budget Enforcement**: Per-device daily spending limit enforced via `usageMetadata` token accounting.

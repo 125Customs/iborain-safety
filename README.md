@@ -20,12 +20,11 @@ Iborain Safety is a decentralized Vision-Language AI public safety and crime eli
                            │ • JSON Control {threatLevel, deterrence, fingerprint}
 ┌────────────────────────────────────────────────────────┐
 │             TACTICAL SENTRY NODE (CHIPUROBO LAB)       │
-│  • Raspberry Pi Zero 2 W + Sony IMX500 AI Camera       │
-│  • GC9A01 1.28" Round LCD (Threat Beacon & Strobe)     │
-│  • MAX98357A I2S 3W DAC + Acoustic Warning Speaker     │
+│  • Raspberry Pi Zero 2 W (Quad-Core 64-bit ARM)        │
+│  • Sony IMX500 AI Camera (On-Sensor Neural DSP & ROI)  │
+│  • Quectel 4G LTE HAT + High-Gain External SMA Antenna │
 │  • MPU-6500 6-Axis IMU (Anti-Tamper / Anti-Theft)      │
-│  • TCRT5000 IR Tripwire (Zero-Latency Arrival Trigger) │
-│  • CD4069UBE CMOS Logic (Hardware Tamper Clamp)        │
+│  • Stealth Weatherproof PETG Enclosure (Zero Lights)   │
 └────────────────────────────────────────────────────────┘
 ```
 

@@ -27,12 +27,11 @@ Mounted on **street light poles, road intersections, arterial transit corridors,
                            │ • JSON Control {threatLevel, deterrence, fingerprint}
 ┌──────────────────────────▼─────────────────────────────┐
 │             TACTICAL SENTRY NODE (CHIPUROBO LAB)       │
-│  • Raspberry Pi Zero 2 W + Sony IMX500 AI Camera       │
-│  • GC9A01 1.28" Round LCD (Active Sentry Strobe)       │
-│  • MAX98357A I2S DAC + 3W Acoustic Warning Speaker     │
-│  • MPU-6500 6-Axis IMU (Anti-Tamper & Anti-Vandalism)  │
-│  • TCRT5000 IR Tripwire (Zero-Latency Arrival Trigger) │
-│  • CD4069UBE Logic (Hardware Tamper Clamp)             │
+│  • Raspberry Pi Zero 2 W (Quad-Core 64-bit ARM)        │
+│  • Sony IMX500 AI Camera (On-Sensor Neural DSP & ROI)  │
+│  • Quectel 4G LTE HAT + High-Gain External SMA Antenna │
+│  • MPU-6500 6-Axis IMU (Anti-Tamper & Anti-Theft)      │
+│  • Stealth Weatherproof PETG Enclosure (Zero Lights)   │
 └────────────────────────────────────────────────────────┘
 ```
 
@@ -53,26 +52,20 @@ Mounted on **street light poles, road intersections, arterial transit corridors,
 ```
                               ┌─────────────────────────┐
                               │  Raspberry Pi Zero 2 W  │
-                 3.3V Power ──┤ [1]  (3V3)    (5V)  [2] ├── 5V Rail (Amp & Actuator)
-     (I2C SDA)       GPIO 2 ──┤ [3]  (GPIO2)  (5V)  [4] ├── 5V Rail
-     (I2C SCL)       GPIO 3 ──┤ [5]  (GPIO3)  (GND) [6] ├── Common GND
-                      GPIO 4 ──┤ [7]  (GPIO4)  (TXD) [8] ├── GPIO 14
-                  Common GND ──┤ [9]  (GND)    (RXD) [10]├── GPIO 15
- (TCRT5000 Tripwire) GPIO 17 ──┤ [11] (GPIO17) (IO18)[12]├── GPIO 18 (I2S BCLK -> Amp)
-                     GPIO 27 ──┤ [13] (GPIO27) (GND) [14]├── Common GND
-                     GPIO 22 ──┤ [15] (GPIO22) (IO23)[16]├── GPIO 23
-                  3.3V Power ──┤ [17] (3V3)    (IO24)[18]├── GPIO 24 (LCD DC)
-      (LCD MOSI)     GPIO 10 ──┤ [19] (MOSI)   (GND) [20]├── Common GND
-       (SPI MISO)     GPIO 9 ──┤ [21] (MISO)   (IO25)[22]├── GPIO 25 (LCD RST)
-      (LCD SCK)      GPIO 11 ──┤ [23] (SCLK)   (CE0) [24]├── GPIO 8  (LCD CS)
-                  Common GND ──┤ [25] (GND)    (CE1) [26]├── GPIO 7
-      (I2C ID_EE)      ID_SD ──┤ [27] (ID_SD)  (ID)  [28]├── ID_SC
- (SG90 Actuator)     GPIO 12 ──┤ [29] (GPIO12) (GND) [30]├── Common GND
-                     GPIO 13 ──┤ [31] (GPIO13) (GND) [34]├── Common GND
-     (I2S LRC/FS)    GPIO 19 ──┤ [35] (GPIO19) (IO16)[36]├── GPIO 16
-                     GPIO 26 ──┤ [37] (GPIO26) (IO20)[38]├── GPIO 20
-                  Common GND ──┤ [39] (GND)    (IO21)[40]├── GPIO 21 (I2S DIN -> Amp)
-                               └─────────────────────────┘
+                 3.3V Power ──┤ [1]  (3V3)    (5V)  [2] ├── 5V Power In (from Buck/Adapter)
+     (I2C SDA -> MPU-6500) ───┤ [3]  (GPIO2)  (5V)  [4] │
+     (I2C SCL -> MPU-6500) ───┤ [5]  (GPIO3)  (GND) [6] ├── Common Ground
+                              │ [7]  (GPIO4)  (TXD) [8] │
+                 Common GND ──┤ [9]  (GND)    (RXD) [10]│
+                              │ [11] (GPIO17) (IO18)[12]│
+                              │ [13] (GPIO27) (GND) [14]│
+                              │ [15] (GPIO22) (IO23)[16]│
+                 3.3V Power ──┤ [17] (3V3)    (IO24)[18]│
+                              │ [19] (MOSI)   (GND) [20]│
+                              │ [21] (MISO)   (IO25)[22]│
+                              │ [23] (SCLK)   (CE0) [24]│
+                 Common GND ──┤ [25] (GND)    (CE1) [26]│
+                              └─────────────────────────┘
 ```
 
 ---
