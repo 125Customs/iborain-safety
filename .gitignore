@@ -1,3 +1,6 @@
+###############################################################
+# Build artifacts & runtime
+###############################################################
 node_modules/
 dist/
 .env
@@ -6,6 +9,56 @@ dist/
 .venv/
 __pycache__/
 *.pyc
+
+###############################################################
+# CONFIDENTIAL — Financial & Legal Documents
+# Not appropriate for open-source distribution
+###############################################################
+
+# PDF exports (P&L, dossiers, evidence reports)
+*.pdf
+iborain_safety_*.pdf
+
+# Financial model HTML pages (generated inside apps/playground)
+apps/playground/pnl_statement.html
+apps/playground/official_pnl_template.html
+apps/playground/revenue_evidence.html
+apps/playground/execution_evidence.html
+apps/playground/execution_evidence_multipage.html
+apps/playground/master_dossier.html
+
+###############################################################
+# CONFIDENTIAL — Internal Business & Operational Reports
+# These contain strategy, pricing, and partner information
+###############################################################
+IBORAIN_BUSINESS_MASTER_REPORT.md
+SMARTBOT_MASTER_REPORT.md
+IBORAIN_MASTER_LAUNCH_CHECKLIST.md
+IMPLEMENTATION_PLAN.md
+AUTOMATED_TEST_REPORT.md
+
+###############################################################
+# CONFIDENTIAL — Internal Agent & Demo Guides
+# Operational tooling not relevant to open-source contributors
+###############################################################
+DEMO_RECORDING_AGENT_GUIDE.md
+
+###############################################################
+# CONFIDENTIAL — Pitch & Investor Materials
+###############################################################
+PITCH_SCRIPT_TELEPROMPTER.md
 CINEMATIC_PITCH_SCRIPT_AND_ACTOR_NOTES.md
 *cinematic*
 *pitch_script*
+
+###############################################################
+# Public / Open-Source — DO NOT GITIGNORE:
+# README.md, AGENTS.md, PROTOCOL.md, DESIGNS.md
+# IBORAIN_MASTER_SPECIFICATION.md
+# cad/         (CAD scripts + output STEP/STL files)
+# packages/    (shared protocol)
+# apps/backend/
+# apps/playground/pixel-mock/
+# apps/landing/
+# apps/pi-client/
+###############################################################
