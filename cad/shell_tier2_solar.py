@@ -1,21 +1,24 @@
 #!/usr/bin/env python3
 """
 Iborain Safety — Production Golden Ratio Stealth Mast Capsule 3D CAD Generator for Shell 2 (Package B: Solar Sentry)
-Design Standards: Guaranteed Component Clearance + Heavy-Duty Pole Saddle + IP66 Weatherproofing
+Design Standards: Guaranteed Component Clearance + Smooth-Slotting Corner Pins + Pole Saddle + IP66 Sealing
   • Form Factor: 52mm W x 108mm H x 26mm D Minimalist Stadium Capsule (R=14mm Smooth Curves).
-  • Guaranteed Fitment:
+  • Refined Corner Pin Architecture:
+      - 4x Corner Alignment / Fastener Pins on Lid: Slimmed to 4.8mm OD (R=2.4mm) with 0.8mm tapered lead-in tips.
+      - 4x Corner Receiver Sockets on Base: Precision 5.4mm bore (R=2.7mm, depth 5.0mm) offering 0.3mm radial clearance
+        for effortless, smooth drop-in slotting with zero binding.
+      - Rear-entry M3 screw holes (3.4mm dia) passing through the base floor into the lid pins.
+  • Internal Packaging:
       - Upper Bay: Raspberry Pi Zero 2 W (65x30mm) + Sony IMX500 AI Camera (25x24mm, 15° tilt).
       - Lower Bay: 12V-to-5V Synchronous Stepdown Buck Converter (36x20mm).
       - MPU-6500 Anti-Tamper 6-Axis IMU.
       - Dual IP68 PG7 Cable Glands (Solar Panel + 12V Battery) on bottom face.
       - Top SMA 4G Antenna Port (dia 6.5mm).
       - Integrated Concave Pole Saddle (R=90mm) with dual 14mm Stainless Jubilee Strap Channels.
-  • IP66 Weatherproofing & Waterproofing:
-      - Continuous perimeter stepped labyrinth gasket groove (2.2mm W x 1.8mm D) for 1.5mm silicone cord.
-      - Recessed 20.0mm x 1.5mm optical glass disc sealing seat behind the 15° beveled lens aperture.
-      - 4x Rear-entry M3 stainless steel fasteners pulling the shell into a uniform hermetic seal.
+      - Recessed 20.0mm x 1.2mm optical glass sealing disc seat.
+      - Continuous Stepped Labyrinth Gasket Groove (2.2mm W x 1.8mm D).
 
-100% Pure Stealth: Monolithic Zero-Screw Front Face, Ultra-Slim 26mm Depth, Proven Weatherproof Seal.
+100% Pure Stealth: Monolithic Zero-Screw Front Face, Ultra-Slim 26mm Depth, Smooth Drop-In Pin Slotting.
 """
 import os
 import sys
@@ -51,19 +54,27 @@ def build_tier2_base_casing():
         with Locations((0, 32.0, 0), (0, -32.0, 0)):
             Box(w + 4.0, 15.0, 3.0, align=(Align.CENTER, Align.CENTER, Align.MIN), mode=Mode.SUBTRACT)
 
-        # 5. 4x Rear-Entry M3 Fastener Holes (Concealed from front face)
+        # 5. 4x Corner Receiver Socket Pillars for Lid Pin Slotting
+        # Outer radius 3.5mm, Top socket bore radius 2.7mm (5.4mm dia) with 0.3mm radial clearance
         screw_positions = [
-            (-w/2 + 7.0, -h/2 + 8.5, 0),
-            ( w/2 - 7.0, -h/2 + 8.5, 0),
-            ( w/2 - 7.0,  h/2 - 8.5, 0),
-            (-w/2 + 7.0,  h/2 - 8.5, 0),
+            (-w/2 + 7.0, -h/2 + 8.5),
+            ( w/2 - 7.0, -h/2 + 8.5),
+            ( w/2 - 7.0,  h/2 - 8.5),
+            (-w/2 + 7.0,  h/2 - 8.5),
         ]
-        with Locations(screw_positions):
-            Hole(radius=1.7, depth=floor_t + 2.0)
-            with Locations((0, 0, 0)):
-                Cylinder(radius=3.2, height=1.2, align=(Align.CENTER, Align.CENTER, Align.MIN), mode=Mode.SUBTRACT)
+        with Locations([(x, y, floor_t) for x, y in screw_positions]):
+            Cylinder(radius=3.5, height=d - floor_t, align=(Align.CENTER, Align.CENTER, Align.MIN))
+            # Smooth drop-in socket pocket (depth 5.0mm from top lip)
+            with Locations((0, 0, d - floor_t)):
+                Hole(radius=2.7, depth=5.0)
+            # M3 screw through-hole through the base floor
+            Hole(radius=1.7, depth=d)
 
-        # 6. Upper Bay: Raspberry Pi Zero 2 W Floor Standoffs (58.0mm x 23.0mm)
+        # 6. Rear Screw Counterbores on the Back Face (z = 0)
+        with Locations([(x, y, 0) for x, y in screw_positions]):
+            Cylinder(radius=3.2, height=1.2, align=(Align.CENTER, Align.CENTER, Align.MIN), mode=Mode.SUBTRACT)
+
+        # 7. Upper Bay: Raspberry Pi Zero 2 W Floor Standoffs (58.0mm x 23.0mm)
         pi_center_y = 12.0
         pi_standoff_h = 3.5
         pi_offsets = [
@@ -76,7 +87,7 @@ def build_tier2_base_casing():
             Cylinder(radius=2.4, height=pi_standoff_h, align=(Align.CENTER, Align.CENTER, Align.MIN))
             Hole(radius=1.2, depth=pi_standoff_h + 1.0)
 
-        # 7. Lower Bay: 12V-to-5V Stepdown Buck Regulator Standoffs (36.0mm x 20.0mm)
+        # 8. Lower Bay: 12V-to-5V Stepdown Buck Regulator Standoffs (36.0mm x 20.0mm)
         buck_center_y = -36.0
         buck_offsets = [
             (-10.0, buck_center_y - 10.0),
@@ -88,13 +99,13 @@ def build_tier2_base_casing():
             Cylinder(radius=2.4, height=3.0, align=(Align.CENTER, Align.CENTER, Align.MIN))
             Hole(radius=1.1, depth=3.0)
 
-        # 8. MPU-6500 Anti-Tamper Rigid Mounting Platform
+        # 9. MPU-6500 Anti-Tamper Rigid Mounting Platform
         with Locations((w/2 - 13.0, 12.0, floor_t)):
             Box(10.0, 16.0, 2.5, align=(Align.CENTER, Align.CENTER, Align.MIN))
             with Locations((0, -4.5, 2.5), (0, 4.5, 2.5)):
                 Hole(radius=1.0, depth=2.5)
 
-        # 9. Industrial Weatherproof Gland Ports
+        # 10. Industrial Weatherproof Gland Ports
         # Bottom Face: Dual PG7 Glands (dia 12.5mm each) for Solar Panel & 12V Battery
         with BuildSketch(Plane.XZ.offset(-h/2)):
             with Locations((-11.0, floor_t + 8.5), (11.0, floor_t + 8.5)):
@@ -107,7 +118,7 @@ def build_tier2_base_casing():
                 Circle(radius=3.25)
         extrude(amount=-(wall + 3.0), mode=Mode.SUBTRACT)
 
-        # 10. Continuous Stepped Labyrinth Gasket Groove on Top Rim (Width 2.2mm, Depth 1.8mm)
+        # 11. Continuous Stepped Labyrinth Gasket Groove on Top Rim (Width 2.2mm, Depth 1.8mm)
         with BuildSketch(Plane.XY.offset(d)):
             Rectangle(w - wall, h - wall)
             fillet(s1.vertices(), radius=max(0.5, r - wall/2))
@@ -150,7 +161,8 @@ def build_tier2_front_bezel():
                 Cylinder(radius=2.2, height=4.0, align=(Align.CENTER, Align.CENTER, Align.MAX))
                 Hole(radius=1.0, depth=4.0)
 
-        # 4. 4x Concealed M3 Brass Heat-Set Insert Bosses on Interior (z < 0)
+        # 4. 4x Slimmed Smooth-Slotting Corner Alignment & Fastener Pins (z < 0)
+        # Outer radius 2.4mm (4.8mm dia), height 4.5mm, with 0.8mm self-aligning tapered conical tip
         screw_positions = [
             (-w/2 + 7.0, -h/2 + 8.5, 0),
             ( w/2 - 7.0, -h/2 + 8.5, 0),
@@ -159,8 +171,10 @@ def build_tier2_front_bezel():
         ]
         for x, y, _ in screw_positions:
             with Locations((x, y, 0)):
-                Cylinder(radius=3.8, height=6.0, align=(Align.CENTER, Align.CENTER, Align.MAX))
-                Hole(radius=2.1, depth=6.0)
+                Cylinder(radius=2.4, height=4.5, align=(Align.CENTER, Align.CENTER, Align.MAX))
+                Hole(radius=1.3, depth=4.5)
+                with Locations((0, 0, -4.5)):
+                    Cone(bottom_radius=1.8, top_radius=2.4, height=0.8, align=(Align.CENTER, Align.CENTER, Align.MIN), mode=Mode.SUBTRACT)
 
         # 5. Continuous Perimeter Sealing Tongue (1.8mm W x 1.4mm H)
         with BuildSketch(Plane.XY):
@@ -175,7 +189,7 @@ if __name__ == "__main__":
     out_dir = os.path.join(os.path.dirname(__file__), "output")
     os.makedirs(out_dir, exist_ok=True)
 
-    print("🛡️ Compiling Production Golden Ratio Stealth Mast Capsule Shell 2 (Package B: Solar Sentry)...")
+    print("🛡️ Compiling Production Golden Ratio Stealth Mast Capsule Shell 2 (Refined Corner Pins)...")
     base = build_tier2_base_casing()
     bezel = build_tier2_front_bezel()
 
@@ -190,4 +204,4 @@ if __name__ == "__main__":
         bezel.moved(Location((0, 0, 23.0)))
     ])
     export_step(assembly, os.path.join(out_dir, "shell_tier2_complete_assembly.step"))
-    print("  ✅ Shell 2 (52x108x26mm Golden Ratio Stealth Mast Capsule) Compiled Successfully!")
+    print("  ✅ Shell 2 (Refined Slimmed Corner Pins & Sockets) Compiled Successfully!")
