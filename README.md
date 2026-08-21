@@ -86,4 +86,6 @@ Simulates high-speed edge sentries, sends synthetic acoustic waveforms, and inje
 - `apps/backend` — Google Cloud Run broker: auth, session lifecycle, Gemini Multimodal Live bridge, cost guards, latency telemetry.
 - `apps/playground/pixel-mock` — Browser Sentry Intelligence & WhatsApp Dispatch Simulator: mic→PCM16, camera→JPEG diffs, GC9A01 sentry beacon mock, latency HUD.
 - `apps/pi-client` — Native Raspberry Pi Zero 2 W Python client (`test_hardware.py`, `robot.py`).
+- `cad/` — Parametric 3D CAD models (`build123d`) and production STEP/STL exports for Bambu Lab 3D printers.
+- `DESIGNS.md` — Complete CAD blueprint guide: STEP/STL locations, regeneration scripts, slicing profiles, and hardware BOM.
 - `IBORAIN_MASTER_SPECIFICATION.md` — Complete master project specification, commercial model, and XPRIZE Devpost submission blueprint.
