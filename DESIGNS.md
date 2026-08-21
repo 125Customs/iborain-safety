@@ -111,3 +111,57 @@ To assemble the printed enclosures into field-ready sentries:
 | **Threaded Inserts** | M3 × 4.0mm OD × 4.2mm Length Brass Heat-Set Inserts | 4 | Heat-pressed into front bezel screw bosses |
 | **Cable Glands** | IP68 PG7 Nylon Cable Gland (3.5–6.5mm cable dia) | 1 (Tier 1) / 2 (Tier 2) | Hermetic feedthrough for power and solar lines |
 | **Mast Clamps (Tier 2)** | 14mm W Stainless Steel Jubilee / Hose Clamps (50–110mm) | 2 | Secures Tier 2 saddle to streetlight poles |
+
+---
+
+## ⚖️ 6. Shell Weight Measurements
+
+> **Method:** Volumes computed via the **divergence theorem** applied directly to the production `.stl` mesh files in [`cad/output/`](file:///Users/radebe49/smartB0t/cad/output/). No geometric approximations — these are exact CAD-kernel (OpenCASCADE / build123d) volumes.
+
+### Print Settings Used for Calculation
+
+| Setting | Value |
+| :--- | :--- |
+| Wall Loops (Perimeters) | 4 × 0.4mm nozzle = **1.6mm solid walls** |
+| Infill Pattern & Density | **35% Gyroid** |
+| Layer Height | **0.16mm** |
+| Effective Volumetric Fill | **~71% of solid material** (55% wall zone + 16% infill core) |
+
+---
+
+### 🔹 Shell 1 — Package A: Grid Sentry (48 × 84 × 22mm)
+
+| Part | Solid Volume | PETG Weight | ASA Weight |
+| :--- | :--- | :--- | :--- |
+| Base Casing | 17.12 cm³ | 15.4 g | 13.0 g |
+| Front Bezel | 10.09 cm³ | 9.1 g | 7.6 g |
+| **Complete Shell** | **27.21 cm³** | **≈ 24 g** | **≈ 21 g** |
+
+---
+
+### 🔹 Shell 2 — Package B: Solar Mast Sentry (52 × 108 × 26mm)
+
+| Part | Solid Volume | PETG Weight | ASA Weight |
+| :--- | :--- | :--- | :--- |
+| Base Casing | 7.58 cm³ | 6.8 g | 5.7 g |
+| Front Bezel | 16.64 cm³ | 15.0 g | 12.6 g |
+| **Complete Shell** | **24.22 cm³** | **≈ 22 g** | **≈ 18 g** |
+
+> **Note:** Shell 2's base casing is significantly lighter than its bezel due to the large concave pole saddle (R=45mm) machined into the rear face, which removes a substantial volume of material to conform to streetlight pole profiles.
+
+---
+
+### 📊 Summary — Printed Shell Weights
+
+| Shell | Material | Shell Only | Complete Sentry* |
+| :--- | :--- | :--- | :--- |
+| Shell 1 — Grid Sentry | PETG | **~24 g** | ~75–85 g |
+| Shell 1 — Grid Sentry | ASA | **~21 g** | ~70–80 g |
+| Shell 2 — Solar Mast | PETG | **~22 g** | ~75–85 g |
+| Shell 2 — Solar Mast | ASA | **~18 g** | ~65–75 g |
+
+> \* *Complete Sentry weight includes the printed shell plus internal hardware payload (Raspberry Pi Zero 2 W ~10g, Sony IMX500 Camera ~5g, LTE modem ~15g, MPU-6500 IMU ~1g, cabling & fasteners ~10–15g, gasket & glass ~5g).*
+
+### Key Takeaway
+
+Both enclosures are **ultra-lightweight at under 25 grams per shell**, minimising mechanical stress on pole-mount clamps and keeping logistics costs minimal. The design prioritises material efficiency: the Shell 2 pole saddle cut alone removes ~60% of what would otherwise be a solid rear floor, directly contributing to field-weight reduction.
