@@ -41,7 +41,6 @@
       flex-direction: column;
     }
 
-    /* Top Master Control Header */
     header {
       height: 60px;
       background: rgba(8, 12, 19, 0.96);
@@ -162,7 +161,6 @@
       box-shadow: 0 0 14px rgba(0, 242, 254, 0.3);
     }
 
-    /* 4-Corner Grid Layout */
     main {
       flex: 1;
       display: grid;
@@ -266,7 +264,6 @@
       display: block;
     }
 
-    /* Color Legend on Mated Viewports */
     .legend-overlay {
       position: absolute;
       top: 54px;
@@ -361,7 +358,6 @@
       color: var(--text-muted);
     }
 
-    /* Maximize mode */
     .viewport-card.maximized {
       position: absolute;
       inset: 0;
@@ -380,7 +376,7 @@
       <div>
         <div class="brand-title">Iborain Safety — Universal Autonomous Solar Sentry 3D Workbench</div>
       </div>
-      <div class="brand-tag">ONE UNIFIED HARDWARE SKU • 100% SOLAR AUTONOMOUS</div>
+      <div class="brand-tag">ONE UNIFIED HARDWARE PLATFORM • 100% SOLAR AUTONOMOUS</div>
     </div>
     <div class="toolbar">
       <div class="slider-group">
@@ -401,7 +397,7 @@
       <div class="viewport-header">
         <div class="viewport-title">
           <span class="corner-badge">CORNER 1 (TOP-LEFT)</span>
-          <span class="corner-title-text">Universal Sentry: Slicing Build Plate (Base + Bezel)</span>
+          <span class="corner-title-text">Universal Sentry: Master Slicing Plate (Base + Bezel)</span>
         </div>
         <div class="viewport-tools">
           <button class="icon-btn" title="Reset View" onclick="resetView(0)">🎯</button>
@@ -411,10 +407,10 @@
       <div class="canvas-container" id="container-1"></div>
       <div class="loading-overlay" id="loading-1">
         <div class="spinner"></div>
-        <div class="loading-text">Loading shell_tier2_side_by_side_plate.stl...</div>
+        <div class="loading-text">Loading shell_universal_side_by_side_plate.stl...</div>
       </div>
       <div class="viewport-footer">
-        <div class="spec-pill"><span class="green">●</span> Master Build Plate for Bambu Lab P1S / X1C</div>
+        <div class="spec-pill"><span class="green">●</span> Master Build Plate for Bambu Lab P1S</div>
         <div class="spec-pill">52 × 108 × 24 mm • 22g Matte PETG</div>
       </div>
     </div>
@@ -446,7 +442,7 @@
       </div>
       <div class="viewport-footer">
         <div class="spec-pill"><span class="cyan">●</span> 100% Sealed Inside • <span class="green">Zero Collision</span></div>
-        <div class="spec-pill">IP66 Hermetic Labyrinth Seal</div>
+        <div class="spec-pill">Single Centered PG7 Solar Port</div>
       </div>
     </div>
 
@@ -491,7 +487,7 @@
         <div class="loading-text">Loading Multi-Layer X-Ray Inspector...</div>
       </div>
       <div class="viewport-footer">
-        <div class="spec-pill"><span class="amber">●</span> Solar 5.1V In: Bottom IP68 PG7 Glands</div>
+        <div class="spec-pill"><span class="amber">●</span> Solar 5.1V In: Single Centered PG7 Gland</div>
         <div class="spec-pill"><span class="green">●</span> Blackout-Proof: 24/7 Autonomous</div>
       </div>
     </div>
@@ -506,7 +502,6 @@
 
     const loader = new THREE.STLLoader();
 
-    // High-Resolution Materials
     const mats = {
       plate: new THREE.MeshStandardMaterial({ color: 0x1f2937, metalness: 0.2, roughness: 0.8 }),
       shellBase: new THREE.MeshPhysicalMaterial({ color: 0x223040, transparent: true, opacity: 0.38, roughness: 0.3, transmission: 0.6, thickness: 1.5, metalness: 0.1 }),
@@ -539,7 +534,6 @@
       controls.enableDamping = true;
       controls.dampingFactor = 0.05;
 
-      // Studio Lighting
       scene.add(new THREE.AmbientLight(0xffffff, 0.8));
 
       const keyLight = new THREE.DirectionalLight(0x00f2fe, 1.3);
@@ -554,7 +548,6 @@
       rimLight.position.set(0, -150, -100);
       scene.add(rimLight);
 
-      // Floor Grid
       const grid = new THREE.GridHelper(220, 44, 0x00f2fe, 0x1e293b);
       grid.rotation.x = Math.PI / 2;
       grid.position.z = -20;
@@ -597,25 +590,25 @@
     }
 
     async function buildScenes() {
-      // 1. CORNER 1: Universal Sentry Print Bed Plate
+      // 1. CORNER 1: Universal Master Slicing Plate
       const app1 = initViewport('container-1', 'loading-1', 0);
-      await loadPart(app1, 'output/shell_tier2_side_by_side_plate.stl', mats.plate, [0, 0, 0]);
+      await loadPart(app1, 'output/shell_universal_side_by_side_plate.stl', mats.plate, [0, 0, 0]);
       app1.loading.style.opacity = '0';
       setTimeout(() => app1.loading.style.display = 'none', 300);
 
-      // 2. CORNER 2: Universal Sentry Mated + Digital Twins (0% Sealed by default)
+      // 2. CORNER 2: Universal Sentry Mated + Digital Twins (Single Centered Bottom PG7 Port)
       const app2 = initViewport('container-2', 'loading-2', 1);
       await Promise.all([
-        loadPart(app2, 'output/shell_tier2_base_casing.stl', mats.shellBase, [0, 0, 0], [0, 0, 0], [0, 0, -25]),
-        loadPart(app2, 'output/shell_tier2_front_bezel.stl', mats.shellBezel, [0, 0, 24], [0, 0, 0], [0, 0, 35]),
+        loadPart(app2, 'output/shell_universal_base_casing.stl', mats.shellBase, [0, 0, 0], [0, 0, 0], [0, 0, -25]),
+        loadPart(app2, 'output/shell_universal_front_bezel.stl', mats.shellBezel, [0, 0, 24], [0, 0, 0], [0, 0, 35]),
         loadPart(app2, 'components/digital_twin_sony_imx500_camera.stl', mats.camera, [0, 34, 19.5], [0, 0, 0], [0, 0, 20]),
         loadPart(app2, 'components/digital_twin_pi_zero_2w.stl', mats.piZero, [0, -6, 5.5], [0, 0, 0], [0, 0, 0]),
         loadPart(app2, 'components/digital_twin_4g_lte_modem.stl', mats.modem, [0, -38, 5.0], [0, 0, 0], [0, 0, -5]),
         loadPart(app2, 'components/digital_twin_bestfire_battery.stl', mats.battery, [0, -6, 5.5], [0, 0, 0], [-25, 0, 15]),
         loadPart(app2, 'components/digital_twin_imu_breakout.stl', mats.imu, [13, 8, 5.0], [0, 0, 0], [15, 0, -10]),
         loadPart(app2, 'components/digital_twin_optical_glass.stl', mats.glass, [0, 34, 25.8], [0, 0, 0], [0, 0, 45]),
-        loadPart(app2, 'components/digital_twin_pg7_gland.stl', mats.hardware, [-11, -54, 11.0], [Math.PI/2, 0, 0], [0, -20, 0]),
-        loadPart(app2, 'components/digital_twin_pg7_gland.stl', mats.hardware, [ 11, -54, 11.0], [Math.PI/2, 0, 0], [0, -20, 0]),
+        // SINGLE CENTERED BOTTOM PG7 GLAND (X=0, Y=-54mm)
+        loadPart(app2, 'components/digital_twin_pg7_gland.stl', mats.hardware, [0, -54, 11.0], [Math.PI/2, 0, 0], [0, -20, 0]),
         loadPart(app2, 'components/digital_twin_sma_bulkhead.stl', mats.hardware, [0, 54, 11.0], [-Math.PI/2, 0, 0], [0, 20, 0])
       ]);
       app2.loading.style.opacity = '0';
@@ -623,23 +616,23 @@
 
       // 3. CORNER 3: Base Casing Pole Saddle Focus
       const app3 = initViewport('container-3', 'loading-3', 2);
-      await loadPart(app3, 'output/shell_tier2_base_casing.stl', mats.plate, [0, 0, 0]);
+      await loadPart(app3, 'output/shell_universal_base_casing.stl', mats.plate, [0, 0, 0]);
       app3.loading.style.opacity = '0';
       setTimeout(() => app3.loading.style.display = 'none', 300);
 
       // 4. CORNER 4: Multi-Layer X-Ray Inspector
       const app4 = initViewport('container-4', 'loading-4', 3);
       await Promise.all([
-        loadPart(app4, 'output/shell_tier2_base_casing.stl', mats.shellBase, [0, 0, 0]),
-        loadPart(app4, 'output/shell_tier2_front_bezel.stl', mats.shellBezel, [0, 0, 24]),
+        loadPart(app4, 'output/shell_universal_base_casing.stl', mats.shellBase, [0, 0, 0]),
+        loadPart(app4, 'output/shell_universal_front_bezel.stl', mats.shellBezel, [0, 0, 24]),
         loadPart(app4, 'components/digital_twin_sony_imx500_camera.stl', mats.camera, [0, 34, 19.5]),
         loadPart(app4, 'components/digital_twin_pi_zero_2w.stl', mats.piZero, [0, -6, 5.5]),
         loadPart(app4, 'components/digital_twin_4g_lte_modem.stl', mats.modem, [0, -38, 5.0]),
         loadPart(app4, 'components/digital_twin_bestfire_battery.stl', mats.battery, [0, -6, 5.5]),
         loadPart(app4, 'components/digital_twin_imu_breakout.stl', mats.imu, [13, 8, 5.0]),
         loadPart(app4, 'components/digital_twin_optical_glass.stl', mats.glass, [0, 34, 25.8]),
-        loadPart(app4, 'components/digital_twin_pg7_gland.stl', mats.hardware, [-11, -54, 11.0], [Math.PI/2, 0, 0]),
-        loadPart(app4, 'components/digital_twin_pg7_gland.stl', mats.hardware, [ 11, -54, 11.0], [Math.PI/2, 0, 0]),
+        // SINGLE CENTERED BOTTOM PG7 GLAND
+        loadPart(app4, 'components/digital_twin_pg7_gland.stl', mats.hardware, [0, -54, 11.0], [Math.PI/2, 0, 0]),
         loadPart(app4, 'components/digital_twin_sma_bulkhead.stl', mats.hardware, [0, 54, 11.0], [-Math.PI/2, 0, 0])
       ]);
       app4.loading.style.opacity = '0';
