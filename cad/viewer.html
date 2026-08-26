@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🛡️ Iborain Safety — Industrial Baton 3D Hardware Workbench</title>
+  <title>🛡️ Iborain Safety — Option B: Horizontal Battery 3D Workbench</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #06080d;
-      --panel-bg: rgba(11, 15, 23, 0.94);
       --panel-border: rgba(255, 255, 255, 0.1);
       --accent-cyan: #00f2fe;
       --accent-blue: #3b82f6;
@@ -22,629 +21,232 @@
       --font-ui: 'Outfit', -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
     }
+    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+    body { background: var(--bg-dark); color: var(--text-main); font-family: var(--font-ui); height: 100vh; width: 100vw; overflow: hidden; display: flex; flex-direction: column; }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      user-select: none;
-    }
+    header { height: 62px; background: rgba(8,12,19,0.96); backdrop-filter: blur(20px); border-bottom: 1px solid var(--panel-border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; z-index: 100; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-icon { width: 36px; height: 36px; background: linear-gradient(135deg, #00f2fe, #3b82f6); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 0 20px rgba(0,242,254,0.4); }
+    .brand-title { font-weight: 700; font-size: 16px; letter-spacing: -0.3px; }
+    .brand-tag { font-family: var(--font-mono); font-size: 10px; font-weight: 700; padding: 3px 8px; background: rgba(0,242,254,0.12); color: var(--accent-cyan); border: 1px solid rgba(0,242,254,0.25); border-radius: 4px; }
+    .toolbar { display: flex; align-items: center; gap: 14px; }
+    .slider-group { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); padding: 7px 16px; border-radius: 8px; border: 1px solid var(--panel-border); }
+    .slider-label { font-family: var(--font-mono); font-size: 11px; font-weight: 600; color: var(--accent-cyan); }
+    input[type=range] { -webkit-appearance: none; width: 140px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; outline: none; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; background: var(--accent-cyan); border-radius: 50%; cursor: pointer; box-shadow: 0 0 12px var(--accent-cyan); }
+    .btn { font-family: var(--font-ui); font-size: 12px; font-weight: 600; padding: 8px 16px; border-radius: 6px; border: 1px solid var(--panel-border); background: rgba(255,255,255,0.05); color: var(--text-main); cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.15s ease; }
+    .btn:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25); }
+    .btn.active { background: rgba(0,242,254,0.18); border-color: var(--accent-cyan); color: var(--accent-cyan); box-shadow: 0 0 14px rgba(0,242,254,0.3); }
 
-    body {
-      background: var(--bg-dark);
-      color: var(--text-main);
-      font-family: var(--font-ui);
-      height: 100vh;
-      width: 100vw;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
+    main { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 3px; background: rgba(255,255,255,0.04); padding: 3px; }
+    .viewport-card { position: relative; background: radial-gradient(circle at center, #0f141f 0%, #06080d 100%); overflow: hidden; }
+    .viewport-header { position: absolute; top: 16px; left: 16px; right: 16px; display: flex; justify-content: space-between; align-items: center; z-index: 10; pointer-events: none; }
+    .viewport-title { pointer-events: auto; background: rgba(8,12,19,0.88); backdrop-filter: blur(14px); padding: 8px 14px; border-radius: 6px; border: 1px solid var(--panel-border); display: flex; align-items: center; gap: 10px; }
+    .corner-badge { font-family: var(--font-mono); font-size: 10px; font-weight: 800; color: var(--accent-cyan); background: rgba(0,242,254,0.12); padding: 3px 8px; border-radius: 4px; }
+    .corner-title-text { font-size: 13px; font-weight: 700; }
+    .icon-btn { pointer-events: auto; width: 32px; height: 32px; border-radius: 6px; background: rgba(8,12,19,0.88); border: 1px solid var(--panel-border); color: var(--text-main); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 13px; transition: all 0.15s; }
+    .icon-btn:hover { background: rgba(255,255,255,0.15); }
+    .canvas-container { width: 100%; height: 100%; cursor: grab; }
+    .canvas-container:active { cursor: grabbing; }
+    .canvas-container canvas { width: 100% !important; height: 100% !important; display: block; }
 
-    header {
-      height: 62px;
-      background: rgba(8, 12, 19, 0.96);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--panel-border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 24px;
-      z-index: 100;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand-icon {
-      width: 36px;
-      height: 36px;
-      background: linear-gradient(135deg, #00f2fe, #3b82f6);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
-    }
-
-    .brand-title {
-      font-weight: 700;
-      font-size: 16px;
-      letter-spacing: -0.3px;
-    }
-
-    .brand-tag {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 700;
-      padding: 3px 8px;
-      background: rgba(0, 242, 254, 0.12);
-      color: var(--accent-cyan);
-      border: 1px solid rgba(0, 242, 254, 0.25);
-      border-radius: 4px;
-    }
-
-    .toolbar {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .slider-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 7px 16px;
-      border-radius: 8px;
-      border: 1px solid var(--panel-border);
-    }
-
-    .slider-label {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--accent-cyan);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    input[type=range] {
-      -webkit-appearance: none;
-      width: 140px;
-      height: 4px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 2px;
-      outline: none;
-    }
-
-    input[type=range]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 16px;
-      height: 16px;
-      background: var(--accent-cyan);
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 0 12px var(--accent-cyan);
-    }
-
-    .btn {
-      font-family: var(--font-ui);
-      font-size: 12px;
-      font-weight: 600;
-      padding: 8px 16px;
-      border-radius: 6px;
-      border: 1px solid var(--panel-border);
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text-main);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.15s ease;
-    }
-
-    .btn:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.25);
-    }
-
-    .btn.active {
-      background: rgba(0, 242, 254, 0.18);
-      border-color: var(--accent-cyan);
-      color: var(--accent-cyan);
-      box-shadow: 0 0 14px rgba(0, 242, 254, 0.3);
-    }
-
-    main {
-      flex: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr;
-      gap: 3px;
-      background: rgba(255, 255, 255, 0.04);
-      padding: 3px;
-      position: relative;
-    }
-
-    .viewport-card {
-      position: relative;
-      background: radial-gradient(circle at center, #0f141f 0%, #06080d 100%);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .viewport-header {
-      position: absolute;
-      top: 16px;
-      left: 16px;
-      right: 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 10;
-      pointer-events: none;
-    }
-
-    .viewport-title {
-      pointer-events: auto;
-      background: rgba(8, 12, 19, 0.88);
-      backdrop-filter: blur(14px);
-      padding: 8px 14px;
-      border-radius: 6px;
-      border: 1px solid var(--panel-border);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .corner-badge {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 800;
-      color: var(--accent-cyan);
-      background: rgba(0, 242, 254, 0.12);
-      padding: 3px 8px;
-      border-radius: 4px;
-    }
-
-    .corner-title-text {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: -0.2px;
-    }
-
-    .viewport-tools {
-      pointer-events: auto;
-      display: flex;
-      gap: 6px;
-    }
-
-    .icon-btn {
-      width: 32px;
-      height: 32px;
-      border-radius: 6px;
-      background: rgba(8, 12, 19, 0.88);
-      border: 1px solid var(--panel-border);
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 13px;
-      transition: all 0.15s;
-    }
-
-    .icon-btn:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    .canvas-container {
-      flex: 1;
-      width: 100%;
-      height: 100%;
-      position: relative;
-      cursor: grab;
-    }
-
-    .canvas-container:active {
-      cursor: grabbing;
-    }
-
-    .canvas-container canvas {
-      width: 100% !important;
-      height: 100% !important;
-      display: block;
-    }
-
-    .legend-overlay {
-      position: absolute;
-      top: 68px;
-      left: 16px;
-      background: rgba(8, 12, 19, 0.88);
-      backdrop-filter: blur(14px);
-      border: 1px solid var(--panel-border);
-      border-radius: 6px;
-      padding: 10px 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      z-index: 10;
-      pointer-events: auto;
-      font-family: var(--font-mono);
-      font-size: 11px;
-    }
-
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--text-muted);
-    }
-
-    .legend-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-    }
-
-    .viewport-footer {
-      position: absolute;
-      bottom: 16px;
-      left: 16px;
-      right: 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      pointer-events: none;
-      z-index: 10;
-    }
-
-    .spec-pill {
-      pointer-events: auto;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--text-muted);
-      background: rgba(8, 12, 19, 0.88);
-      backdrop-filter: blur(14px);
-      padding: 6px 12px;
-      border-radius: 4px;
-      border: 1px solid var(--panel-border);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
+    .legend-overlay { position: absolute; top: 68px; left: 16px; background: rgba(8,12,19,0.88); backdrop-filter: blur(14px); border: 1px solid var(--panel-border); border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; z-index: 10; font-family: var(--font-mono); font-size: 11px; }
+    .legend-item { display: flex; align-items: center; gap: 8px; color: var(--text-muted); }
+    .legend-dot { width: 9px; height: 9px; border-radius: 50%; }
+    .viewport-footer { position: absolute; bottom: 16px; left: 16px; right: 16px; display: flex; justify-content: space-between; pointer-events: none; z-index: 10; }
+    .spec-pill { pointer-events: auto; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); background: rgba(8,12,19,0.88); backdrop-filter: blur(14px); padding: 6px 12px; border-radius: 4px; border: 1px solid var(--panel-border); display: flex; align-items: center; gap: 8px; }
     .spec-pill span.green { color: var(--accent-green); font-weight: 700; }
     .spec-pill span.cyan { color: var(--accent-cyan); font-weight: 700; }
     .spec-pill span.amber { color: var(--accent-amber); font-weight: 700; }
 
-    .loading-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(6, 8, 13, 0.94);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      z-index: 20;
-      transition: opacity 0.3s ease;
-    }
-
-    .spinner {
-      width: 36px;
-      height: 36px;
-      border: 3px solid rgba(0, 242, 254, 0.15);
-      border-top-color: var(--accent-cyan);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .loading-text {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--text-muted);
-    }
+    .loading-overlay { position: absolute; inset: 0; background: rgba(6,8,13,0.94); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; z-index: 20; transition: opacity 0.3s ease; }
+    .spinner { width: 36px; height: 36px; border: 3px solid rgba(0,242,254,0.15); border-top-color: var(--accent-cyan); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-text { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
 </head>
 <body>
-
   <header>
     <div class="brand">
       <div class="brand-icon">🛡️</div>
-      <div>
-        <div class="brand-title">Iborain Safety — Industrial Baton 3D Workbench</div>
-      </div>
-      <div class="brand-tag">3-TIER ISOLATED THERMAL ZONES • 100% SOLAR AUTONOMOUS</div>
+      <div class="brand-title">Iborain Safety — Option B: Horizontal Battery 3D Workbench</div>
+      <div class="brand-tag">57×122×26mm • ZERO COLLISION • 100% SOLAR</div>
     </div>
     <div class="toolbar">
       <div class="slider-group">
-        <span class="slider-label">💥 Explode View:</span>
+        <span class="slider-label">💥 Explode:</span>
         <input type="range" id="explode-slider" min="0" max="100" value="0" oninput="updateExplode(this.value)">
-        <span class="slider-label" id="explode-val">0% (Sealed Inside)</span>
+        <span class="slider-label" id="explode-val">0% (Sealed)</span>
       </div>
-      <button class="btn active" id="btn-shell-vis" onclick="toggleShellTransparency()">💎 Shell: Translucent</button>
-      <button class="btn" id="btn-sync" onclick="toggleSync()">🔄 Sync Views: OFF</button>
-      <button class="btn" onclick="resetAllViews()">⚡ Reset Views</button>
+      <button class="btn active" id="btn-shell" onclick="toggleShell()">💎 Shell: Translucent</button>
+      <button class="btn" id="btn-sync" onclick="toggleSync()">🔄 Sync: OFF</button>
+      <button class="btn" onclick="resetAll()">⚡ Reset</button>
     </div>
   </header>
 
-  <main id="matrix">
-
-    <!-- VIEW 1 (LEFT): Master Slicing Print Bed -->
+  <main>
     <div class="viewport-card" id="card-1">
       <div class="viewport-header">
         <div class="viewport-title">
-          <span class="corner-badge">VIEW 1 (LEFT)</span>
-          <span class="corner-title-text">Master Slicing Build Plate (Base + Front Bezel)</span>
+          <span class="corner-badge">VIEW 1</span>
+          <span class="corner-title-text">Master Slicing Build Plate</span>
         </div>
-        <div class="viewport-tools">
-          <button class="icon-btn" title="Reset View" onclick="resetView(0)">🎯</button>
-        </div>
+        <div><button class="icon-btn" onclick="resetView(0)">🎯</button></div>
       </div>
       <div class="canvas-container" id="container-1"></div>
-      <div class="loading-overlay" id="loading-1">
-        <div class="spinner"></div>
-        <div class="loading-text">Loading shell_universal_side_by_side_plate.stl...</div>
-      </div>
+      <div class="loading-overlay" id="loading-1"><div class="spinner"></div><div class="loading-text">Loading build plate...</div></div>
       <div class="viewport-footer">
-        <div class="spec-pill"><span class="green">●</span> Pre-Oriented for Bambu Lab P1S / X1C</div>
-        <div class="spec-pill">54 × 128 × 26 mm • 24g Matte PETG • R=45mm Saddle</div>
+        <div class="spec-pill"><span class="green">●</span> Bambu Lab P1S / X1C Ready</div>
+        <div class="spec-pill">57 × 122 × 26 mm • ~25g Matte PETG</div>
       </div>
     </div>
 
-    <!-- VIEW 2 (RIGHT): Clean Tri-Zone Assembly + Digital Twins -->
     <div class="viewport-card" id="card-2">
       <div class="viewport-header">
         <div class="viewport-title">
-          <span class="corner-badge">VIEW 2 (RIGHT)</span>
-          <span class="corner-title-text">3-Tier Isolated Assembly + Digital Twins</span>
+          <span class="corner-badge">VIEW 2</span>
+          <span class="corner-title-text">Option B Assembly + Digital Twins</span>
         </div>
-        <div class="viewport-tools">
-          <button class="icon-btn" title="Reset View" onclick="resetView(1)">🎯</button>
-        </div>
+        <div><button class="icon-btn" onclick="resetView(1)">🎯</button></div>
       </div>
       <div class="legend-overlay">
-        <div class="legend-item"><span class="legend-dot" style="background:#3b82f6;"></span> Zone 1: Sony IMX500 AI Camera (Y=+45mm)</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#10b981;"></span> Zone 2: Raspberry Pi Zero 2 W (Deck 1)</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#e2e8f0;"></span> Zone 2: Quectel 4G LTE HAT (Deck 2)</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#f59e0b;"></span> Zone 3: Bestfire 1350mAh Battery (Y=-37mm)</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#8b5cf6;"></span> Anti-Tamper: ICM-20948 IMU Platform</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#00f2fe;"></span> Optics Window: 16mm AR Glass Disc</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#64748b;"></span> Bottom Apex: Single Centered PG7 Solar Port</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#3b82f6"></span> Zone 1: Sony IMX500 Camera (Y=+49)</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#10b981"></span> Zone 2: Pi Zero 2 W — Deck 1 (Y=+12)</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#e2e8f0"></span> Zone 2: 4G LTE HAT — Deck 2 (Y=+12)</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#f59e0b"></span> Zone 3: Battery HORIZONTAL (Y=-37)</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#8b5cf6"></span> Under-Board IMU (Y=+12, Z=2.5)</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#00f2fe"></span> 16mm AR Optical Glass Disc</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#64748b"></span> PG7 Solar Gland + SMA Antenna</div>
       </div>
       <div class="canvas-container" id="container-2"></div>
-      <div class="loading-overlay" id="loading-2">
-        <div class="spinner"></div>
-        <div class="loading-text">Assembling 3-Tier Digital Twins...</div>
-      </div>
+      <div class="loading-overlay" id="loading-2"><div class="spinner"></div><div class="loading-text">Assembling Option B twins...</div></div>
       <div class="viewport-footer">
-        <div class="spec-pill"><span class="cyan">●</span> 100% Zero Overlap • <span class="green">Zero Collision</span></div>
-        <div class="spec-pill"><span class="amber">●</span> 9.5mm Convection Airflow Buffer</div>
+        <div class="spec-pill"><span class="cyan">●</span> Zero Overlap • <span class="green">3.25mm Pi–Battery Gap</span></div>
+        <div class="spec-pill"><span class="amber">●</span> Battery Rotated 90° Horizontal</div>
       </div>
     </div>
-
   </main>
 
   <script>
     const apps = [];
-    let isSync = false;
-    let shellTranslucent = true;
-    let explodeFactor = 0.0;
-
+    let isSync = false, shellTranslucent = true, explodeFactor = 0;
     const loader = new THREE.STLLoader();
 
-    const mats = {
-      plate: new THREE.MeshStandardMaterial({ color: 0x1f2937, metalness: 0.2, roughness: 0.8 }),
-      shellBase: new THREE.MeshPhysicalMaterial({ color: 0x223040, transparent: true, opacity: 0.38, roughness: 0.3, transmission: 0.6, thickness: 1.5, metalness: 0.1 }),
-      shellBezel: new THREE.MeshPhysicalMaterial({ color: 0x1e293b, transparent: true, opacity: 0.38, roughness: 0.3, transmission: 0.6, thickness: 1.5, metalness: 0.1 }),
-      piZero: new THREE.MeshStandardMaterial({ color: 0x10b981, roughness: 0.4, metalness: 0.3 }),
-      camera: new THREE.MeshStandardMaterial({ color: 0x2563eb, roughness: 0.3, metalness: 0.5 }),
-      modem: new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.2, metalness: 0.9 }),
-      battery: new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.4, metalness: 0.2 }),
-      imu: new THREE.MeshStandardMaterial({ color: 0x8b5cf6, roughness: 0.4, metalness: 0.3 }),
-      glass: new THREE.MeshPhysicalMaterial({ color: 0x00f2fe, transparent: true, opacity: 0.75, roughness: 0.1, transmission: 0.9 }),
-      hardware: new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.6, metalness: 0.7 })
+    const M = {
+      plate:     new THREE.MeshStandardMaterial({ color: 0x1f2937, metalness: 0.2, roughness: 0.8 }),
+      base:      new THREE.MeshPhysicalMaterial({ color: 0x223040, transparent: true, opacity: 0.38, roughness: 0.3, transmission: 0.6, thickness: 1.5, metalness: 0.1 }),
+      bezel:     new THREE.MeshPhysicalMaterial({ color: 0x1e293b, transparent: true, opacity: 0.38, roughness: 0.3, transmission: 0.6, thickness: 1.5, metalness: 0.1 }),
+      pi:        new THREE.MeshStandardMaterial({ color: 0x10b981, roughness: 0.4, metalness: 0.3 }),
+      cam:       new THREE.MeshStandardMaterial({ color: 0x2563eb, roughness: 0.3, metalness: 0.5 }),
+      modem:     new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.2, metalness: 0.9 }),
+      batt:      new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.4, metalness: 0.2 }),
+      imu:       new THREE.MeshStandardMaterial({ color: 0x8b5cf6, roughness: 0.4, metalness: 0.3 }),
+      glass:     new THREE.MeshPhysicalMaterial({ color: 0x00f2fe, transparent: true, opacity: 0.75, roughness: 0.1, transmission: 0.9 }),
+      hw:        new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.6, metalness: 0.7 }),
     };
 
-    function initViewport(containerId, loadingId, index) {
-      const container = document.getElementById(containerId);
-      const loading = document.getElementById(loadingId);
-
+    function initVP(cid, lid, idx) {
+      const c = document.getElementById(cid), l = document.getElementById(lid);
       const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-      camera.position.set(0, -180, 130);
-
-      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-      renderer.setSize(container.clientWidth, container.clientHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.3;
-      container.appendChild(renderer.domElement);
-
-      const controls = new THREE.OrbitControls(camera, renderer.domElement);
-      controls.enableDamping = true;
-      controls.dampingFactor = 0.05;
-
+      const cam = new THREE.PerspectiveCamera(45, c.clientWidth / c.clientHeight, 0.1, 1000);
+      cam.position.set(0, -180, 130);
+      const r = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      r.setSize(c.clientWidth, c.clientHeight);
+      r.setPixelRatio(Math.min(devicePixelRatio, 2));
+      r.toneMapping = THREE.ACESFilmicToneMapping;
+      r.toneMappingExposure = 1.3;
+      c.appendChild(r.domElement);
+      const ctrl = new THREE.OrbitControls(cam, r.domElement);
+      ctrl.enableDamping = true; ctrl.dampingFactor = 0.05;
       scene.add(new THREE.AmbientLight(0xffffff, 0.85));
-
-      const keyLight = new THREE.DirectionalLight(0x00f2fe, 1.4);
-      keyLight.position.set(140, 180, 240);
-      scene.add(keyLight);
-
-      const fillLight = new THREE.DirectionalLight(0xffffff, 0.9);
-      fillLight.position.set(-160, -120, 120);
-      scene.add(fillLight);
-
-      const rimLight = new THREE.DirectionalLight(0x3b82f6, 1.3);
-      rimLight.position.set(0, -180, -120);
-      scene.add(rimLight);
-
-      const grid = new THREE.GridHelper(300, 60, 0x00f2fe, 0x1e293b);
-      grid.rotation.x = Math.PI / 2;
-      grid.position.z = -20;
-      scene.add(grid);
-
-      const rootGroup = new THREE.Group();
-      scene.add(rootGroup);
-
-      const app = { scene, camera, renderer, controls, rootGroup, index, parts: [], loading };
+      const k = new THREE.DirectionalLight(0x00f2fe, 1.4); k.position.set(140,180,240); scene.add(k);
+      const f = new THREE.DirectionalLight(0xffffff, 0.9); f.position.set(-160,-120,120); scene.add(f);
+      const rim = new THREE.DirectionalLight(0x3b82f6, 1.3); rim.position.set(0,-180,-120); scene.add(rim);
+      const g = new THREE.GridHelper(300, 60, 0x00f2fe, 0x1e293b); g.rotation.x = Math.PI/2; g.position.z = -20; scene.add(g);
+      const root = new THREE.Group(); scene.add(root);
+      const app = { scene, camera: cam, renderer: r, controls: ctrl, rootGroup: root, index: idx, parts: [], loading: l };
       apps.push(app);
-
-      controls.addEventListener('change', () => {
-        if (isSync) {
-          apps.forEach((other, i) => {
-            if (i !== index) {
-              other.camera.position.copy(camera.position);
-              other.camera.quaternion.copy(camera.quaternion);
-              other.controls.target.copy(controls.target);
-            }
-          });
-        }
-      });
-
+      ctrl.addEventListener('change', () => { if (isSync) apps.forEach((o,i) => { if (i !== idx) { o.camera.position.copy(cam.position); o.camera.quaternion.copy(cam.quaternion); o.controls.target.copy(ctrl.target); } }); });
       return app;
     }
 
-    function loadPart(app, url, mat, pos = [0,0,0], rot = [0,0,0], explodeVector = [0,0,0]) {
-      return new Promise((resolve) => {
-        loader.load(url, (geo) => {
+    function loadP(app, url, mat, pos=[0,0,0], rot=[0,0,0], ev=[0,0,0]) {
+      return new Promise(res => {
+        loader.load(url, geo => {
           geo.computeVertexNormals();
-          const mesh = new THREE.Mesh(geo, mat);
-          mesh.position.set(...pos);
-          mesh.rotation.set(...rot);
-          mesh.userData = { origPos: [...pos], explodeVector: [...explodeVector] };
-          app.rootGroup.add(mesh);
-          app.parts.push(mesh);
-          resolve(mesh);
-        }, undefined, () => resolve(null));
+          const m = new THREE.Mesh(geo, mat);
+          m.position.set(...pos); m.rotation.set(...rot);
+          m.userData = { origPos: [...pos], ev: [...ev] };
+          app.rootGroup.add(m); app.parts.push(m); res(m);
+        }, undefined, () => res(null));
       });
     }
 
-    async function buildScenes() {
-      // 1. VIEW 1 (LEFT): Master Slicing Plate
-      const app1 = initViewport('container-1', 'loading-1', 0);
-      await loadPart(app1, 'output/shell_universal_side_by_side_plate.stl', mats.plate, [0, 0, 0]);
-      app1.loading.style.opacity = '0';
-      setTimeout(() => app1.loading.style.display = 'none', 300);
+    async function build() {
+      // VIEW 1: Build Plate
+      const a1 = initVP('container-1','loading-1',0);
+      await loadP(a1, 'output/shell_universal_side_by_side_plate.stl', M.plate);
+      a1.loading.style.opacity='0'; setTimeout(()=>a1.loading.style.display='none',300);
 
-      // 2. VIEW 2 (RIGHT): 3-Tier Isolated Assembly + Digital Twins (Zero Overlap Guaranteed)
-      const app2 = initViewport('container-2', 'loading-2', 1);
+      // VIEW 2: Option B Assembly (VERIFIED COORDINATES)
+      const a2 = initVP('container-2','loading-2',1);
       await Promise.all([
-        loadPart(app2, 'output/shell_universal_base_casing.stl', mats.shellBase, [0, 0, 0], [0, 0, 0], [0, 0, -25]),
-        loadPart(app2, 'output/shell_universal_front_bezel.stl', mats.shellBezel, [0, 0, 26], [0, 0, 0], [0, 0, 35]),
-        // Zone 1: Camera at Y = +45mm
-        loadPart(app2, 'components/digital_twin_sony_imx500_camera.stl', mats.camera, [0, 45, 21.5], [0, 0, 0], [0, 0, 20]),
-        // Zone 2: Compute Stack at Y = +18mm
-        loadPart(app2, 'components/digital_twin_pi_zero_2w.stl', mats.piZero, [0, 18, 5.5], [0, 0, 0], [0, 0, -2]),
-        loadPart(app2, 'components/digital_twin_4g_lte_modem.stl', mats.modem, [0, 18, 11.4], [0, 0, 0], [0, 0, 10]),
-        // Zone 3: Dedicated Battery at Y = -37mm (ZERO OVERLAP!)
-        loadPart(app2, 'components/digital_twin_bestfire_battery.stl', mats.battery, [0, -37, 3.5], [0, 0, 0], [0, -15, 5]),
-        // Anti-Tamper Sensor
-        loadPart(app2, 'components/digital_twin_imu_breakout.stl', mats.imu, [14, 24, 5.0], [0, 0, 0], [15, 0, -8]),
-        // Optical Glass
-        loadPart(app2, 'components/digital_twin_optical_glass.stl', mats.glass, [0, 45, 27.8], [0, 0, 0], [0, 0, 45]),
-        // Single Centered Bottom PG7 Gland
-        loadPart(app2, 'components/digital_twin_pg7_gland.stl', mats.hardware, [0, -64, 12.0], [Math.PI/2, 0, 0], [0, -20, 0]),
-        // Single Top SMA Antenna Port
-        loadPart(app2, 'components/digital_twin_sma_bulkhead.stl', mats.hardware, [0, 64, 12.0], [-Math.PI/2, 0, 0], [0, 20, 0])
+        // Shell (explodes apart)
+        loadP(a2, 'output/shell_universal_base_casing.stl',  M.base,  [0,0,0],    [0,0,0], [0,0,-25]),
+        loadP(a2, 'output/shell_universal_front_bezel.stl',  M.bezel, [0,0,26],   [0,0,0], [0,0,35]),
+        // Zone 1: Camera at Y=+49, Z=21.5 (pressed against lid ceiling)
+        loadP(a2, 'components/digital_twin_sony_imx500_camera.stl', M.cam, [0,49,21.5], [0,0,0], [0,0,20]),
+        // Zone 2: Pi Zero at Y=+12, Z=5.5 (on floor standoffs)
+        loadP(a2, 'components/digital_twin_pi_zero_2w.stl', M.pi, [0,12,5.5], [0,0,0], [0,0,-2]),
+        // Zone 2: 4G HAT at Y=+12, Z=11.4 (piggybacked on GPIO)
+        loadP(a2, 'components/digital_twin_4g_lte_modem.stl', M.modem, [0,12,11.4], [0,0,0], [0,0,10]),
+        // Zone 3: Battery HORIZONTAL at Y=-37, Z=3.5, ROTATED 90° around Z
+        loadP(a2, 'components/digital_twin_bestfire_battery.stl', M.batt, [0,-37,3.5], [0,0,Math.PI/2], [0,-15,5]),
+        // IMU: Under Pi Zero at Y=+12, Z=2.5 (in standoff gap)
+        loadP(a2, 'components/digital_twin_imu_breakout.stl', M.imu, [0,12,2.5], [0,0,0], [15,0,-8]),
+        // Optical Glass at Y=+49
+        loadP(a2, 'components/digital_twin_optical_glass.stl', M.glass, [0,49,27.8], [0,0,0], [0,0,45]),
+        // PG7 Gland at Y=-61 (bottom)
+        loadP(a2, 'components/digital_twin_pg7_gland.stl', M.hw, [0,-61,12], [Math.PI/2,0,0], [0,-20,0]),
+        // SMA Antenna at Y=+61 (top)
+        loadP(a2, 'components/digital_twin_sma_bulkhead.stl', M.hw, [0,61,12], [-Math.PI/2,0,0], [0,20,0]),
       ]);
-      app2.loading.style.opacity = '0';
-      setTimeout(() => app2.loading.style.display = 'none', 300);
-
-      // Start with 0% Explode (Fully Sealed Inside)
+      a2.loading.style.opacity='0'; setTimeout(()=>a2.loading.style.display='none',300);
       updateExplode(0);
     }
+    build();
 
-    buildScenes();
-
-    function animate() {
-      requestAnimationFrame(animate);
-      apps.forEach(app => {
-        app.controls.update();
-        app.renderer.render(app.scene, app.camera);
-      });
-    }
+    function animate() { requestAnimationFrame(animate); apps.forEach(a => { a.controls.update(); a.renderer.render(a.scene, a.camera); }); }
     animate();
 
-    window.addEventListener('resize', () => {
-      apps.forEach(app => {
-        const container = document.getElementById(`container-${app.index + 1}`);
-        app.camera.aspect = container.clientWidth / container.clientHeight;
-        app.camera.updateProjectionMatrix();
-        app.renderer.setSize(container.clientWidth, container.clientHeight);
-      });
-    });
+    window.addEventListener('resize', () => apps.forEach((a,i) => { const c = document.getElementById(`container-${i+1}`); a.camera.aspect = c.clientWidth/c.clientHeight; a.camera.updateProjectionMatrix(); a.renderer.setSize(c.clientWidth, c.clientHeight); }));
 
-    function updateExplode(val) {
-      explodeFactor = val / 100;
-      const label = val == 0 ? '0% (Sealed Inside)' : `${val}%`;
-      document.getElementById('explode-val').textContent = label;
-
-      if (apps[1] && apps[1].parts) {
-        apps[1].parts.forEach(mesh => {
-          if (mesh.userData && mesh.userData.origPos && mesh.userData.explodeVector) {
-            const orig = mesh.userData.origPos;
-            const vec = mesh.userData.explodeVector;
-            mesh.position.set(
-              orig[0] + vec[0] * explodeFactor,
-              orig[1] + vec[1] * explodeFactor,
-              orig[2] + vec[2] * explodeFactor
-            );
-          }
-        });
-      }
+    function updateExplode(v) {
+      explodeFactor = v/100;
+      document.getElementById('explode-val').textContent = v==0 ? '0% (Sealed)' : v+'%';
+      if (apps[1]) apps[1].parts.forEach(m => { if (m.userData?.origPos && m.userData?.ev) { const o=m.userData.origPos, e=m.userData.ev; m.position.set(o[0]+e[0]*explodeFactor, o[1]+e[1]*explodeFactor, o[2]+e[2]*explodeFactor); }});
     }
 
-    function toggleShellTransparency() {
+    function toggleShell() {
       shellTranslucent = !shellTranslucent;
-      const btn = document.getElementById('btn-shell-vis');
-      btn.textContent = `💎 Shell: ${shellTranslucent ? 'Translucent' : 'Opaque Matte'}`;
-      btn.classList.toggle('active', shellTranslucent);
-
-      mats.shellBase.opacity = shellTranslucent ? 0.38 : 1.0;
-      mats.shellBase.transparent = shellTranslucent;
-      mats.shellBase.needsUpdate = true;
-
-      mats.shellBezel.opacity = shellTranslucent ? 0.38 : 1.0;
-      mats.shellBezel.transparent = shellTranslucent;
-      mats.shellBezel.needsUpdate = true;
+      const b = document.getElementById('btn-shell');
+      b.textContent = `💎 Shell: ${shellTranslucent?'Translucent':'Opaque'}`;
+      b.classList.toggle('active', shellTranslucent);
+      [M.base, M.bezel].forEach(m => { m.opacity = shellTranslucent?0.38:1; m.transparent = shellTranslucent; m.needsUpdate = true; });
     }
 
     function toggleSync() {
       isSync = !isSync;
-      const btn = document.getElementById('btn-sync');
-      btn.textContent = `🔄 Sync Views: ${isSync ? 'ON' : 'OFF'}`;
-      btn.classList.toggle('active', isSync);
+      const b = document.getElementById('btn-sync');
+      b.textContent = `🔄 Sync: ${isSync?'ON':'OFF'}`;
+      b.classList.toggle('active', isSync);
     }
 
-    function resetView(index) {
-      const app = apps[index];
-      if (app) {
-        app.camera.position.set(0, -180, 130);
-        app.controls.target.set(0, 0, 0);
-        app.controls.update();
-      }
-    }
-
-    function resetAllViews() {
-      apps.forEach((_, i) => resetView(i));
-    }
+    function resetView(i) { const a=apps[i]; if(a){a.camera.position.set(0,-180,130); a.controls.target.set(0,0,0); a.controls.update();} }
+    function resetAll() { apps.forEach((_,i) => resetView(i)); }
   </script>
 </body>
 </html>
