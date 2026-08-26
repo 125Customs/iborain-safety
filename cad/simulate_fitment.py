@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
 Iborain Safety — 3D Virtual Fitment & Collision Simulation Engine
-Simulates the Clean Tri-Zone Architecture for the Universal Sentry (52mm x 108mm x 24mm):
-  • ZONE 1 (Top Y = +34mm): Sony IMX500 AI Camera + 16mm AR Optical Glass Disc
-  • ZONE 2 (Center Y = +2mm): Raspberry Pi Zero 2 W (Deck 1) + Quectel 4G LTE HAT (Deck 2)
-  • ZONE 3 (Lower Y = -32mm): Bestfire 1350mAh Rechargeable Battery (Dedicated Cool Bay)
-  • SINGLE Centered Bottom PG7 Solar Power Port (X = 0, Y = -54mm)
-  • SINGLE Top SMA 4G Antenna Port (X = 0, Y = +54mm)
+Simulates the Industrial Baton Architecture for the Universal Sentry (54mm x 128mm x 26mm):
+  • ZONE 1 (Top Y = +45mm): Sony IMX500 AI Camera + 16mm AR Optical Glass Disc (z = 21.5 to 26.0mm)
+  • ZONE 2 (Center Y = +18mm): Raspberry Pi Zero 2 W (Deck 1) + Quectel 4G LTE HAT (Deck 2) (z = 5.5 to 16.5mm)
+  • ZONE 3 (Lower Y = -37mm): Bestfire 1350mAh Rechargeable Battery (Y = -61.25 to -12.75mm, z = 3.5 to 21.0mm)
+  • SINGLE Centered Bottom PG7 Solar Power Port (X = 0, Y = -64mm)
+  • SINGLE Top SMA 4G Antenna Port (X = 0, Y = +64mm)
 """
 import os
 import sys
@@ -34,7 +34,7 @@ from components_digital_twin import (
 def run_simulation():
     t_start = time.time()
     print("=" * 85)
-    print("  🔬 Iborain Safety — Clean Tri-Zone 3D Fitment Simulation")
+    print("  🔬 Iborain Safety — Industrial Baton 3D Fitment & Airflow Simulation")
     print("  OpenCASCADE B-Rep Kernel Precision: 0.01 mm Tolerance Check")
     print("=" * 85)
     
@@ -56,36 +56,36 @@ def run_simulation():
     print("  ✅ 8 Physical Hardware Digital Twins Loaded Successfully.")
 
     # -------------------------------------------------------------------------
-    # 2. Simulate Clean Tri-Zone Universal Sentry (52mm x 108mm x 24mm)
+    # 2. Simulate Industrial Baton Universal Sentry (54mm x 128mm x 26mm)
     # -------------------------------------------------------------------------
-    print("\n[2/2] Simulating Clean Tri-Zone Stacking in Universal Sentry (52x108x24mm)...")
+    print("\n[2/2] Simulating Industrial Baton Stacking in Universal Sentry (54x128x26mm)...")
     base = build_universal_base_casing()
     bezel = build_universal_front_bezel()
     
     # Position components with ZERO geometric overlap
-    # ZONE 1: Optics Bay (Y = +34mm)
-    cam_placed = cam.moved(Location((0, 34.0, 24.0 - 4.5)))
-    glass_placed = glass.moved(Location((0, 34.0, 24.0 + 1.8)))
+    # ZONE 1: Optics Bay (Y = +45mm)
+    cam_placed = cam.moved(Location((0, 45.0, 26.0 - 4.5)))
+    glass_placed = glass.moved(Location((0, 45.0, 26.0 + 1.8)))
     
-    # ZONE 2: Compute & Cellular Stack (Y = +2.0mm)
-    pi_placed = pi.moved(Location((0, 2.0, 2.5 + 3.0))) # Deck 1: Pi Zero 2 W (z = 5.5mm)
-    modem_placed = modem.moved(Location((0, 2.0, 5.5 + 1.4 + 4.5))) # Deck 2: 4G HAT (z = 11.4mm)
+    # ZONE 2: Compute & Cellular Stack (Y = +18.0mm)
+    pi_placed = pi.moved(Location((0, 18.0, 2.5 + 3.0))) # Deck 1: Pi Zero 2 W (z = 5.5mm)
+    modem_placed = modem.moved(Location((0, 18.0, 5.5 + 1.4 + 4.5))) # Deck 2: 4G HAT (z = 11.4mm)
     
-    # ZONE 3: Dedicated Lower Power Bay (Y = -32.0mm)
-    battery_placed = battery.moved(Location((0, -32.0, 2.5 + 1.0))) # z = 3.5mm
+    # ZONE 3: Dedicated Lower Power Bay (Y = -37.0mm)
+    battery_placed = battery.moved(Location((0, -37.0, 2.5 + 1.0))) # z = 3.5mm
     
     # Anti-Tamper IMU Sensor
-    imu_placed = imu.moved(Location((52.0/2 - 13.0, 18.0, 2.5 + 2.5)))
+    imu_placed = imu.moved(Location((54.0/2 - 13.0, 24.0, 2.5 + 2.5)))
     
-    # Single Centered Bottom PG7 Gland (X=0, Y=-54mm)
-    gland_placed = gland.moved(Location((0, -108.0/2, 2.5 + 8.5), (90, 0, 0)))
-    # Single Top SMA Antenna Port (X=0, Y=+54mm)
-    sma_placed = sma.moved(Location((0, 108.0/2, 2.5 + 8.5), (-90, 0, 0)))
+    # Single Centered Bottom PG7 Gland (X=0, Y=-64mm)
+    gland_placed = gland.moved(Location((0, -128.0/2, 2.5 + 9.5), (90, 0, 0)))
+    # Single Top SMA Antenna Port (X=0, Y=+64mm)
+    sma_placed = sma.moved(Location((0, 128.0/2, 2.5 + 9.5), (-90, 0, 0)))
     
     # Mated Solid Assembly for Universal Sentry with all internal components
     universal_full_assembly = Compound([
         base,
-        bezel.moved(Location((0, 0, 24.0))),
+        bezel.moved(Location((0, 0, 26.0))),
         cam_placed,
         pi_placed,
         modem_placed,
@@ -100,14 +100,13 @@ def run_simulation():
     export_step(universal_full_assembly, os.path.join(out_dir, "shell_universal_with_internals.step"))
     export_stl(universal_full_assembly, os.path.join(out_dir, "shell_universal_with_internals.stl"))
     
-    # Maintain shell_tier2 alias for compatibility
     export_step(universal_full_assembly, os.path.join(out_dir, "shell_tier2_with_internals.step"))
     export_stl(universal_full_assembly, os.path.join(out_dir, "shell_tier2_with_internals.stl"))
     
-    print("  • Zone 1 (Optics): Y=+34mm (Sony IMX500 & 16mm AR Glass) -> 100% Isolated")
-    print("  • Zone 2 (Compute): Y=+2mm (Pi Zero Deck 1 + 4G HAT Deck 2) -> 7.8mm Front Clearance")
-    print("  • Zone 3 (Power): Y=-32mm (Bestfire 1350mAh in Dedicated Bay) -> ZERO Overlap with Pi")
-    print("  • Bottom Solar Port: X=0mm, Y=-54mm (IP68 PG7 Solar Gland) -> 8mm Wire Clearance")
+    print("  • Zone 1 (Optics): Y=+45mm (Sony IMX500 & 16mm AR Glass) -> 100% Isolated")
+    print("  • Zone 2 (Compute): Y=+18mm (Pi Zero Deck 1 + 4G HAT Deck 2) -> 9.5mm Front Clearance")
+    print("  • Zone 3 (Power): Y=-37mm (Bestfire 1350mAh in Dedicated Bay) -> ZERO Overlap with Pi")
+    print("  • Bottom Solar Port: X=0mm, Y=-64mm (IP68 PG7 Solar Gland) -> 8mm Wire Clearance")
     print("  • 3D Mated Model: `cad/output/shell_universal_with_internals.step` exported")
 
     # Mirror to Desktop
@@ -121,7 +120,7 @@ def run_simulation():
             shutil.copy2(src, os.path.join(desktop_dir, f))
 
     print("\n" + "=" * 85)
-    print("  🎉 3D Tri-Zone Fitment & Collision Simulation Passed with ZERO Errors!")
+    print("  🎉 3D Industrial Baton Fitment & Collision Simulation Passed with ZERO Errors!")
     print(f"  Total Simulation Time: {time.time() - t_start:.2f}s")
     print("=" * 85)
 
