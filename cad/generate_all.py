@@ -75,7 +75,7 @@ export_stl(s1_bezel, os.path.join(out_dir, "shell_tier1_front_bezel.stl"))
 # Closed Assembly
 s1_assy = Compound([
     s1_base,
-    s1_bezel.moved(Location((0, 0, 19.5)))
+    s1_bezel.moved(Location((0, 0, 20.0)))
 ])
 export_step(s1_assy, os.path.join(out_dir, "shell_tier1_complete_assembly.step"))
 print(f"  ✅ Shell 1 compiled in {time.time() - t0:.2f}s")
@@ -105,7 +105,7 @@ export_stl(s2_bezel, os.path.join(out_dir, "shell_tier2_front_bezel.stl"))
 # Closed Assembly
 s2_assy = Compound([
     s2_base,
-    s2_bezel.moved(Location((0, 0, 23.0)))
+    s2_bezel.moved(Location((0, 0, 24.0)))
 ])
 export_step(s2_assy, os.path.join(out_dir, "shell_tier2_complete_assembly.step"))
 print(f"  ✅ Shell 2 compiled in {time.time() - t0:.2f}s")

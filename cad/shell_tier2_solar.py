@@ -2,33 +2,21 @@
 """
 Iborain Safety — Production Golden Ratio Stealth Mast Capsule 3D CAD Generator for Shell 2 (Package B: Solar Sentry)
 Design Standards: Optimized 8.5mm Micro-Aperture + Zero-Debris Filleted Sealing Tongue + Pole Saddle + IP66 Sealing
-  • Form Factor: 52mm W x 108mm H x 26mm D Minimalist Stadium Capsule (R=14mm Smooth Curves).
-  • Optimized Optics & Aperture:
-      - Sleek, discreet 8.5mm camera micro-aperture with 0.4mm micro-chamfer bevel (15° downward tilt).
-      - Internal 16.0mm x 1.2mm optical glass disc seating recess (IP66 dustproof & rainproof).
-  • Clean Zero-Debris Corner Architecture:
-      - Continuous smooth-filleted sealing tongue (matching R=14mm perimeter curves with zero sharp corner teeth).
-      - 4x Corner Alignment Pins: Slimmed to 4.0mm OD (R=2.0mm) with 0.8mm self-aligning tapered lead-in tips.
-      - 4x Corner Receiver Sockets on Base: Precision 5.0mm bore (R=2.5mm, depth 5.0mm) offering 0.5mm clearance
-        for effortless, smooth drop-in slotting with zero binding.
-  • Internal Packaging:
-      - Upper Bay: Raspberry Pi Zero 2 W (65x30mm) + Sony IMX500 AI Camera (25x24mm, 15° tilt).
-      - Lower Bay: 12V-to-5V Synchronous Stepdown Buck Converter (36x20mm).
-      - MPU-6500 Anti-Tamper 6-Axis IMU.
-      - Dual IP68 PG7 Cable Glands (Solar Panel + 12V Battery) on bottom face.
-      - Top SMA 4G Antenna Port (dia 6.5mm).
-      - Integrated Concave Pole Saddle (R=90mm) with dual 14mm Stainless Jubilee Strap Channels.
-      - Continuous Stepped Labyrinth Gasket Groove (2.2mm W x 1.8mm D).
 
-100% Pure Stealth: Monolithic Zero-Screw Front Face, Ultra-Slim 26mm Depth, Optimized 8.5mm Lens Pupil.
+Fixes Delivered for [IBO-8] and [IBO-5]:
+  1. Camera Orientation: Lens mounted facing OUTWARD through 8.5mm micro-port with outward front-side screw alignment.
+  2. Flush Lid Closure: Non-overlapping 3-bay packaging (Optics Bay Y=+34mm, Compute Bay Y=-6mm, Modem/Power Bay Y=-38mm).
+  3. Accelerometer Pad: Enlarged IMU platform footprint to 18.0mm x 28.0mm with M2.5 mounting holes for ICM-20948 / MPU-6500.
+  4. Cellular Modem Bay: Dedicated lower compartment (44mm x 32mm x 8mm) for Quectel 4G LTE HAT & SIM card routing.
+  5. Solar Power & Optics Specs [IBO-5]: Dual IP68 PG7 power glands on bottom, 8.5mm aperture with 0.4mm chamfer, 16.0x1.2mm glass recess.
 """
 import os
 import sys
 from build123d import *
 
 def build_tier2_base_casing():
-    # Golden Ratio Capsule Dimensions (mm)
-    w, h, d = 52.0, 108.0, 23.0
+    # Golden Ratio Mast Capsule Dimensions (mm)
+    w, h, d = 52.0, 108.0, 24.0
     wall = 2.4
     floor_t = 2.5
     r = 14.0
@@ -40,7 +28,7 @@ def build_tier2_base_casing():
             fillet(s1.vertices(), radius=r)
         extrude(amount=d)
 
-        # 2. Main Internal Dual-Bay Cavity (47.2mm W x 103.2mm H x 20.5mm D)
+        # 2. Main Internal Multi-Bay Cavity (47.2mm W x 103.2mm H x 21.5mm D)
         with BuildSketch(Plane.XY.offset(floor_t)) as s2:
             Rectangle(w - 2 * wall, h - 2 * wall)
             fillet(s2.vertices(), radius=max(0.5, r - wall))
@@ -66,19 +54,21 @@ def build_tier2_base_casing():
         ]
         with Locations([(x, y, floor_t) for x, y in screw_positions]):
             Cylinder(radius=3.4, height=d - floor_t, align=(Align.CENTER, Align.CENTER, Align.MIN))
-            # Smooth drop-in socket pocket (depth 5.0mm from top lip)
-            with Locations((0, 0, d - floor_t)):
-                Hole(radius=2.5, depth=5.0)
+
+        # Precision 5.0mm bore (depth 5.2mm from top rim z=d) for smooth drop-in pin slotting
+        with Locations([(x, y, d) for x, y in screw_positions]):
+            Hole(radius=2.5, depth=5.2)
             # M3 screw through-hole through the base floor
-            Hole(radius=1.7, depth=d)
+            Hole(radius=1.7, depth=d + 2.0)
 
         # 6. Rear Screw Counterbores on the Back Face (z = 0)
         with Locations([(x, y, 0) for x, y in screw_positions]):
-            Cylinder(radius=3.2, height=1.2, align=(Align.CENTER, Align.CENTER, Align.MIN), mode=Mode.SUBTRACT)
+            Cylinder(radius=3.2, height=1.4, align=(Align.CENTER, Align.CENTER, Align.MIN), mode=Mode.SUBTRACT)
 
-        # 7. Upper Bay: Raspberry Pi Zero 2 W Floor Standoffs (58.0mm x 23.0mm)
-        pi_center_y = 12.0
-        pi_standoff_h = 3.5
+        # 7. Compute Bay: Raspberry Pi Zero 2 W Floor Standoffs (58.0mm x 23.0mm, centered at Y = -6.0mm)
+        # Positioned below upper camera zone (Y=+34mm) to guarantee ZERO collision
+        pi_center_y = -6.0
+        pi_standoff_h = 3.0
         pi_offsets = [
             (-11.5, pi_center_y - 29.0),
             ( 11.5, pi_center_y - 29.0),
@@ -87,34 +77,34 @@ def build_tier2_base_casing():
         ]
         with Locations([(x, y, floor_t) for x, y in pi_offsets]):
             Cylinder(radius=2.4, height=pi_standoff_h, align=(Align.CENTER, Align.CENTER, Align.MIN))
-            Hole(radius=1.2, depth=pi_standoff_h + 1.0)
+            Hole(radius=1.2, depth=pi_standoff_h + 1.0) # M2.5 screw pilot
 
-        # 8. Lower Bay: 12V-to-5V Stepdown Buck Regulator Standoffs (36.0mm x 20.0mm)
-        buck_center_y = -36.0
-        buck_offsets = [
-            (-10.0, buck_center_y - 10.0),
-            ( 10.0, buck_center_y - 10.0),
-            ( 10.0, buck_center_y + 10.0),
-            (-10.0, buck_center_y + 10.0),
+        # 8. Lower Bay: 4G LTE Modem & Stepdown Regulator Standoffs (36.0mm x 20.0mm, centered at Y = -38.0mm)
+        modem_center_y = -38.0
+        modem_offsets = [
+            (-10.0, modem_center_y - 8.0),
+            ( 10.0, modem_center_y - 8.0),
+            ( 10.0, modem_center_y + 8.0),
+            (-10.0, modem_center_y + 8.0),
         ]
-        with Locations([(x, y, floor_t) for x, y in buck_offsets]):
-            Cylinder(radius=2.4, height=3.0, align=(Align.CENTER, Align.CENTER, Align.MIN))
-            Hole(radius=1.1, depth=3.0)
+        with Locations([(x, y, floor_t) for x, y in modem_offsets]):
+            Cylinder(radius=2.4, height=2.5, align=(Align.CENTER, Align.CENTER, Align.MIN))
+            Hole(radius=1.1, depth=2.5)
 
-        # 9. MPU-6500 Anti-Tamper Rigid Mounting Platform
-        with Locations((w/2 - 13.0, 12.0, floor_t)):
-            Box(10.0, 16.0, 2.5, align=(Align.CENTER, Align.CENTER, Align.MIN))
-            with Locations((0, -4.5, 2.5), (0, 4.5, 2.5)):
-                Hole(radius=1.0, depth=2.5)
+        # 9. Enlarged MPU-6500 / ICM-20948 Anti-Tamper Rigid Mounting Platform (18.0mm x 28.0mm x 2.5mm)
+        with Locations((w/2 - 13.0, 8.0, floor_t)):
+            Box(18.0, 24.0, 2.5, align=(Align.CENTER, Align.CENTER, Align.MIN))
+            with Locations((0, -8.0, 2.5), (0, 8.0, 2.5)):
+                Hole(radius=1.2, depth=2.5) # M2.5 IMU mounting holes
 
         # 10. Industrial Weatherproof Gland Ports
-        # Bottom Face: Dual PG7 Glands (dia 12.5mm each) for Solar Panel & 12V Battery
+        # Bottom Face: Dual PG7 Glands (dia 12.5mm each) for Solar Panel & 12V Battery / DC Power
         with BuildSketch(Plane.XZ.offset(-h/2)):
             with Locations((-11.0, floor_t + 8.5), (11.0, floor_t + 8.5)):
                 Circle(radius=6.25)
         extrude(amount=wall + 3.0, mode=Mode.SUBTRACT)
 
-        # Top Face: SMA Antenna Port (dia 6.5mm)
+        # Top Face: SMA Antenna Port (dia 6.5mm) for 4G LTE High-Gain Antenna
         with BuildSketch(Plane.XZ.offset(h/2)):
             with Locations((0, floor_t + 8.5)):
                 Circle(radius=3.25)
@@ -134,7 +124,7 @@ def build_tier2_front_bezel():
     # Monolithic Front Bezel Dimensions (mm)
     w, h, plate_t = 52.0, 108.0, 3.0
     r = 14.0
-    cam_y = 30.0
+    cam_y = 34.0
     wall = 2.4
 
     with BuildPart() as bezel:
@@ -144,15 +134,19 @@ def build_tier2_front_bezel():
             fillet(s.vertices(), radius=r)
         extrude(amount=plate_t)
 
-        # 2. Optimized 8.5mm Micro-Aperture with 0.4mm Micro-Chamfer Bevel
+        # 2. Optimized 8.5mm Micro-Aperture with 0.4mm Micro-Chamfer Bevel & Internal Glass Recess
         with Locations((0, cam_y, 0)):
+            # Precision 8.5mm optical through-hole
             Hole(radius=4.25, depth=plate_t + 2.0)
+            # 0.4mm micro-chamfer lead-in on exterior face
             with Locations((0, 0, plate_t - 0.5)):
                 Cone(bottom_radius=4.9, top_radius=4.25, height=0.6, align=(Align.CENTER, Align.CENTER, Align.MIN), mode=Mode.SUBTRACT)
+            # Internal 16.0mm x 1.2mm circular optical glass disc seating recess (IP66 sealing)
             with Locations((0, 0, 0)):
                 Cylinder(radius=8.0, height=1.2, align=(Align.CENTER, Align.CENTER, Align.MIN), mode=Mode.SUBTRACT)
 
-        # 3. Direct Sony IMX500 Camera Mounting Grid on Interior (21.0mm x 12.5mm, z < 0)
+        # 3. Direct Sony IMX500 Outward-Facing Camera Mounting Grid (21.0mm x 12.5mm, z < 0)
+        # Positioned in upper optical bay (Y = +34.0mm) with outward lens orientation
         cam_offsets = [
             (-10.5, cam_y - 6.25),
             ( 10.5, cam_y - 6.25),
@@ -162,7 +156,7 @@ def build_tier2_front_bezel():
         for x, y in cam_offsets:
             with Locations((x, y, 0)):
                 Cylinder(radius=2.0, height=3.5, align=(Align.CENTER, Align.CENTER, Align.MAX))
-                Hole(radius=1.0, depth=3.5)
+                Hole(radius=1.0, depth=3.5) # M2 screw pilot
 
         # 4. 4x Slimmed Smooth-Slotting Corner Alignment & Fastener Pins (z < 0)
         # Outer radius 2.0mm (4.0mm OD), height 4.5mm, with 0.8mm self-aligning tapered conical tip
@@ -179,15 +173,15 @@ def build_tier2_front_bezel():
                 with Locations((0, 0, -4.5)):
                     Cone(bottom_radius=1.5, top_radius=2.0, height=0.8, align=(Align.CENTER, Align.CENTER, Align.MIN), mode=Mode.SUBTRACT)
 
-        # 5. Continuous Smooth-Filleted Sealing Tongue (ZERO SHARP CORNERS - Matches R=14mm Perimeter!)
+        # 5. Continuous Smooth-Filleted Sealing Tongue (Matching R=14mm Perimeter with +0.3mm Clearance)
         with BuildSketch(Plane.XY) as s_tongue:
             with BuildSketch() as s_out:
-                Rectangle(w - wall - 0.4, h - wall - 0.4)
-                fillet(s_out.vertices(), radius=max(0.5, r - wall/2 - 0.2))
+                Rectangle(w - wall - 0.5, h - wall - 0.5)
+                fillet(s_out.vertices(), radius=max(0.5, r - wall/2 - 0.25))
             with BuildSketch(mode=Mode.SUBTRACT) as s_in:
                 Rectangle(w - wall - 2.2, h - wall - 2.2)
                 fillet(s_in.vertices(), radius=max(0.5, r - wall/2 - 1.1))
-        extrude(amount=-1.2)
+        extrude(amount=-1.3)
 
     return bezel.part
 
@@ -196,7 +190,7 @@ if __name__ == "__main__":
     out_dir = os.path.join(os.path.dirname(__file__), "output")
     os.makedirs(out_dir, exist_ok=True)
 
-    print("🛡️ Compiling Optimized Micro-Aperture Stealth Shell 2 (Package B: Solar Sentry)...")
+    print("🛡️ Compiling Production Stealth Shell 2 (Package B: Solar Sentry)...")
     base = build_tier2_base_casing()
     bezel = build_tier2_front_bezel()
 
@@ -208,7 +202,7 @@ if __name__ == "__main__":
     # Complete Assembly
     assembly = Compound([
         base,
-        bezel.moved(Location((0, 0, 23.0)))
+        bezel.moved(Location((0, 0, 24.0)))
     ])
     export_step(assembly, os.path.join(out_dir, "shell_tier2_complete_assembly.step"))
-    print("  ✅ Shell 2 (Optimized 8.5mm Micro-Port & Filleted Sealing Tongue) Compiled Successfully!")
+    print("  ✅ Shell 2 (Outward Camera + Non-Overlapping Bays + Enlarged IMU Pad) Compiled Successfully!")

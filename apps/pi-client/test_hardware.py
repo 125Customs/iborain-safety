@@ -34,14 +34,16 @@ try:
 except Exception as e:
     print(f"  ⚠️ I2C scan skipped or smbus2 not installed: {e}")
 
-# 2. Test Camera Capture Pipeline (Sony IMX500)
+# 2. Test Camera Capture Pipeline (Sony IMX500 / Pi AI Cam)
 print("\n[2/2] Testing Neural Camera Capture Pipeline (Sony IMX500)...")
 try:
-    res = subprocess.run(["libcamera-still", "--list-cameras"], capture_output=True, text=True, timeout=5)
-    if "Available cameras" in res.stdout or res.returncode == 0:
-        print(f"  ✅ Camera sensor detected:\n{res.stdout.strip()}")
+    cam_tool = "rpicam-still" if subprocess.run(["which", "rpicam-still"], capture_output=True).returncode == 0 else "libcamera-still"
+    res = subprocess.run([cam_tool, "--list-cameras"], capture_output=True, text=True, timeout=5)
+    output = (res.stdout + res.stderr).strip()
+    if "Available cameras" in output and "No cameras available" not in output:
+        print(f"  ✅ Camera sensor detected via {cam_tool}:\n{output}")
     else:
-        print("  ℹ️ libcamera-still returned no cameras (verify ribbon cable to CSI port)")
+        print(f"  ℹ️ {cam_tool} returned no active camera (verify ribbon cable to CSI port):\n  {output}")
 except Exception as e:
     print(f"  ⚠️ Camera test command error: {e}")
 
