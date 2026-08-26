@@ -18,37 +18,26 @@ All production-grade 3D CAD files are stored directly in this repository in both
 
 ---
 
-## 📐 2. Available CAD Models & Specs
+## 📐 2. Standardized Production Model & Specs
 
-The hardware suite includes two production form factors designed around golden-ratio proportions, zero-screw stealth aesthetics, and IP66 weatherproofing:
+The hardware suite has been unified into **ONE Single Autonomous Solar Hardware Platform** built for African public safety and blackout resilience:
 
-### 🔹 Tier 1 / Package A: Grid Sentry Capsule (48mm × 84mm × 22mm)
-*Designed for grid-powered deployments on building perimeters, gates, and utility boxes.*
+### ⭐ The Universal Autonomous Solar Sentry Capsule (52mm × 108mm × 24mm)
+*Designed for 100% off-grid self-sufficiency across streetlight poles, perimeter walls, gates, and SACCO stages. Combines rear concave pole saddle (R=45mm) with standard M4 wall-mounting grid and dual IP68 PG7 power ports.*
 
 | File Name | Format | Description & Usage |
 | :--- | :--- | :--- |
-| [`shell_tier1_side_by_side_plate.step`](file:///Users/radebe49/smartB0t/cad/output/shell_tier1_side_by_side_plate.step) | STEP | ⭐ **Ready-to-Slice Build Plate** (Base + Bezel oriented for Bambu Studio) |
-| [`shell_tier1_side_by_side_plate.stl`](file:///Users/radebe49/smartB0t/cad/output/shell_tier1_side_by_side_plate.stl) | STL | High-resolution mesh build plate |
-| [`shell_tier1_base_casing.step`](file:///Users/radebe49/smartB0t/cad/output/shell_tier1_base_casing.step) | STEP | Base enclosure with Pi Zero 2 W standoffs, bottom PG7 gland, top SMA port |
-| [`shell_tier1_base_casing.stl`](file:///Users/radebe49/smartB0t/cad/output/shell_tier1_base_casing.stl) | STL | Base casing polygon mesh |
-| [`shell_tier1_front_bezel.step`](file:///Users/radebe49/smartB0t/cad/output/shell_tier1_front_bezel.step) | STEP | Monolithic zero-screw front bezel with 45° beveled lens aperture & gasket tongue |
-| [`shell_tier1_front_bezel.stl`](file:///Users/radebe49/smartB0t/cad/output/shell_tier1_front_bezel.stl) | STL | Front bezel polygon mesh |
-| [`shell_tier1_complete_assembly.step`](file:///Users/radebe49/smartB0t/cad/output/shell_tier1_complete_assembly.step) | STEP | Full hermetically mated CAD assembly for CAD/CAM verification |
+| [`shell_tier2_side_by_side_plate.step`](file:///Users/radebe49/smartB0t/cad/output/shell_tier2_side_by_side_plate.step) | STEP | ⭐ **Master Ready-to-Slice Build Plate** (Base + Bezel oriented for Bambu Studio P1S) |
+| [`shell_tier2_side_by_side_plate.stl`](file:///Users/radebe49/smartB0t/cad/output/shell_tier2_side_by_side_plate.stl) | STL | High-resolution polygon mesh build plate |
+| [`shell_tier2_with_internals.step`](file:///Users/radebe49/smartB0t/cad/output/shell_tier2_with_internals.step) | STEP | 🔬 **Complete 3D Digital Twin Assembly** (Shell + Pi Zero 2 + Sony IMX500 + Bestfire 1350mAh + 4G Modem + IMU) |
+| [`shell_tier2_base_casing.step`](file:///Users/radebe49/smartB0t/cad/output/shell_tier2_base_casing.step) | STEP | Dual-mount base casing (R=45mm saddle + 14mm strap channels + M4 wall grid) |
+| [`shell_tier2_front_bezel.step`](file:///Users/radebe49/smartB0t/cad/output/shell_tier2_front_bezel.step) | STEP | Front bezel with 8.5mm micro-aperture pupil and 16.0x1.2mm optical glass recess |
+| [`shell_tier2_complete_assembly.step`](file:///Users/radebe49/smartB0t/cad/output/shell_tier2_complete_assembly.step) | STEP | Hermetically sealed production assembly |
 
 ---
 
-### 🔹 Tier 2 / Package B: Solar Mast Sentry Capsule (52mm × 108mm × 26mm)
-*Designed for off-grid mast and streetlight pole installations with integrated saddle clamp channels and dual-bay electronics.*
-
-| File Name | Format | Description & Usage |
-| :--- | :--- | :--- |
-| [`shell_tier2_side_by_side_plate.step`](file:///Users/radebe49/smartB0t/cad/output/shell_tier2_side_by_side_plate.step) | STEP | ⭐ **Ready-to-Slice Build Plate** (Base + Bezel with pole saddle oriented) |
-| [`shell_tier2_side_by_side_plate.stl`](file:///Users/radebe49/smartB0t/cad/output/shell_tier2_side_by_side_plate.stl) | STL | High-resolution mesh build plate |
-| [`shell_tier2_base_casing.step`](file:///Users/radebe49/smartB0t/cad/output/shell_tier2_base_casing.step) | STEP | Base enclosure with concave pole saddle (R=45mm), 14mm jubilee strap channels, dual PG7 glands, buck converter bay |
-| [`shell_tier2_base_casing.stl`](file:///Users/radebe49/smartB0t/cad/output/shell_tier2_base_casing.stl) | STL | Base casing polygon mesh |
-| [`shell_tier2_front_bezel.step`](file:///Users/radebe49/smartB0t/cad/output/shell_tier2_front_bezel.step) | STEP | Front bezel with 15° tilted downward camera viewport for elevated pole vantage |
-| [`shell_tier2_front_bezel.stl`](file:///Users/radebe49/smartB0t/cad/output/shell_tier2_front_bezel.stl) | STL | Front bezel polygon mesh |
-| [`shell_tier2_complete_assembly.step`](file:///Users/radebe49/smartB0t/cad/output/shell_tier2_complete_assembly.step) | STEP | Full mated mast assembly |
+### 🔹 Legacy / Compact Variant: Shell 1 (48mm × 84mm × 20mm)
+*Compact grid-tied capsule preserved for ultra-small indoor or perimeter checkpoint applications.*
 
 ---
 

@@ -37,12 +37,13 @@ Mounted on **street light poles, road intersections, arterial transit corridors,
                                                │ • 1fps JPEG Vision Diffs (IMX500 HDR)
                                                │ • JSON Structured Threat Payload
 ┌──────────────────────────────────────────────▼───────────────────────────────────────────────────┐
-│              TACTICAL CORRIDOR & STREET SENTRY UNIT (FABRICATED AT CHIPUROBO)                    │
+│        THE UNIVERSAL AUTONOMOUS SOLAR SENTRY UNIT (FABRICATED AT CHIPUROBO MAKESPACES)          │
 │  • Edge Compute: Raspberry Pi Zero 2 W (Quad-Core 64-bit ARM, 5V/0.5A Ultra-Low Draw)            │
-│  • Vision Sensor: Raspberry Pi AI Camera (Sony IMX500 On-Sensor Neural DSP & ROI Arrival Trigger)│
+│  • Vision Sensor: Raspberry Pi AI Camera (Sony IMX500 On-Sensor Neural DSP & 8.5mm Lens Port)     │
+│  • Power System: 100% Autonomous Solar + Bestfire 5V 1350mAh Rechargeable Buffer (Blackout-Proof)│
 │  • Cellular IoT: Quectel 4G LTE HAT + High-Gain External SMA Antenna                            │
-│  • Anti-Tamper & Anti-Theft: MPU-6500 6-Axis Gyroscope/Accelerometer (I2C 0x68)                  │
-│  • Enclosure: UV-Resistant Stealth Matte-Black PETG (Single 20mm Hooded Lens, Zero Lights)       │
+│  • Anti-Tamper: ICM-20948 / MPU-6500 6-Axis Motion & Vibration IMU (Chassis Coupled)             │
+│  • Enclosure: Universal Dual-Mount (Pole Saddle R=45mm + Wall Grid) Stealth Matte PETG Capsule   │
 └──────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
