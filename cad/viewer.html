@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🛡️ Iborain Safety — Universal Autonomous Solar Sentry 3D Workbench</title>
+  <title>🛡️ Iborain Safety — Dual-View 3D Hardware Workbench</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -41,15 +41,16 @@
       flex-direction: column;
     }
 
+    /* Top Master Control Header */
     header {
-      height: 60px;
+      height: 62px;
       background: rgba(8, 12, 19, 0.96);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--panel-border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px;
+      padding: 0 24px;
       z-index: 100;
     }
 
@@ -60,8 +61,8 @@
     }
 
     .brand-icon {
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       background: linear-gradient(135deg, #00f2fe, #3b82f6);
       border-radius: 8px;
       display: flex;
@@ -73,7 +74,7 @@
 
     .brand-title {
       font-weight: 700;
-      font-size: 15px;
+      font-size: 16px;
       letter-spacing: -0.3px;
     }
 
@@ -81,7 +82,7 @@
       font-family: var(--font-mono);
       font-size: 10px;
       font-weight: 700;
-      padding: 2px 8px;
+      padding: 3px 8px;
       background: rgba(0, 242, 254, 0.12);
       color: var(--accent-cyan);
       border: 1px solid rgba(0, 242, 254, 0.25);
@@ -99,7 +100,7 @@
       align-items: center;
       gap: 10px;
       background: rgba(255, 255, 255, 0.05);
-      padding: 6px 14px;
+      padding: 7px 16px;
       border-radius: 8px;
       border: 1px solid var(--panel-border);
     }
@@ -116,7 +117,7 @@
 
     input[type=range] {
       -webkit-appearance: none;
-      width: 130px;
+      width: 140px;
       height: 4px;
       background: rgba(255, 255, 255, 0.2);
       border-radius: 2px;
@@ -125,19 +126,19 @@
 
     input[type=range]::-webkit-slider-thumb {
       -webkit-appearance: none;
-      width: 14px;
-      height: 14px;
+      width: 16px;
+      height: 16px;
       background: var(--accent-cyan);
       border-radius: 50%;
       cursor: pointer;
-      box-shadow: 0 0 10px var(--accent-cyan);
+      box-shadow: 0 0 12px var(--accent-cyan);
     }
 
     .btn {
       font-family: var(--font-ui);
       font-size: 12px;
       font-weight: 600;
-      padding: 8px 14px;
+      padding: 8px 16px;
       border-radius: 6px;
       border: 1px solid var(--panel-border);
       background: rgba(255, 255, 255, 0.05);
@@ -161,14 +162,15 @@
       box-shadow: 0 0 14px rgba(0, 242, 254, 0.3);
     }
 
+    /* 2-Column Split Viewport */
     main {
       flex: 1;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 2px;
+      grid-template-rows: 1fr;
+      gap: 3px;
       background: rgba(255, 255, 255, 0.04);
-      padding: 2px;
+      padding: 3px;
       position: relative;
     }
 
@@ -182,9 +184,9 @@
 
     .viewport-header {
       position: absolute;
-      top: 12px;
-      left: 12px;
-      right: 12px;
+      top: 16px;
+      left: 16px;
+      right: 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -196,12 +198,12 @@
       pointer-events: auto;
       background: rgba(8, 12, 19, 0.88);
       backdrop-filter: blur(14px);
-      padding: 6px 12px;
+      padding: 8px 14px;
       border-radius: 6px;
       border: 1px solid var(--panel-border);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
     .corner-badge {
@@ -210,12 +212,12 @@
       font-weight: 800;
       color: var(--accent-cyan);
       background: rgba(0, 242, 254, 0.12);
-      padding: 2px 6px;
+      padding: 3px 8px;
       border-radius: 4px;
     }
 
     .corner-title-text {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       letter-spacing: -0.2px;
     }
@@ -227,8 +229,8 @@
     }
 
     .icon-btn {
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
       border-radius: 6px;
       background: rgba(8, 12, 19, 0.88);
       border: 1px solid var(--panel-border);
@@ -237,7 +239,7 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 12px;
+      font-size: 13px;
       transition: all 0.15s;
     }
 
@@ -264,42 +266,43 @@
       display: block;
     }
 
+    /* Color Legend on Mated Viewport */
     .legend-overlay {
       position: absolute;
-      top: 54px;
-      left: 12px;
+      top: 68px;
+      left: 16px;
       background: rgba(8, 12, 19, 0.88);
       backdrop-filter: blur(14px);
       border: 1px solid var(--panel-border);
       border-radius: 6px;
-      padding: 8px 10px;
+      padding: 10px 12px;
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 6px;
       z-index: 10;
       pointer-events: auto;
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 11px;
     }
 
     .legend-item {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       color: var(--text-muted);
     }
 
     .legend-dot {
-      width: 8px;
-      height: 8px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
     }
 
     .viewport-footer {
       position: absolute;
-      bottom: 12px;
-      left: 12px;
-      right: 12px;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -310,16 +313,16 @@
     .spec-pill {
       pointer-events: auto;
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 11px;
       color: var(--text-muted);
       background: rgba(8, 12, 19, 0.88);
       backdrop-filter: blur(14px);
-      padding: 5px 10px;
+      padding: 6px 12px;
       border-radius: 4px;
       border: 1px solid var(--panel-border);
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
 
     .spec-pill span.green { color: var(--accent-green); font-weight: 700; }
@@ -340,8 +343,8 @@
     }
 
     .spinner {
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       border: 3px solid rgba(0, 242, 254, 0.15);
       border-top-color: var(--accent-cyan);
       border-radius: 50%;
@@ -354,14 +357,8 @@
 
     .loading-text {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-muted);
-    }
-
-    .viewport-card.maximized {
-      position: absolute;
-      inset: 0;
-      z-index: 200;
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -374,7 +371,7 @@
     <div class="brand">
       <div class="brand-icon">🛡️</div>
       <div>
-        <div class="brand-title">Iborain Safety — Universal Autonomous Solar Sentry 3D Workbench</div>
+        <div class="brand-title">Iborain Safety — Dual-View 3D Hardware Workbench</div>
       </div>
       <div class="brand-tag">ONE UNIFIED HARDWARE PLATFORM • 100% SOLAR AUTONOMOUS</div>
     </div>
@@ -392,16 +389,15 @@
 
   <main id="matrix">
 
-    <!-- CORNER 1: Master Slicing Print Bed -->
+    <!-- VIEW 1 (LEFT): Master Slicing Print Bed -->
     <div class="viewport-card" id="card-1">
       <div class="viewport-header">
         <div class="viewport-title">
-          <span class="corner-badge">CORNER 1 (TOP-LEFT)</span>
-          <span class="corner-title-text">Universal Sentry: Master Slicing Plate (Base + Bezel)</span>
+          <span class="corner-badge">VIEW 1 (LEFT)</span>
+          <span class="corner-title-text">Master Slicing Build Plate (Base + Front Bezel)</span>
         </div>
         <div class="viewport-tools">
           <button class="icon-btn" title="Reset View" onclick="resetView(0)">🎯</button>
-          <button class="icon-btn" title="Maximize Viewport" onclick="toggleMaximize(1)">⛶</button>
         </div>
       </div>
       <div class="canvas-container" id="container-1"></div>
@@ -410,30 +406,30 @@
         <div class="loading-text">Loading shell_universal_side_by_side_plate.stl...</div>
       </div>
       <div class="viewport-footer">
-        <div class="spec-pill"><span class="green">●</span> Master Build Plate for Bambu Lab P1S</div>
-        <div class="spec-pill">52 × 108 × 24 mm • 22g Matte PETG</div>
+        <div class="spec-pill"><span class="green">●</span> Pre-Oriented for Bambu Lab P1S / X1C</div>
+        <div class="spec-pill">52 × 108 × 24 mm • 22g Matte PETG • R=45mm Saddle</div>
       </div>
     </div>
 
-    <!-- CORNER 2: Universal Sentry Mated with Color Digital Twins (0% Sealed by Default) -->
+    <!-- VIEW 2 (RIGHT): Universal Sentry Mated with Color Digital Twins (0% Sealed by Default) -->
     <div class="viewport-card" id="card-2">
       <div class="viewport-header">
         <div class="viewport-title">
-          <span class="corner-badge">CORNER 2 (TOP-RIGHT)</span>
-          <span class="corner-title-text">Universal Sentry: Mated Assembly + Digital Twins</span>
+          <span class="corner-badge">VIEW 2 (RIGHT)</span>
+          <span class="corner-title-text">Mated Assembly + Color Digital Twin Electronics</span>
         </div>
         <div class="viewport-tools">
           <button class="icon-btn" title="Reset View" onclick="resetView(1)">🎯</button>
-          <button class="icon-btn" title="Maximize Viewport" onclick="toggleMaximize(2)">⛶</button>
         </div>
       </div>
       <div class="legend-overlay">
-        <div class="legend-item"><span class="legend-dot" style="background:#3b82f6;"></span> Optics Bay: Sony IMX500 Camera (Y=+34)</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#10b981;"></span> Compute Bay: Raspberry Pi Zero 2 W (Y=-6)</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#f59e0b;"></span> Power Bay: Bestfire 1350mAh Battery</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#e2e8f0;"></span> Modem Bay: Quectel 4G LTE (Y=-38)</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#8b5cf6;"></span> Base Floor: ICM-20948 IMU Platform</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#00f2fe;"></span> 16mm AR Optical Glass Disc</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#3b82f6;"></span> Optics Bay: Sony IMX500 AI Camera (Y=+34mm)</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#10b981;"></span> Compute Bay: Raspberry Pi Zero 2 W (Y=-6mm)</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#f59e0b;"></span> Power Bay: Bestfire 1350mAh Rechargeable Battery</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#e2e8f0;"></span> Modem Bay: Quectel 4G LTE IoT HAT (Y=-38mm)</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#8b5cf6;"></span> Base Floor: ICM-20948 IMU Anti-Tamper Pad</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#00f2fe;"></span> Optics Window: 16mm AR Glass Disc</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#64748b;"></span> Bottom Apex: Single Centered PG7 Solar Gland</div>
       </div>
       <div class="canvas-container" id="container-2"></div>
       <div class="loading-overlay" id="loading-2">
@@ -442,53 +438,7 @@
       </div>
       <div class="viewport-footer">
         <div class="spec-pill"><span class="cyan">●</span> 100% Sealed Inside • <span class="green">Zero Collision</span></div>
-        <div class="spec-pill">Single Centered PG7 Solar Port</div>
-      </div>
-    </div>
-
-    <!-- CORNER 3: Dual Pole Saddle & Wall Mounting System -->
-    <div class="viewport-card" id="card-3">
-      <div class="viewport-header">
-        <div class="viewport-title">
-          <span class="corner-badge">CORNER 3 (BOTTOM-LEFT)</span>
-          <span class="corner-title-text">Dual Mounting System: Pole Saddle (R=45mm) & Wall Grid</span>
-        </div>
-        <div class="viewport-tools">
-          <button class="icon-btn" title="Reset View" onclick="resetView(2)">🎯</button>
-          <button class="icon-btn" title="Maximize Viewport" onclick="toggleMaximize(3)">⛶</button>
-        </div>
-      </div>
-      <div class="canvas-container" id="container-3"></div>
-      <div class="loading-overlay" id="loading-3">
-        <div class="spinner"></div>
-        <div class="loading-text">Loading Pole Mount Saddle...</div>
-      </div>
-      <div class="viewport-footer">
-        <div class="spec-pill"><span class="green">●</span> 2x 14mm Stainless Jubilee Strap Channels</div>
-        <div class="spec-pill">Fits 50mm–110mm Poles, Gates & Walls</div>
-      </div>
-    </div>
-
-    <!-- CORNER 4: Autonomous Solar & Battery Architecture -->
-    <div class="viewport-card" id="card-4">
-      <div class="viewport-header">
-        <div class="viewport-title">
-          <span class="corner-badge">CORNER 4 (BOTTOM-RIGHT)</span>
-          <span class="corner-title-text">Multi-Layer X-Ray: Internal Wiring & Solar Power Entry</span>
-        </div>
-        <div class="viewport-tools">
-          <button class="icon-btn" title="Reset View" onclick="resetView(3)">🎯</button>
-          <button class="icon-btn" title="Maximize Viewport" onclick="toggleMaximize(4)">⛶</button>
-        </div>
-      </div>
-      <div class="canvas-container" id="container-4"></div>
-      <div class="loading-overlay" id="loading-4">
-        <div class="spinner"></div>
-        <div class="loading-text">Loading Multi-Layer X-Ray Inspector...</div>
-      </div>
-      <div class="viewport-footer">
-        <div class="spec-pill"><span class="amber">●</span> Solar 5.1V In: Single Centered PG7 Gland</div>
-        <div class="spec-pill"><span class="green">●</span> Blackout-Proof: 24/7 Autonomous</div>
+        <div class="spec-pill"><span class="amber">●</span> Single Centered PG7 Solar Power Port</div>
       </div>
     </div>
 
@@ -521,7 +471,7 @@
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-      camera.position.set(0, -145, 115);
+      camera.position.set(0, -150, 110);
 
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setSize(container.clientWidth, container.clientHeight);
@@ -534,21 +484,21 @@
       controls.enableDamping = true;
       controls.dampingFactor = 0.05;
 
-      scene.add(new THREE.AmbientLight(0xffffff, 0.8));
+      scene.add(new THREE.AmbientLight(0xffffff, 0.85));
 
-      const keyLight = new THREE.DirectionalLight(0x00f2fe, 1.3);
-      keyLight.position.set(100, 150, 200);
+      const keyLight = new THREE.DirectionalLight(0x00f2fe, 1.4);
+      keyLight.position.set(120, 160, 220);
       scene.add(keyLight);
 
       const fillLight = new THREE.DirectionalLight(0xffffff, 0.9);
-      fillLight.position.set(-120, -100, 100);
+      fillLight.position.set(-140, -100, 100);
       scene.add(fillLight);
 
-      const rimLight = new THREE.DirectionalLight(0x3b82f6, 1.2);
-      rimLight.position.set(0, -150, -100);
+      const rimLight = new THREE.DirectionalLight(0x3b82f6, 1.3);
+      rimLight.position.set(0, -160, -100);
       scene.add(rimLight);
 
-      const grid = new THREE.GridHelper(220, 44, 0x00f2fe, 0x1e293b);
+      const grid = new THREE.GridHelper(260, 52, 0x00f2fe, 0x1e293b);
       grid.rotation.x = Math.PI / 2;
       grid.position.z = -20;
       scene.add(grid);
@@ -590,13 +540,13 @@
     }
 
     async function buildScenes() {
-      // 1. CORNER 1: Universal Master Slicing Plate
+      // 1. VIEW 1 (LEFT): Universal Master Slicing Plate
       const app1 = initViewport('container-1', 'loading-1', 0);
       await loadPart(app1, 'output/shell_universal_side_by_side_plate.stl', mats.plate, [0, 0, 0]);
       app1.loading.style.opacity = '0';
       setTimeout(() => app1.loading.style.display = 'none', 300);
 
-      // 2. CORNER 2: Universal Sentry Mated + Digital Twins (Single Centered Bottom PG7 Port)
+      // 2. VIEW 2 (RIGHT): Universal Sentry Mated + Digital Twins (Single Centered Bottom PG7 Port)
       const app2 = initViewport('container-2', 'loading-2', 1);
       await Promise.all([
         loadPart(app2, 'output/shell_universal_base_casing.stl', mats.shellBase, [0, 0, 0], [0, 0, 0], [0, 0, -25]),
@@ -613,30 +563,6 @@
       ]);
       app2.loading.style.opacity = '0';
       setTimeout(() => app2.loading.style.display = 'none', 300);
-
-      // 3. CORNER 3: Base Casing Pole Saddle Focus
-      const app3 = initViewport('container-3', 'loading-3', 2);
-      await loadPart(app3, 'output/shell_universal_base_casing.stl', mats.plate, [0, 0, 0]);
-      app3.loading.style.opacity = '0';
-      setTimeout(() => app3.loading.style.display = 'none', 300);
-
-      // 4. CORNER 4: Multi-Layer X-Ray Inspector
-      const app4 = initViewport('container-4', 'loading-4', 3);
-      await Promise.all([
-        loadPart(app4, 'output/shell_universal_base_casing.stl', mats.shellBase, [0, 0, 0]),
-        loadPart(app4, 'output/shell_universal_front_bezel.stl', mats.shellBezel, [0, 0, 24]),
-        loadPart(app4, 'components/digital_twin_sony_imx500_camera.stl', mats.camera, [0, 34, 19.5]),
-        loadPart(app4, 'components/digital_twin_pi_zero_2w.stl', mats.piZero, [0, -6, 5.5]),
-        loadPart(app4, 'components/digital_twin_4g_lte_modem.stl', mats.modem, [0, -38, 5.0]),
-        loadPart(app4, 'components/digital_twin_bestfire_battery.stl', mats.battery, [0, -6, 5.5]),
-        loadPart(app4, 'components/digital_twin_imu_breakout.stl', mats.imu, [13, 8, 5.0]),
-        loadPart(app4, 'components/digital_twin_optical_glass.stl', mats.glass, [0, 34, 25.8]),
-        // SINGLE CENTERED BOTTOM PG7 GLAND
-        loadPart(app4, 'components/digital_twin_pg7_gland.stl', mats.hardware, [0, -54, 11.0], [Math.PI/2, 0, 0]),
-        loadPart(app4, 'components/digital_twin_sma_bulkhead.stl', mats.hardware, [0, 54, 11.0], [-Math.PI/2, 0, 0])
-      ]);
-      app4.loading.style.opacity = '0';
-      setTimeout(() => app4.loading.style.display = 'none', 300);
 
       // Start with 0% Explode (Fully Sealed Inside)
       updateExplode(0);
@@ -667,21 +593,19 @@
       const label = val == 0 ? '0% (Sealed Inside)' : `${val}%`;
       document.getElementById('explode-val').textContent = label;
 
-      [apps[1], apps[3]].forEach(app => {
-        if (app && app.parts) {
-          app.parts.forEach(mesh => {
-            if (mesh.userData && mesh.userData.origPos && mesh.userData.explodeVector) {
-              const orig = mesh.userData.origPos;
-              const vec = mesh.userData.explodeVector;
-              mesh.position.set(
-                orig[0] + vec[0] * explodeFactor,
-                orig[1] + vec[1] * explodeFactor,
-                orig[2] + vec[2] * explodeFactor
-              );
-            }
-          });
-        }
-      });
+      if (apps[1] && apps[1].parts) {
+        apps[1].parts.forEach(mesh => {
+          if (mesh.userData && mesh.userData.origPos && mesh.userData.explodeVector) {
+            const orig = mesh.userData.origPos;
+            const vec = mesh.userData.explodeVector;
+            mesh.position.set(
+              orig[0] + vec[0] * explodeFactor,
+              orig[1] + vec[1] * explodeFactor,
+              orig[2] + vec[2] * explodeFactor
+            );
+          }
+        });
+      }
     }
 
     function toggleShellTransparency() {
@@ -709,7 +633,7 @@
     function resetView(index) {
       const app = apps[index];
       if (app) {
-        app.camera.position.set(0, -145, 115);
+        app.camera.position.set(0, -150, 110);
         app.controls.target.set(0, 0, 0);
         app.controls.update();
       }
@@ -717,12 +641,6 @@
 
     function resetAllViews() {
       apps.forEach((_, i) => resetView(i));
-    }
-
-    function toggleMaximize(cardId) {
-      const card = document.getElementById(`card-${cardId}`);
-      card.classList.toggle('maximized');
-      setTimeout(() => window.dispatchEvent(new Event('resize')), 50);
     }
   </script>
 </body>
