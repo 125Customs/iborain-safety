@@ -1,26 +1,28 @@
 #!/usr/bin/env python3
 """
 Iborain Safety — The Unified Universal Autonomous Solar Sentry (Master 3D CAD Generator)
-Hardware Standard: Single Centered Bottom PG7 Solar Port + Top SMA Port + Pole Saddle + 16mm Glass Recess + Tri-Bay Layout
+Hardware Architecture: Dual-Deck Piggyback Sandwich (Pi Zero 2 W + 4G LTE HAT) + Dedicated Power Bay + 100% Solar Autonomous
+Dimensions: 50.0 mm (W) x 88.0 mm (H) x 24.0 mm (D)
 
-Consolidated Master Model (52mm W x 108mm H x 24mm D):
-  1. Camera Orientation: Sony IMX500 mounted facing OUTWARD through 8.5mm micro-port with 16.0x1.2mm AR glass recess.
-  2. Flush Lid Closure: Non-overlapping 3-bay packaging (Optics Bay Y=+34mm, Compute Bay Y=-6mm, Modem/Battery Bay Y=-38mm).
-  3. Accelerometer Pad: 18.0mm x 28.0mm rigid platform with dual M2.5 mounting holes for ICM-20948 / MPU-6500.
-  4. Cellular Modem Bay: Dedicated lower compartment (44mm x 32mm x 8mm) for Quectel 4G LTE HAT.
-  5. 100% Autonomous Solar Power: SINGLE CENTERED IP68 PG7 power gland on bottom (dia 12.5mm, X=0, Y=-54mm).
-  6. Universal 2-in-1 Mounting: Rear concave pole saddle (R=45mm) + 2x 14mm stainless jubilee strap slots + M4 wall grid.
+Key Engineering Features:
+  1. Ultra-Compact Golden Ratio Form Factor: 50mm x 88mm x 24mm (reduced from 108mm, eliminating dead vertical space).
+  2. Dual-Deck Compute Deck (Y = -4.0mm): Pi Zero 2 W (Deck 1) + Quectel 4G LTE HAT (Deck 2) with 3.5mm convection airflow gap.
+  3. Optics Bay (Y = +24.0mm): Sony IMX500 AI Camera mounted facing outward with 8.5mm pupil & 16.0x1.2mm AR glass recess.
+  4. Power Bay: Bestfire 1350mAh rechargeable battery buffer nestled securely with zero thermal interference.
+  5. Single Centered Bottom PG7 Port (X = 0, Y = -44.0mm): Clean 14mm cable curve clearance for solar DC power in.
+  6. Single Top SMA Port (X = 0, Y = +44.0mm): Short direct 18mm micro-coax run to modem U.FL port.
+  7. Universal 2-in-1 Mounting: Rear concave pole saddle (R = 45mm) + 2x 14mm jubilee strap channels + M4 wall grid.
 """
 import os
 import sys
 from build123d import *
 
 def build_universal_base_casing():
-    # Golden Ratio Mast Capsule Dimensions (mm)
-    w, h, d = 52.0, 108.0, 24.0
+    # Compact Master Dimensions (mm)
+    w, h, d = 50.0, 88.0, 24.0
     wall = 2.4
     floor_t = 2.5
-    r = 14.0
+    r = 13.0
 
     with BuildPart() as base:
         # 1. Smooth Rounded Stadium Outer Envelope
@@ -29,7 +31,7 @@ def build_universal_base_casing():
             fillet(s1.vertices(), radius=r)
         extrude(amount=d)
 
-        # 2. Main Internal Multi-Bay Cavity (47.2mm W x 103.2mm H x 21.5mm D)
+        # 2. Main Internal Multi-Bay Cavity (45.2mm W x 83.2mm H x 21.5mm D)
         with BuildSketch(Plane.XY.offset(floor_t)) as s2:
             Rectangle(w - 2 * wall, h - 2 * wall)
             fillet(s2.vertices(), radius=max(0.5, r - wall))
@@ -41,69 +43,56 @@ def build_universal_base_casing():
                 Circle(45.0) # R=45mm radius (90mm diameter pole contour)
         extrude(amount=w + 2.0, both=True, mode=Mode.SUBTRACT)
 
-        # 4. Dual 14mm Jubilee Strap Channels across the rear (Height 15mm, Depth 3.0mm)
-        with Locations((0, 32.0, 0), (0, -32.0, 0)):
-            Box(w + 4.0, 15.0, 3.0, align=(Align.CENTER, Align.CENTER, Align.MIN), mode=Mode.SUBTRACT)
+        # 4. Dual 14mm Jubilee Strap Channels across the rear (Height 14.5mm, Depth 3.0mm)
+        with Locations((0, 26.0, 0), (0, -26.0, 0)):
+            Box(w + 4.0, 14.5, 3.0, align=(Align.CENTER, Align.CENTER, Align.MIN), mode=Mode.SUBTRACT)
 
         # 5. 4x Corner Receiver Socket Pillars for Lid Pin Slotting
         screw_positions = [
-            (-w/2 + 7.0, -h/2 + 8.5),
-            ( w/2 - 7.0, -h/2 + 8.5),
-            ( w/2 - 7.0,  h/2 - 8.5),
-            (-w/2 + 7.0,  h/2 - 8.5),
+            (-w/2 + 6.5, -h/2 + 7.5),
+            ( w/2 - 6.5, -h/2 + 7.5),
+            ( w/2 - 6.5,  h/2 - 7.5),
+            (-w/2 + 6.5,  h/2 - 7.5),
         ]
         with Locations([(x, y, floor_t) for x, y in screw_positions]):
-            Cylinder(radius=3.4, height=d - floor_t, align=(Align.CENTER, Align.CENTER, Align.MIN))
+            Cylinder(radius=3.2, height=d - floor_t, align=(Align.CENTER, Align.CENTER, Align.MIN))
 
-        # Precision 5.0mm bore (depth 5.2mm from top rim z=d) for smooth drop-in pin slotting
+        # Precision 4.8mm bore (depth 5.0mm from top rim z=d) for smooth drop-in pin slotting
         with Locations([(x, y, d) for x, y in screw_positions]):
-            Hole(radius=2.5, depth=5.2)
+            Hole(radius=2.4, depth=5.0)
             # M3 screw through-hole through the base floor
-            Hole(radius=1.7, depth=d + 2.0)
+            Hole(radius=1.65, depth=d + 2.0)
 
         # 6. Rear Screw Counterbores on the Back Face (z = 0)
         with Locations([(x, y, 0) for x, y in screw_positions]):
-            Cylinder(radius=3.2, height=1.4, align=(Align.CENTER, Align.CENTER, Align.MIN), mode=Mode.SUBTRACT)
+            Cylinder(radius=3.0, height=1.4, align=(Align.CENTER, Align.CENTER, Align.MIN), mode=Mode.SUBTRACT)
 
-        # 7. Compute Bay: Raspberry Pi Zero 2 W Floor Standoffs (58.0mm x 23.0mm, centered at Y = -6.0mm)
-        pi_center_y = -6.0
+        # 7. Dual-Deck Compute Standoffs: Raspberry Pi Zero 2 W + 4G LTE HAT (58.0mm x 23.0mm, centered at Y = -4.0mm)
+        compute_center_y = -4.0
         pi_standoff_h = 3.0
         pi_offsets = [
-            (-11.5, pi_center_y - 29.0),
-            ( 11.5, pi_center_y - 29.0),
-            ( 11.5, pi_center_y + 29.0),
-            (-11.5, pi_center_y + 29.0),
+            (-11.5, compute_center_y - 29.0),
+            ( 11.5, compute_center_y - 29.0),
+            ( 11.5, compute_center_y + 29.0),
+            (-11.5, compute_center_y + 29.0),
         ]
         with Locations([(x, y, floor_t) for x, y in pi_offsets]):
             Cylinder(radius=2.4, height=pi_standoff_h, align=(Align.CENTER, Align.CENTER, Align.MIN))
             Hole(radius=1.2, depth=pi_standoff_h + 1.0) # M2.5 screw pilot
 
-        # 8. Lower Bay: 4G LTE Modem & Battery Standoffs (36.0mm x 20.0mm, centered at Y = -38.0mm)
-        modem_center_y = -38.0
-        modem_offsets = [
-            (-10.0, modem_center_y - 8.0),
-            ( 10.0, modem_center_y - 8.0),
-            ( 10.0, modem_center_y + 8.0),
-            (-10.0, modem_center_y + 8.0),
-        ]
-        with Locations([(x, y, floor_t) for x, y in modem_offsets]):
-            Cylinder(radius=2.4, height=2.5, align=(Align.CENTER, Align.CENTER, Align.MIN))
-            Hole(radius=1.1, depth=2.5)
-
-        # 9. Enlarged MPU-6500 / ICM-20948 Anti-Tamper Rigid Mounting Platform (18.0mm x 28.0mm x 2.5mm)
-        with Locations((w/2 - 13.0, 8.0, floor_t)):
-            Box(18.0, 24.0, 2.5, align=(Align.CENTER, Align.CENTER, Align.MIN))
-            with Locations((0, -8.0, 2.5), (0, 8.0, 2.5)):
+        # 8. MPU-6500 / ICM-20948 Anti-Tamper Rigid Mounting Platform (16.0mm x 22.0mm x 2.5mm)
+        with Locations((w/2 - 12.0, -28.0, floor_t)):
+            Box(16.0, 20.0, 2.5, align=(Align.CENTER, Align.CENTER, Align.MIN))
+            with Locations((0, -6.0, 2.5), (0, 6.0, 2.5)):
                 Hole(radius=1.2, depth=2.5) # M2.5 IMU mounting holes
 
-        # 10. SINGLE CENTERED Weatherproof Bottom Gland Port for Solar 5.1V DC Power
-        # Bottom Face: Single PG7 Gland (dia 12.5mm, X=0, Y=-54mm)
+        # 9. SINGLE CENTERED Weatherproof Bottom Gland Port for Solar 5.1V DC Power (X=0, Y=-44mm)
         with BuildSketch(Plane.XZ.offset(-h/2)):
             with Locations((0, floor_t + 8.5)):
                 Circle(radius=6.25)
         extrude(amount=wall + 3.0, mode=Mode.SUBTRACT)
 
-        # Top Face: SMA Antenna Port (dia 6.5mm, X=0, Y=+54mm) for 4G LTE High-Gain Antenna
+        # 10. Top Face: SMA Antenna Port (dia 6.5mm, X=0, Y=+44mm) for 4G LTE High-Gain Antenna
         with BuildSketch(Plane.XZ.offset(h/2)):
             with Locations((0, floor_t + 8.5)):
                 Circle(radius=3.25)
@@ -121,9 +110,9 @@ def build_universal_base_casing():
 
 def build_universal_front_bezel():
     # Monolithic Front Bezel Dimensions (mm)
-    w, h, plate_t = 52.0, 108.0, 3.0
-    r = 14.0
-    cam_y = 34.0
+    w, h, plate_t = 50.0, 88.0, 3.0
+    r = 13.0
+    cam_y = 24.0
     wall = 2.4
 
     with BuildPart() as bezel:
@@ -158,10 +147,10 @@ def build_universal_front_bezel():
 
         # 4. 4x Slimmed Smooth-Slotting Corner Alignment & Fastener Pins (z < 0)
         screw_positions = [
-            (-w/2 + 7.0, -h/2 + 8.5, 0),
-            ( w/2 - 7.0, -h/2 + 8.5, 0),
-            ( w/2 - 7.0,  h/2 - 8.5, 0),
-            (-w/2 + 7.0,  h/2 - 8.5, 0),
+            (-w/2 + 6.5, -h/2 + 7.5, 0),
+            ( w/2 - 6.5, -h/2 + 7.5, 0),
+            ( w/2 - 6.5,  h/2 - 7.5, 0),
+            (-w/2 + 6.5,  h/2 - 7.5, 0),
         ]
         for x, y, _ in screw_positions:
             with Locations((x, y, 0)):
@@ -170,7 +159,7 @@ def build_universal_front_bezel():
                 with Locations((0, 0, -4.5)):
                     Cone(bottom_radius=1.5, top_radius=2.0, height=0.8, align=(Align.CENTER, Align.CENTER, Align.MIN), mode=Mode.SUBTRACT)
 
-        # 5. Continuous Smooth-Filleted Sealing Tongue (Matching R=14mm Perimeter with +0.3mm Clearance)
+        # 5. Continuous Smooth-Filleted Sealing Tongue (Matching R=13mm Perimeter with +0.3mm Clearance)
         with BuildSketch(Plane.XY) as s_tongue:
             with BuildSketch() as s_out:
                 Rectangle(w - wall - 0.5, h - wall - 0.5)
@@ -187,11 +176,11 @@ def build_universal_side_by_side_plate():
     base = build_universal_base_casing()
     bezel = build_universal_front_bezel()
 
-    # Position Base on Left (X = -35mm) with bottom face (z = 0) sitting flat on print bed
-    base_plate = base.locate(Location((-35.0, 0, 0)))
+    # Position Base on Left (X = -32mm) with bottom face (z = 0) sitting flat on print bed
+    base_plate = base.locate(Location((-32.0, 0, 0)))
 
-    # Position Front Bezel on Right (X = +35mm) with internal bosses pointing DOWN and smooth front face pointing UP
-    bezel_plate = bezel.locate(Location((35.0, 0, 4.8)))
+    # Position Front Bezel on Right (X = +32mm) with internal bosses pointing DOWN and smooth front face pointing UP
+    bezel_plate = bezel.locate(Location((32.0, 0, 4.5)))
 
     return Compound(children=[base_plate, bezel_plate])
 
@@ -213,7 +202,7 @@ def generate_all():
     os.makedirs(desktop_dir, exist_ok=True)
 
     print("=================================================================")
-    print(" 🛡️ Generating Unified Universal Autonomous Solar Sentry CAD Files")
+    print(" 🛡️ Generating Dual-Deck Universal Autonomous Solar Sentry CAD Files")
     print("=================================================================")
 
     base = build_universal_base_casing()
@@ -226,7 +215,7 @@ def generate_all():
         "shell_universal_front_bezel": bezel,
         "shell_universal_side_by_side_plate": plate,
         "shell_universal_complete_assembly": assembly,
-        # Aliases for backward-compatibility
+        # Backward compatibility aliases
         "shell_tier2_base_casing": base,
         "shell_tier2_front_bezel": bezel,
         "shell_tier2_side_by_side_plate": plate,
@@ -248,7 +237,7 @@ def generate_all():
 
         print(f"  ✅ Exported: {name}.step & .stl ({os.path.getsize(step_path)//1024} KB)")
 
-    print("\n🎉 Master Unified Hardware 3D CAD Generation Complete!")
+    print("\n🎉 Dual-Deck Universal Hardware 3D CAD Generation Complete!")
 
 if __name__ == "__main__":
     generate_all()

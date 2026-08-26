@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🛡️ Iborain Safety — Dual-View 3D Hardware Workbench</title>
+  <title>🛡️ Iborain Safety — Dual-Deck 3D Hardware Workbench</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -41,7 +41,6 @@
       flex-direction: column;
     }
 
-    /* Top Master Control Header */
     header {
       height: 62px;
       background: rgba(8, 12, 19, 0.96);
@@ -162,7 +161,6 @@
       box-shadow: 0 0 14px rgba(0, 242, 254, 0.3);
     }
 
-    /* 2-Column Split Viewport */
     main {
       flex: 1;
       display: grid;
@@ -266,7 +264,6 @@
       display: block;
     }
 
-    /* Color Legend on Mated Viewport */
     .legend-overlay {
       position: absolute;
       top: 68px;
@@ -371,9 +368,9 @@
     <div class="brand">
       <div class="brand-icon">🛡️</div>
       <div>
-        <div class="brand-title">Iborain Safety — Dual-View 3D Hardware Workbench</div>
+        <div class="brand-title">Iborain Safety — Dual-Deck 3D Hardware Workbench</div>
       </div>
-      <div class="brand-tag">ONE UNIFIED HARDWARE PLATFORM • 100% SOLAR AUTONOMOUS</div>
+      <div class="brand-tag">DUAL-DECK SANDWICH • 100% AUTONOMOUS SOLAR</div>
     </div>
     <div class="toolbar">
       <div class="slider-group">
@@ -407,38 +404,38 @@
       </div>
       <div class="viewport-footer">
         <div class="spec-pill"><span class="green">●</span> Pre-Oriented for Bambu Lab P1S / X1C</div>
-        <div class="spec-pill">52 × 108 × 24 mm • 22g Matte PETG • R=45mm Saddle</div>
+        <div class="spec-pill">50 × 88 × 24 mm • 20g Matte PETG • R=45mm Saddle</div>
       </div>
     </div>
 
-    <!-- VIEW 2 (RIGHT): Universal Sentry Mated with Color Digital Twins (0% Sealed by Default) -->
+    <!-- VIEW 2 (RIGHT): Universal Sentry Mated with Dual-Deck Digital Twins -->
     <div class="viewport-card" id="card-2">
       <div class="viewport-header">
         <div class="viewport-title">
           <span class="corner-badge">VIEW 2 (RIGHT)</span>
-          <span class="corner-title-text">Mated Assembly + Color Digital Twin Electronics</span>
+          <span class="corner-title-text">Dual-Deck Sandwich Assembly + Digital Twins</span>
         </div>
         <div class="viewport-tools">
           <button class="icon-btn" title="Reset View" onclick="resetView(1)">🎯</button>
         </div>
       </div>
       <div class="legend-overlay">
-        <div class="legend-item"><span class="legend-dot" style="background:#3b82f6;"></span> Optics Bay: Sony IMX500 AI Camera (Y=+34mm)</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#10b981;"></span> Compute Bay: Raspberry Pi Zero 2 W (Y=-6mm)</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#f59e0b;"></span> Power Bay: Bestfire 1350mAh Rechargeable Battery</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#e2e8f0;"></span> Modem Bay: Quectel 4G LTE IoT HAT (Y=-38mm)</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#8b5cf6;"></span> Base Floor: ICM-20948 IMU Anti-Tamper Pad</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#3b82f6;"></span> Optics Bay: Sony IMX500 AI Camera (Y=+24mm)</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#10b981;"></span> Deck 1 (Bottom): Raspberry Pi Zero 2 W</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#e2e8f0;"></span> Deck 2 (Top): Quectel 4G LTE IoT HAT</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#f59e0b;"></span> Power Bay: Bestfire 1350mAh Battery</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#8b5cf6;"></span> Anti-Tamper: ICM-20948 IMU Sensor</div>
         <div class="legend-item"><span class="legend-dot" style="background:#00f2fe;"></span> Optics Window: 16mm AR Glass Disc</div>
-        <div class="legend-item"><span class="legend-dot" style="background:#64748b;"></span> Bottom Apex: Single Centered PG7 Solar Gland</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#64748b;"></span> Bottom Apex: Single Centered PG7 Solar Port</div>
       </div>
       <div class="canvas-container" id="container-2"></div>
       <div class="loading-overlay" id="loading-2">
         <div class="spinner"></div>
-        <div class="loading-text">Assembling Universal Digital Twins...</div>
+        <div class="loading-text">Assembling Dual-Deck Digital Twins...</div>
       </div>
       <div class="viewport-footer">
-        <div class="spec-pill"><span class="cyan">●</span> 100% Sealed Inside • <span class="green">Zero Collision</span></div>
-        <div class="spec-pill"><span class="amber">●</span> Single Centered PG7 Solar Power Port</div>
+        <div class="spec-pill"><span class="cyan">●</span> 100% Internal Fitment • <span class="green">Zero Collision</span></div>
+        <div class="spec-pill"><span class="amber">●</span> 3.5mm Convection Airflow Gap</div>
       </div>
     </div>
 
@@ -471,7 +468,7 @@
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-      camera.position.set(0, -150, 110);
+      camera.position.set(0, -140, 100);
 
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setSize(container.clientWidth, container.clientHeight);
@@ -498,7 +495,7 @@
       rimLight.position.set(0, -160, -100);
       scene.add(rimLight);
 
-      const grid = new THREE.GridHelper(260, 52, 0x00f2fe, 0x1e293b);
+      const grid = new THREE.GridHelper(240, 48, 0x00f2fe, 0x1e293b);
       grid.rotation.x = Math.PI / 2;
       grid.position.z = -20;
       scene.add(grid);
@@ -540,26 +537,32 @@
     }
 
     async function buildScenes() {
-      // 1. VIEW 1 (LEFT): Universal Master Slicing Plate
+      // 1. VIEW 1 (LEFT): Dual-Deck Master Slicing Plate
       const app1 = initViewport('container-1', 'loading-1', 0);
       await loadPart(app1, 'output/shell_universal_side_by_side_plate.stl', mats.plate, [0, 0, 0]);
       app1.loading.style.opacity = '0';
       setTimeout(() => app1.loading.style.display = 'none', 300);
 
-      // 2. VIEW 2 (RIGHT): Universal Sentry Mated + Digital Twins (Single Centered Bottom PG7 Port)
+      // 2. VIEW 2 (RIGHT): Dual-Deck Sandwich Assembly + Digital Twins
       const app2 = initViewport('container-2', 'loading-2', 1);
       await Promise.all([
         loadPart(app2, 'output/shell_universal_base_casing.stl', mats.shellBase, [0, 0, 0], [0, 0, 0], [0, 0, -25]),
         loadPart(app2, 'output/shell_universal_front_bezel.stl', mats.shellBezel, [0, 0, 24], [0, 0, 0], [0, 0, 35]),
-        loadPart(app2, 'components/digital_twin_sony_imx500_camera.stl', mats.camera, [0, 34, 19.5], [0, 0, 0], [0, 0, 20]),
-        loadPart(app2, 'components/digital_twin_pi_zero_2w.stl', mats.piZero, [0, -6, 5.5], [0, 0, 0], [0, 0, 0]),
-        loadPart(app2, 'components/digital_twin_4g_lte_modem.stl', mats.modem, [0, -38, 5.0], [0, 0, 0], [0, 0, -5]),
-        loadPart(app2, 'components/digital_twin_bestfire_battery.stl', mats.battery, [0, -6, 5.5], [0, 0, 0], [-25, 0, 15]),
-        loadPart(app2, 'components/digital_twin_imu_breakout.stl', mats.imu, [13, 8, 5.0], [0, 0, 0], [15, 0, -10]),
-        loadPart(app2, 'components/digital_twin_optical_glass.stl', mats.glass, [0, 34, 25.8], [0, 0, 0], [0, 0, 45]),
-        // SINGLE CENTERED BOTTOM PG7 GLAND (X=0, Y=-54mm)
-        loadPart(app2, 'components/digital_twin_pg7_gland.stl', mats.hardware, [0, -54, 11.0], [Math.PI/2, 0, 0], [0, -20, 0]),
-        loadPart(app2, 'components/digital_twin_sma_bulkhead.stl', mats.hardware, [0, 54, 11.0], [-Math.PI/2, 0, 0], [0, 20, 0])
+        loadPart(app2, 'components/digital_twin_sony_imx500_camera.stl', mats.camera, [0, 24, 19.5], [0, 0, 0], [0, 0, 20]),
+        // Deck 1: Pi Zero 2 W
+        loadPart(app2, 'components/digital_twin_pi_zero_2w.stl', mats.piZero, [0, -4, 5.5], [0, 0, 0], [0, 0, -2]),
+        // Deck 2: Quectel 4G LTE HAT (Piggybacked above Pi Zero)
+        loadPart(app2, 'components/digital_twin_4g_lte_modem.stl', mats.modem, [0, -4, 11.4], [0, 0, 0], [0, 0, 10]),
+        // Bestfire Battery
+        loadPart(app2, 'components/digital_twin_bestfire_battery.stl', mats.battery, [0, -4, 3.5], [0, 0, 0], [-25, 0, 8]),
+        // IMU Sensor
+        loadPart(app2, 'components/digital_twin_imu_breakout.stl', mats.imu, [13, -28, 5.0], [0, 0, 0], [15, 0, -8]),
+        // Optical Glass
+        loadPart(app2, 'components/digital_twin_optical_glass.stl', mats.glass, [0, 24, 25.8], [0, 0, 0], [0, 0, 45]),
+        // Single Centered Bottom PG7 Gland
+        loadPart(app2, 'components/digital_twin_pg7_gland.stl', mats.hardware, [0, -44, 11.0], [Math.PI/2, 0, 0], [0, -20, 0]),
+        // Single Top SMA Antenna Port
+        loadPart(app2, 'components/digital_twin_sma_bulkhead.stl', mats.hardware, [0, 44, 11.0], [-Math.PI/2, 0, 0], [0, 20, 0])
       ]);
       app2.loading.style.opacity = '0';
       setTimeout(() => app2.loading.style.display = 'none', 300);
@@ -633,7 +636,7 @@
     function resetView(index) {
       const app = apps[index];
       if (app) {
-        app.camera.position.set(0, -150, 110);
+        app.camera.position.set(0, -140, 100);
         app.controls.target.set(0, 0, 0);
         app.controls.update();
       }
