@@ -49,16 +49,16 @@ def run_simulation():
     base  = build_universal_base_casing()
     bezel = build_universal_front_bezel()
 
-    # ZONE 1: Optics Bay — Camera at top (Y = +49mm), pressed against front lid (Z = 21.5mm)
-    cam_placed   = cam.moved(Location((0, 49.0, 21.5)))
-    glass_placed = glass.moved(Location((0, 49.0, 26.0 + 1.8)))
+    # ZONE 1: Optics Bay — Camera at top (Y = +46mm), pressed against front lid (Z = 21.5mm)
+    cam_placed   = cam.moved(Location((0, 46.0, 21.5)))
+    glass_placed = glass.moved(Location((0, 46.0, 26.0 + 1.8)))
 
     # ZONE 2: Compute Stack — Pi Zero + 4G HAT centered at Y = +12mm
     pi_placed    = pi.moved(Location((0, 12.0, 5.5)))       # Deck 1 on 3mm standoffs
     modem_placed = modem.moved(Location((0, 12.0, 11.4)))   # Deck 2 on GPIO header
 
     # ZONE 3: Horizontal Battery — ROTATED 90° around Z axis (Y = -37mm)
-    # Original build: X=26.5, Y=48.5. After 90° Z rotation: X=48.5, Y=26.5
+    # Exact footprint: X = 48.5mm, Y = 26.5mm, Z = 17.5mm (Zero Protrusion)
     battery_placed = battery.moved(Location((0, -37.0, 3.5), (0, 0, 90)))
 
     # IMU — Under Pi Zero in the standoff gap (Y = +12mm, Z = 2.5mm floor level)
@@ -70,13 +70,15 @@ def run_simulation():
     # Single Top SMA Antenna Port (X=0, Y=+61mm)
     sma_placed = sma.moved(Location((0, 122.0/2, 2.5 + 9.5), (-90, 0, 0)))
 
-    # 3. Collision audit (Y-axis gap checks)
-    print("\n[3/3] Running collision audit...")
+    # 3. Collision audit (Y-axis gap checks & Wall Clearances)
+    print("\n[3/3] Running collision & wall clearance audit...")
     checks = [
+        ("Camera top edge vs Top Wall (Y)",  58.0,   58.6,  0.60),
         ("Pi bottom vs Battery top (Y)",    -20.5,  -23.75, 3.25),
         ("Modem bottom vs Battery top (Y)", -15.5,  -23.75, 8.25),
         ("Camera vs Pi (Z gap)",             21.5,   10.7,  10.8),
         ("IMU top vs Pi bottom (Z)",          5.5,    5.5,   0.0),
+        ("Battery lateral clearance vs Wall (X)", 24.25, 26.1, 1.85),
         ("Battery bottom vs PG7 gland (Y)", -50.25, -61.0,  10.75),
     ]
     all_pass = True

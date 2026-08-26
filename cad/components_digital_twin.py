@@ -93,13 +93,9 @@ def build_bestfire_battery():
         with Locations((0, (h - 3.5)/2, d/2)):
             Box(w - 2.0, 3.5, d - 2.0, align=(Align.CENTER, Align.MIN, Align.CENTER))
             
-        # USB Type-C Charging Receptacle (Side/Top)
+        # USB Type-C Charging Receptacle (Side/Top) - Flush Recessed (Zero Protrusion)
         with Locations((0, (h - 3.5)/2 + 1.5, d/2)):
             Box(8.9, 3.2, 3.2, align=(Align.CENTER, Align.CENTER, Align.CENTER), mode=Mode.SUBTRACT)
-            
-        # Positive & Negative Terminal Snaps
-        with Locations((-6.0, (h - 3.5)/2 + 3.5, d/2), (6.0, (h - 3.5)/2 + 3.5, d/2)):
-            Cylinder(radius=2.5, height=2.0, align=(Align.CENTER, Align.MIN, Align.CENTER))
     return batt.part
 
 def build_4g_lte_modem():

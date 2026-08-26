@@ -122,7 +122,7 @@ def build_universal_base_casing():
 def build_universal_front_bezel():
     w, h, plate_t = 57.0, 122.0, 3.0
     r = 14.0
-    cam_y = 49.0
+    cam_y = 46.0
     wall = 2.4
 
     with BuildPart() as bezel:
@@ -132,7 +132,7 @@ def build_universal_front_bezel():
             fillet(s.vertices(), radius=r)
         extrude(amount=plate_t)
 
-        # 2. 8.5mm Micro-Aperture with Chamfer & Glass Recess (at Y = +49mm)
+        # 2. 8.5mm Micro-Aperture with Chamfer & Glass Recess (at Y = +46mm)
         with Locations((0, cam_y, 0)):
             Hole(radius=4.25, depth=plate_t + 2.0)
             with Locations((0, 0, plate_t - 0.5)):
